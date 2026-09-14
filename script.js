@@ -597,7 +597,7 @@
     linkedin: S('<rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="7.6" cy="8" r="1.1" fill="currentColor" stroke="none"/><path d="M7.6 10.8v6.2"/><path d="M11 17v-6.2"/><path d="M11 13.3c.4-1 1.4-1.8 2.7-1.8 1.6 0 2.7 1.1 2.7 3V17"/>'),
     pin: S('<path d="M12 21c4-4 6.3-7.2 6.3-10.5a6.3 6.3 0 1 0-12.6 0C5.7 13.8 8 17 12 21z"/><circle cx="12" cy="10.4" r="2.3"/>'),
   };
-  const PORTFOLIO_URL = "https://github.com/MONUPRAJAPAT"; // shown/copied by the Share button
+  const PORTFOLIO_URL = "https://www.linkedin.com/in/ankur-meena/"; // shown/copied by the Share button
 
   // ---- content builders ----
   const P = (t) => '<p class="nw__p">' + t + "</p>";
@@ -696,85 +696,97 @@
   const CONTENT = {
     "About Me":
       '<h1 class="nw__h1">About Me</h1>' +
-      P(`Hello, I'm Monu.`) +
-      P(`I'm a Full Stack Engineer and Tech Lead with 4+ years of experience building high-impact, enterprise-grade products end to end across the MERN / Node.js + React stack, with full ownership and accountability from concept to production.`) +
-      P(`I've shipped mission-critical, production-grade systems across inventory management, society management, gaming platforms, construction cost benchmarking, and solar analytics, translating ambiguous business requirements into clear technical roadmaps and predictable delivery.`) +
-      P(`As a core technical owner, I drive key system design and architecture decisions (API design, database schema, cloud infrastructure) that reduce technical risk and improve reliability, while mentoring engineers, setting coding standards, and enforcing CI/CD and Git best practices to maximize delivery velocity.`) +
-      P(`I enjoy the hard parts most users never see, whether it's a data ingestion pipeline that runs 14 days non-stop with zero data loss, a recursive parent-child cost verification engine, or a tariff engine for location-based rate structures. I believe every reliability and performance improvement compounds into a better product.`) +
-      '<blockquote class="nw__quote">' + `"Understand systems before screens, logic before layouts, and scalability before aesthetics."` + "</blockquote>" +
+      P(`Hello, I'm Ankur.`) +
+      P(`I'm a Senior UI/UX Designer with a B.Tech (Hons.) from IIT Roorkee, designing end-to-end product experiences across fintech, insurance, hiring, and EdTech, for web and mobile.`) +
+      P(`At Ensylon, I lead product design for EquiTrust's Fintech and Insurance digital ecosystem, including the Quotient hiring platform and 4+ enterprise insurance tools across policy, retirement, and annuity workflows.`) +
+      P(`Between design roles, I spent a year as a Software Development Engineer on Apple Maps via ThoughtGenesis, working on visualization logic and data-driven UI behavior for geographic data layers.`) +
       HR +
-      H2(`My Engineering Philosophy`) +
-      P(`I don't just ship features.`) +
-      P(`I ship systems that scale.`) +
-      P(`Code that works today but can't be reasoned about tomorrow is technical debt in disguise. My goal is to build software that's reliable under load, easy to extend, and safe to change.`) +
-      P(`Every architecture decision should answer three questions clearly:`) +
-      TAGS([`Will it scale?`, `Can it fail safely?`, `Is it easy to change?`]) +
-      P(`If those aren't obvious, the design isn't done yet.`) +
+      H2(`What I Do`) +
+      P(`I take products from research to developer-ready design: structuring user journeys, building information architecture and interaction models, prototyping, and testing with real users.`) +
+      TAGS([`User Research`, `User Journey Mapping`, `Information Architecture`, `Wireframing`, `User Flows`, `High-Fidelity Prototyping`, `Interaction Design`, `Usability Testing`, `Design Systems`, `Developer Handoff`]) +
       HR +
-      H2(`How I Work`) +
-      P(`Every project begins with understanding the problem and the constraints, not the framework.`) +
-      P(`My typical delivery process includes:`) +
-      TAGS([`Requirement Discovery`, `Solution Architecture`, `System Design`, `API & Schema Design`, `Sprint Planning`, `Implementation`, `Code Reviews`, `CI/CD`, `Performance Tuning`, `Observability`, `Stakeholder Alignment`, `Continuous Iteration`]) +
-      P(`I work best as the client-facing technical lead, owning requirement discovery, architecture walkthroughs, and delivery across cross-functional engineering teams.`) +
+      H2(`Impact`) +
+      P(`Delivered 30+ wireframes, user flows, and high-fidelity prototypes, reducing design iteration cycles by ~30% across stakeholder reviews.`) +
+      P(`Conducted structured user research with 30+ participants in 2-week cycles, improving task completion rates by ~25% across hiring and internal workflows.`) +
+      P(`Built and scaled reusable design system components across hiring and insurance products, reducing design-to-development turnaround time by ~35%.`) +
+      P(`Delivered developer-ready specifications, interaction states, and edge cases, improving implementation efficiency by ~34% and reducing rework.`) +
       HR +
-      H2(`Areas I Love Building`) +
-      TAGS([`Enterprise SaaS`, `Microservices`, `Event-Driven Systems`, `Distributed Systems`, `REST & GraphQL APIs`, `Data Ingestion Pipelines`, `Real-Time Apps`, `Serverless on AWS`, `Payment Integrations`, `AI / LLM Integrations`]) +
+      H2(`What I Design`) +
+      TAGS([`Enterprise Product Design`, `SaaS Product Design`, `AI/LLM UX Design`, `Conversational UI Design`, `AI Copilot Experience Design`, `Dashboard & Analytics Design`, `Data Visualization`, `Mobile App Design`, `Web Application Design`]) +
       HR +
-      H2(`Beyond Work`) +
-      P(`Outside of client work, I explore emerging technologies and integrate AI into real product workflows.`) +
-      P(`I actively build with LLM and AI tooling:`) +
-      TAGS([`OpenAI`, `LLM APIs`, `Pinecone`, `Claude`, `ChatGPT`, `Cursor`]) +
-      P(`I'm most drawn to the space where architecture meets scale:`) +
-      TAGS([`System Design`, `Distributed Systems`, `Cloud Architecture`, `Performance Engineering`, `Developer Experience`]) +
-      P(`Learning is part of my daily routine, because the ecosystem evolves quickly and curiosity is one of the most valuable skills an engineer can have.`),
+      H2(`Recognition`) +
+      P(`Recipient of the Best Design Award in the Design Rush competition, organized by IIT BHU, out of 1200+ participants, for the design of Trado, a crypto trading app, while heading the IIT Roorkee Design Team.`) +
+      HR +
+      H2(`AI in My Workflow`) +
+      P(`I work with AI tools across the design process, and completed LinkedIn Learning's Using AI in the UX Design Process.`) +
+      TAGS([`Cursor`, `Lovable AI`, `V0 by Vercel`, `ChatGPT`, `Claude`, `Gemini`, `Stitch`, `UX Pilot`, `Readdy.ai`]),
 
     "Professional Experience":
       '<h1 class="nw__h1">Professional Experience</h1>' +
-      JOB(`Sr. Full Stack Engineer, Eminence Technology`, `Apr 2024 - Present`, [`Serve as Full Stack Tech Lead and core technical owner for high-impact, enterprise-grade products, driving initiatives from concept to production across the MERN / Node.js + React stack with full ownership and accountability`, `Translate ambiguous business requirements into clear, actionable technical roadmaps, ensuring predictable delivery and high client confidence in Agile/Scrum environments`, `Act as primary client-facing technical lead, owning requirement discovery, solution architecture walkthroughs, sprint planning, and stakeholder alignment across cross-functional engineering teams`, `Consistently ship mission-critical, production-grade systems on time by balancing speed, code quality, and long-term scalability across microservices and distributed architectures`, `Drive key system design and architecture decisions (API design, database schema, cloud infrastructure) that reduce technical risk and improve reliability`, `Lead and mentor a team of full stack engineers, setting coding standards, conducting code reviews, and enforcing CI/CD and Git best practices to maximize delivery velocity`]) +
-      JOB(`Full Stack Engineer, FarmHeal`, `Mar 2022 - Apr 2024`, [`Led end-to-end development of client-facing full stack platforms, including an enterprise inventory management system and a society management solution using React, Node.js, AWS Lambda, API Gateway, and S3 in a serverless microservices architecture`, `Designed, built, and integrated scalable REST APIs with SSR and full-stack performance optimizations, reducing page load times by ~37%`, `Collaborated with cross-functional product, design, and QA teams in Agile/Scrum sprints to deliver high-availability full stack solutions for enterprise clients`]),
+      JOB(`Senior UI/UX Designer, Ensylon, Jaipur`, `Jun 2025 - Sep 2026`, [`Leading end-to-end product design for EquiTrust's Fintech and Insurance digital ecosystem, including the Quotient hiring platform and 4+ enterprise insurance tools across policy, retirement, and annuity workflows`, `Designed and optimized multi-step user journeys within the Quotient platform, covering candidate onboarding, profile creation, job workflows, and recruiter interactions`, `Delivered 30+ wireframes, user flows, and high-fidelity prototypes, reducing design iteration cycles by ~30% across stakeholder reviews`, `Conducted structured user research with 30+ participants in 2-week cycles, identifying usability gaps and improving task completion rates by ~25% across hiring and internal workflows`, `Built and scaled reusable design system components across hiring and insurance products, reducing design-to-development turnaround time by ~35%`, `Delivered developer-ready specifications, interaction states, and edge cases, improving implementation efficiency by ~34% and reducing rework`, `Collaborated with US-based stakeholders, product managers, and engineering teams to translate complex hiring and insurance requirements into scalable UX solutions`, `Contributed to product direction by presenting UX insights that influenced feature prioritization and roadmap decisions`]) +
+      JOB(`UI/UX Designer, Oolook, Jaipur`, `May 2023 - Apr 2025`, [`Designed end-to-end user experiences across web and mobile platforms, structuring core user journeys from onboarding to key feature interactions`, `Created scalable information architecture and interaction models, improving task completion rates by ~25% across primary user flows`, `Conducted usability testing and iterative design improvements, increasing user satisfaction by 15-20% based on feedback and usage patterns`, `Collaborated closely with product managers and engineers to translate requirements into feasible, high-quality design solutions`, `Delivered high-fidelity prototypes and developer-ready specifications, reducing ambiguity during implementation and improving delivery speed`, `Contributed to feature prioritization by leveraging user insights, aligning design decisions with business and product goals`]) +
+      JOB(`Software Development Engineer, Apple Maps via ThoughtGenesis, Hyderabad`, `Jan 2022 - Jan 2023`, [`Improved map-based user experience by enhancing visualization logic for geographic data layers (e.g., water bodies) across multiple zoom levels`, `Designed and implemented data optimization pipelines, achieving ~487% improvement in data accuracy, consistency, and availability for map interfaces`, `Worked on system-level design for data-driven UI behavior, ensuring consistency and scalability across large datasets and edge cases`]),
 
     "Internships":
       '<h1 class="nw__h1">Internships</h1>' +
-      JOB(`Research Intern, Samsung R&D Institute`, `Aug 2021 - Mar 2022`, [`Developed a deep learning-based recommendation system using 10,000+ data samples for user classification (Samsung PenUp)`, `Applied data engineering and machine learning techniques to improve personalization accuracy`]),
+      JOB(`UI/UX Design Intern, BrainQuest (Remote)`, `Feb 2023 - Apr 2023`, [`Iterated on designs using stakeholder feedback and usage insights, improving clarity and efficiency across key financial interactions`, `Delivered end-to-end UX solutions across fintech and insurance workflows by aligning user needs, business requirements, and system constraints, contributing to scalable, conversion-focused product experiences`, `Built intuitive interfaces for financial dashboards, policy comparison views, and transaction tracking systems, improving usability of data-heavy and high-frequency workflows`]) +
+      JOB(`UI/UX Design Intern, Trumsy (Remote)`, `Apr 2021 - Dec 2021`, [`Owned the end-to-end design lifecycle for an EdTech startup's gamified learning platform for kids, translating complex user needs into intuitive UI flows and engaging learning experiences aligned with product KPIs`, `Collaborated closely with PMs and developers to define product features, apply usability best practices, and deliver high-impact design solutions under tight timelines`]),
 
     "Projects":
       '<h1 class="nw__h1">Projects</h1>' +
-      PROJ(`Solar Calculator, Solar ROI & Analytics Platform`, `Node.js · React · PostgreSQL · SMT API · AWS`, [`Engineered an end-to-end solar cost-benefit analysis platform, from data ingestion to ROI insights, for estimating energy production, costs, savings, and ROI prior to installation`, `Ingested and processed a full year of 15-minute interval usage data (~35,000 points) via the Smart Meter Texas (SMT) API`, `Built proprietary algorithms to track sun position and model shading, enabling precise, panel-specific production estimates`, `Developed a tariff engine for location-based rate structures and accurate cost modeling, and unified all data into a single cost-benefit engine with interactive battery and grid charts`]) +
-      PROJ(`TruGamer, Unified Gaming Platform`, `Next.js · Strapi · PostgreSQL · AWS`, [`Engineered an IGDB game-data ingestion pipeline processing 350,000+ games with batching, rate limiting, and retry logic, sustaining a 14-day non-stop run with zero data loss; built a webhook pipeline for continuous game updates`, `Integrated Steam, Xbox, and PSN APIs with custom per-platform ID resolution, reducing sync to 4-6 API calls per platform per user`, `Implemented priority-queue scheduling and response caching for 700+ active users`]) +
-      PROJ(`ICM, Intelligent Cost Manager (University of Melbourne)`, `Node.js · PostgreSQL · Supabase · React · Auth0`, [`Built a production-grade cost benchmarking platform managing construction project costs across an 8-level data hierarchy with real-time validation at every level`, `Designed a 26-table normalized PostgreSQL schema with recursive parent-child cost verification`, `Implemented role-based access control (Owner/Admin/Editor/Viewer) using Auth0, JWT, and org-level data isolation`]),
+      H2(`Live Projects`) +
+      PROJ(`Quotient, Hiring Platform for EquiTrust (Ensylon)`, `User Journeys · User Research · Prototyping · Design Systems`, [`Designed and optimized multi-step user journeys covering candidate onboarding, profile creation, job workflows, and recruiter interactions`, `Conducted structured user research with 30+ participants in 2-week cycles, improving task completion rates by ~25% across hiring and internal workflows`, '<a class="nw__email" href="https://nexus-ahse-psi.vercel.app/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
+      PROJ(`Employee Portal, iConnect · Ensylon`, ``, ['<a class="nw__email" href="https://employee-portal-seven-delta.vercel.app/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
+      PROJ(`Nexus, Platform Dashboard · Nexus Party`, ``, ['<a class="nw__email" href="https://nexus-phi-gilt.vercel.app/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
+      PROJ(`Oolook, AI Creative Studio & Social Manager`, `Information Architecture · Interaction Design · Usability Testing`, [`Designed end-to-end user experiences across web and mobile platforms, from onboarding to key feature interactions`, `Created scalable information architecture and interaction models, improving task completion rates by ~25% across primary user flows`, `Conducted usability testing and iterative design improvements, increasing user satisfaction by 15-20%`, '<a class="nw__email" href="https://oolook.in/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
+      PROJ(`Chez Suzette, Restaurant Website`, `Web Design`, ['<a class="nw__email" href="https://www.chezsuzette.sg/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
+      PROJ(`V.-R., Architecture & Renovation Landing Page`, `Landing Page · Wix`, ['<a class="nw__email" href="https://mehakwebsitedesign.wixsite.com/my-site" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
+      PROJ(`GlobeFarer, Logistics Landing Page`, `Landing Page · Wix`, ['<a class="nw__email" href="https://mehakwebsitedesign.wixsite.com/global" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
+      H2(`Figma Files`) +
+      PROJ(`Daily News App, News App · Figma`, `Figma · Mobile UI · Web UI`, ['<a class="nw__email" href="Daily%20News%20App.pdf" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/design/65RtEEqPhD6Q6Cozb2E6ux/Inshorts-Assignemt?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`Retail App UI, Retail App · Figma`, `Figma`, ['<a class="nw__email" href="Retail%20App%20UI.pdf" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/design/rlbUbTkCsNntza53gCecmm/Infinite-Locus-Assignment?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`Design System, Figma Design File`, `Figma · Design Systems`, ['<a class="nw__email" href="https://www.figma.com/design/JHHs3nV0rlb9imNmoIW58U/Design-system?t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`Power BI Dashboard, Figma Design File`, `Figma · Dashboard Design`, ['<a class="nw__email" href="Power%20BI%20dashboard.pdf" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/design/me6QhfuomxhmnkibMAxNqm/Power-BI-dashboard?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`Security Rule Engine UI, Figma Design File`, `Figma`, ['<a class="nw__email" href="Create%20Security%20rule%20engine%20UI.pdf" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/design/f64ZWmQ3VwMEDbhIETnvfB/Create-Security-rule-engine-UI?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`Truck Logistics Web/App UI, Figma Design File`, `Figma`, ['<a class="nw__email" href="https://www.figma.com/design/S3hU96qqifE3A5L6yseRdL/Truck-logistics-Web-App-UI?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`SupperTiffin, Food Subscription App`, `Secondary Research · User Interviews · User Persona · Competitor Analysis · User Flow · Wireframing · Interface Design`, ['<a class="nw__email" href="https://ankurmeena.notion.site/Case-Study-SupperTiffin-A-Food-Subscription-App-eb09402e5c5e4837be2d10b377e85a46" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/fV6v8XBN69cnm3mlW5RUV7/SupperTiffins?type=design&node-id=240%3A59&mode=design&t=CBLUvLyjyFZU7PoF-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`GolfTraxx, Golf App`, `Research · Competitor Analysis · Affinity Mapping · Persona · Storyboard · User Flow · Wireframing · Interface Design`, ['<a class="nw__email" href="https://ankurmeena.notion.site/Case-Study-GolfTraxx-Revolutionizing-Golfing-Experience-71a2b62ca62c4bc2a2453a858627af0a" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/RlW96aVMM7huhynjouf6FI/GolfTraxx?type=design&node-id=106%3A8&mode=design&t=GyprBxRElI81hhuM-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`Blue Infinity, Web Solutions Website`, `Web Design · Figma`, ['<a class="nw__email" href="https://ankurmeena.notion.site/Blue-Infinity-Elevate-Your-Digital-Presence-a90b68e2fc3247d995c62d704013f87d" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/2b6SLGvM7hWMF2NMzwxRr0/Blue-i?type=design&node-id=16%3A35&mode=design&t=TdEs7s6KMKn08tBN-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`AUGMEE, Augmented Reality Dining App`, `Prototyping · Figma`, ['<a class="nw__email" href="https://ankurmeena.notion.site/AUGMEE-Elevate-Your-Dining-Experience-with-Augmented-Reality-1a23a3c158a04ddda268bc23ec083154" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/pTLwwK8ZUD5TlRp0nWjbuL/AUGMEE?type=design&node-id=158%3A98&mode=design&t=VoAPJSQ6Sl89hAKp-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`FFV Fast Delivery, Grocery Delivery App`, `App Design · Figma`, ['<a class="nw__email" href="https://ankurmeena.notion.site/FFV-Fast-Delivery-Quality-On-Time-Free-Returns-a317ba9d693a43faa8788cca6e64ff64" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/2v4TCBvY8bsm3kVkzTwAOy/Grocery---app?type=design&node-id=354%3A2&mode=design&t=u7S8qExh4PVRvwk3-1" target="_blank" rel="noopener">Open in Figma ↗</a>']),
 
     "Skills":
       '<h1 class="nw__h1">Skills</h1>' +
-      H2(`Core Technologies`) +
-      TAGS([`Node.js`, `TypeScript`, `React`, `Next.js`, `GraphQL`, `REST APIs`, `Microservices`, `Event-Driven Architecture`, `Distributed Systems`, `System Design`, `Redis`, `WebSockets`, `WebRTC`, `MongoDB`, `PostgreSQL`, `Pinecone`, `API Design`, `Authentication (JWT, OAuth)`]) +
+      H2(`Design`) +
+      TAGS([`User Experience (UX) Design`, `User Interface (UI) Design`, `Enterprise Product Design`, `SaaS Product Design`, `AI/LLM UX Design`, `Conversational UI Design`, `AI Copilot Experience Design`, `Prompt UX Design`, `Dashboard & Analytics Design`, `Data Visualization`, `Design Systems`, `Component Libraries`, `Information Architecture`, `User Research`, `User Journey Mapping`, `Wireframing`, `Prototyping`, `Interaction Design`, `Responsive Design`, `Mobile App Design`, `Web Application Design`, `Accessibility (WCAG)`, `Usability Testing`, `Design Thinking`, `Visual Design`, `Heuristic Evaluation`, `Design Strategy`, `UX Writing`, `User-Centered Design`]) +
       HR +
-      H2(`Cloud, DevOps & Integrations`) +
-      TAGS([`AWS (EC2, S3, Lambda, EKS, ECS, CloudWatch)`, `Serverless Architecture`, `Docker`, `CI/CD`, `NGINX`, `Firebase`, `Twilio`, `Stripe`, `Razorpay`, `PayPal`, `Paddle`, `OAuth (Google, Microsoft, Apple)`, `OpenAI`, `LLM APIs`, `Git`, `GitLab`, `Bitbucket`]),
+      H2(`Development & Collaboration`) +
+      TAGS([`HTML5`, `CSS3`, `JavaScript Fundamentals`, `Bootstrap`, `Responsive Web Design`, `Mobile-First Design`, `Design-to-Development Handoff`, `Figma Inspect`, `Component Libraries`, `Design Systems`, `Developer QA`, `Frontend Feasibility Review`, `Cross-Functional Collaboration`, `Agile/Scrum`, `Stakeholder Management`, `Product-Engineering Collaboration`]) +
+      HR +
+      H2(`Tools`) +
+      TAGS([`Figma`, `FigJam`, `Adobe XD`, `Photoshop`, `Illustrator`, `Miro`, `Jira`, `Confluence`, `Notion`, `Cursor`, `Lovable AI`, `V0 by Vercel`, `ChatGPT`, `Claude`, `Gemini`, `Stitch`, `UX Pilot`, `Readdy.ai`, `Wix`, `WordPress`, `Maze`, `Zeplin`, `Chrome DevTools`]),
 
     "Education":
       '<h1 class="nw__h1">Education</h1>' +
-      CARD(ICON.award, `Bachelor of Technology, Computer Science (CSE)`, `Chandigarh University · 2019 - 2023`, `CGPA: 7.89 / 10.0`) +
-      CARD(ICON.award, `CBSE Class XII`, `Prakash Public School, Karnal · 2019`, `95%`) +
-      CARD(ICON.award, `CBSE Class X`, `Prakash Public School, Karnal · 2017`, `CGPA: 9.80`) +
-      H2(`Languages`) +
-      TAGS([`Hindi (Upper Intermediate)`, `English (Upper Intermediate)`]),
+      CARD(ICON.award, `Bachelor of Technology (Hons.)`, `Indian Institute of Technology, Roorkee · 2018 - 2022`, `CGPA: 7.89 / 10.0`) +
+      CARD(ICON.award, `CBSE Class XII`, `Kendriya Vidyalaya No. 1, Jaipur · 2017`, `95%`) +
+      CARD(ICON.award, `CBSE Class X`, `Kendriya Vidyalaya No. 1, Jaipur · 2015`, `CGPA: 9.80`),
 
     "Certifications":
       '<h1 class="nw__h1">Certifications</h1>' +
-      P(`Verified online courses & specializations I've completed on Coursera.`) +
-      CARD(ICON.award, `Machine Learning`, `Stanford Online · Coursera`, `<a class="nw__email" href="https://www.coursera.org/account/accomplishments/verify/PBNZUF4GMZ3P" target="_blank" rel="noopener">View Certificate ↗</a>`) +
-      CARD(ICON.award, `Blockchain Specialization`, `University at Buffalo & The State University of New York · Coursera`, `<a class="nw__email" href="https://www.coursera.org/account/accomplishments/specialization/XT2CZUVZM2HN" target="_blank" rel="noopener">View Certificate ↗</a>`) +
-      CARD(ICON.award, `Front-End Web Development with React`, `The Hong Kong University of Science and Technology · Coursera`, `<a class="nw__email" href="https://www.coursera.org/account/accomplishments/verify/X3YBVMXUZDNP" target="_blank" rel="noopener">View Certificate ↗</a>`) +
-      CARD(ICON.award, `Java for Android`, `Vanderbilt University · Coursera`, `<a class="nw__email" href="https://www.coursera.org/account/accomplishments/verify/ZK47BNK5FCH8" target="_blank" rel="noopener">View Certificate ↗</a>`) +
-      CARD(ICON.award, `Python Basics`, `University of Michigan · Coursera`, `<a class="nw__email" href="https://www.coursera.org/account/accomplishments/verify/2NUXVMW3L93K" target="_blank" rel="noopener">View Certificate ↗</a>`),
+      P(`Professional certifications I've completed.`) +
+      CARD(ICON.award, `Google UX Design Professional Certificate`, `Google`, `Jan 2024`) +
+      CARD(ICON.award, `Using AI in the UX Design Process`, `LinkedIn Learning`, `Jan 2024`) +
+      H2(`Positions of Responsibility`) +
+      CARD(ICON.award, `Head Team Member, Design Fest`, `IIT Roorkee`, `Headed the IIT Roorkee Design Team at the Design Rush Fest hosted by IIT BHU, and won the Best Design Award out of 1200+ participants for Trado, a crypto trading app.`),
 
     "Contact":
       '<h1 class="nw__h1">Contact</h1>' +
-      P(`Let's build something meaningful.`) +
+      P(`Let's design something meaningful.`) +
       '<div class="nw__contacts">' +
-        CROW(ICON.mail, '<a class="nw__email" href="mailto:monuprajapat6270@gmail.com">monuprajapat6270@gmail.com</a>') +
-        CROW(ICON.linkedin, '<a class="nw__email" href="https://www.linkedin.com/in/monuprajapat/" target="_blank" rel="noopener">linkedin.com/in/monuprajapat</a>') +
-        CROW(ICON.pin, '<a class="nw__email" href="tel:+919996105221">+91-9996105221</a>') +
+        CROW(ICON.mail, '<a class="nw__email" href="mailto:ankurmeena194@gmail.com">ankurmeena194@gmail.com</a>') +
+        CROW(ICON.linkedin, '<a class="nw__email" href="https://www.linkedin.com/in/ankur-meena/" target="_blank" rel="noopener">linkedin.com/in/ankur-meena</a>') +
+        CROW(ICON.pin, '<a class="nw__email" href="tel:+916377683376">+91-6377683376</a>') +
       "</div>",
   };
   const TABS = Object.keys(CONTENT);
@@ -1025,6 +1037,11 @@
     layers: S('<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/>'),
     phone: S('<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M10.5 18h3"/>'),
     web: S('<rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M3 8.5h18"/><circle cx="6" cy="6.5" r="0.6" fill="currentColor" stroke="none"/><circle cx="8" cy="6.5" r="0.6" fill="currentColor" stroke="none"/>'),
+    // design categories: a card for fintech, a folded map, a graduation cap
+    fintech: S('<rect x="3" y="5.5" width="18" height="13" rx="2.4"/><path d="M3 9.8h18"/><path d="M6.8 14.6h4.2"/>'),
+    map: S('<path d="M9 4.5 3.5 6.5v13L9 17.5l6 2 5.5-2v-13L15 6.5z"/><path d="M9 4.5v13M15 6.5v13"/>'),
+    edtech: S('<path d="M12 4.5 22 9.5l-10 5-10-5z"/><path d="M6 11.6V16c0 1.6 2.7 2.9 6 2.9s6-1.3 6-2.9v-4.4"/><path d="M22 9.5v5"/>'),
+    book: S('<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/>'),
   };
   const T = {
     back: S('<path d="M15 6l-6 6 6 6"/>'),
@@ -1060,10 +1077,8 @@
   // the sidebar and page titles keep the full names; the tab bar shows these,
   // so nothing has to truncate mid-word
   const SHORT = {
-    featured: "Featured",
-    devops: "DevOps",
-    mobile: "Mobile",
-    web: "Web",
+    featured: "Live",
+    ai: "Figma",
   };
   const item = (icon, label, cls, group) =>
     '<div class="fw__item' + (cls ? " " + cls : "") + '"' +
@@ -1110,75 +1125,65 @@
   };
 
   const PROJECTS = [
-    // ---- Featured (live, real screenshots) ----
-    { group: "featured", title: "TruGamer", cat: "Unified Gaming Platform", url: "https://trugamer.com/", img: "trugamer.png", pos: "center 18%", badge: "Live", bc: "live", tags: [["Next.js", "blue"], ["IGDB API", "purple"]], mi: "mon", mt: "350K+ Games", yr: "2025",
-      desc: "A unified gaming platform that pulls games, news, and release calendars from Steam, Xbox, and PSN into a single hub.",
-      stack: ["Next.js", "Node.js", "Strapi", "PostgreSQL", "Redis", "AWS", "IGDB API"],
-      highlights: ["Built an IGDB ingestion pipeline for 350K+ games with batching, rate-limiting & retries — a 14-day non-stop run with zero data loss", "Integrated Steam/Xbox/PSN APIs with per-platform ID resolution (4–6 calls per platform per user)", "Priority-queue scheduling & response caching for 700+ active users"] },
-    { group: "featured", title: "Jigawatt", cat: "Solar Design & Analytics Platform", url: "https://jigawatt.solar/", img: "proj-jigawatt.jpg", badge: "Live", bc: "live", tags: [["Node.js", "green"], ["Data Viz", "teal"]], mi: "mon", mt: "Solar ROI", yr: "2025",
-      desc: "A solar cost-benefit platform that estimates energy production, savings, and ROI before installation.",
-      stack: ["Node.js", "React", "PostgreSQL", "SMT API", "Chart.js", "AWS"],
-      highlights: ["Ingested a full year of 15-minute interval usage data (~35K points) via the Smart Meter Texas API", "Built sun-position & shading algorithms for panel-specific production estimates", "Location-based tariff engine unified into a single cost-benefit engine with interactive charts"] },
-    { group: "featured", title: "ICM", cat: "Intelligent Cost Manager", url: "https://icm.in/", img: "proj-icm.jpg", badge: "Live", bc: "live", tags: [["PostgreSQL", "blue"], ["Auth0", "orange"]], mi: "stack", mt: "8-Level Hierarchy", yr: "2024",
-      desc: "A production-grade construction cost-benchmarking platform built for the University of Melbourne.",
-      stack: ["Node.js", "React", "PostgreSQL", "Supabase", "Auth0", "AWS"],
-      highlights: ["Managed project costs across an 8-level data hierarchy with real-time validation at every level", "Designed a 26-table normalized schema with recursive parent-child cost verification", "Role-based access (Owner/Admin/Editor/Viewer) via Auth0 with org-level data isolation"] },
+    // ---- Live projects ----
+    { group: "featured", title: "Quotient", cat: "Hiring Platform · EquiTrust (Ensylon)", url: "https://nexus-ahse-psi.vercel.app/", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["User Research", "blue"], ["Design Systems", "purple"]], mi: "stack", mt: "~25% Task Completion", yr: "2025 – 2026",
+      desc: "Multi-step hiring journeys for EquiTrust's Quotient platform, from candidate onboarding and profile creation to job workflows and recruiter interactions.",
+      stack: ["User Journeys", "User Research", "Wireframing", "User Flows", "High-Fidelity Prototyping", "Design Systems"],
+      highlights: ["Designed and optimized multi-step user journeys covering candidate onboarding, profile creation, job workflows, and recruiter interactions", "Conducted structured user research with 30+ participants in 2-week cycles, improving task completion rates by ~25% across hiring and internal workflows", "Built and scaled reusable design system components across hiring and insurance products, reducing design-to-development turnaround time by ~35%"] },
+    { group: "featured", title: "Employee Portal", cat: "iConnect · Ensylon", url: "https://employee-portal-seven-delta.vercel.app/", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["Ensylon", "purple"], ["Web App", "blue"]],
+      desc: "An employee portal for Ensylon, live as iConnect." },
+    { group: "featured", title: "Nexus", cat: "Platform Dashboard · Nexus Party", url: "https://nexus-phi-gilt.vercel.app/", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["Dashboard", "teal"], ["Web App", "blue"]],
+      desc: "A platform dashboard for Nexus Party." },
+    { group: "featured", title: "Oolook", cat: "AI Creative Studio & Social Manager", url: "https://oolook.in/", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["Information Architecture", "blue"], ["Usability Testing", "green"]], mi: "mon", mt: "15–20% Satisfaction", yr: "2023 – 2025",
+      desc: "An AI platform for creators and marketing teams to generate content, schedule posts, and track analytics, with end-to-end web and mobile experiences from onboarding to key feature interactions.",
+      stack: ["Information Architecture", "Interaction Design", "Usability Testing", "High-Fidelity Prototyping"],
+      highlights: ["Designed end-to-end user experiences across web and mobile platforms, structuring core user journeys from onboarding to key feature interactions", "Created scalable information architecture and interaction models, improving task completion rates by ~25% across primary user flows", "Conducted usability testing and iterative design improvements, increasing user satisfaction by 15-20% based on feedback and usage patterns", "Delivered high-fidelity prototypes and developer-ready specifications, reducing ambiguity during implementation and improving delivery speed"] },
+    { group: "featured", title: "Chez Suzette", cat: "Restaurant Website", url: "https://www.chezsuzette.sg/", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["Web Design", "blue"], ["Restaurant", "orange"]],
+      desc: "A restaurant website for Chez Suzette, a caf\u00e9, restaurant and wine bar in Singapore, with the menu, gallery, reservations and contact information.",
+      stack: ["Web Design"] },
+    { group: "featured", title: "V.-R.", cat: "Architecture & Renovation Landing Page", url: "https://mehakwebsitedesign.wixsite.com/my-site", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["Landing Page", "blue"], ["Wix", "gray"]],
+      desc: "A landing page for V.-R., focused on forward-thinking architecture and home renovation.",
+      stack: ["Landing Page", "Wix"] },
+    { group: "featured", title: "GlobeFarer", cat: "Logistics Landing Page", url: "https://mehakwebsitedesign.wixsite.com/global", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["Landing Page", "blue"], ["Wix", "gray"]],
+      desc: "A landing page for GlobeFarer, a logistics platform covering warehousing, distribution, customs clearance, value-added services and freight forwarding.",
+      stack: ["Landing Page", "Wix"] },
 
-    // ---- AI / ML ----
-    { group: "ai", title: "DocuMind AI", cat: "RAG Document Assistant", badge: "Live", bc: "live", tags: [["OpenAI", "purple"], ["Pinecone", "blue"]], mi: "stack", mt: "Vector Search", yr: "2025",
-      desc: "A retrieval-augmented assistant that answers questions over private document sets with cited sources.",
-      stack: ["Node.js", "React", "OpenAI", "Pinecone", "LangChain", "MongoDB"],
-      highlights: ["Chunking + embedding pipeline with semantic vector search over Pinecone", "Streaming answers with inline source citations", "Per-workspace document isolation & access control"] },
-    { group: "ai", title: "SupportGenie", cat: "AI Customer-Support Copilot", badge: "Live", bc: "live", tags: [["LLM APIs", "purple"], ["React", "teal"]], mi: "mon", mt: "Streaming Chat", yr: "2024",
-      desc: "An AI copilot that drafts support replies from a knowledge base and past ticket history.",
-      stack: ["React", "Node.js", "LLM APIs", "Redis", "WebSockets", "PostgreSQL"],
-      highlights: ["Streaming chat with tool-calling and knowledge-base retrieval", "Tone & brand-voice controls for generated replies", "Human-in-the-loop approval before sending"] },
-    { group: "ai", title: "SmartRecs", cat: "Personalized Recommendation Engine", badge: "Case Study", bc: "case", tags: [["Node.js", "green"], ["ML", "purple"]], mi: "stack", mt: "Real-Time", yr: "2024",
-      desc: "A recommendation engine serving real-time personalized suggestions across a product catalog.",
-      stack: ["Node.js", "Python", "Redis", "PostgreSQL", "scikit-learn"],
-      highlights: ["Hybrid collaborative + content-based scoring", "Real-time feature store backed by Redis", "Built-in A/B testing framework to measure lift"] },
-
-    // ---- Cloud & DevOps ----
-    { group: "devops", title: "DeployHub", cat: "CI/CD Pipeline Automation", badge: "Live", bc: "live", tags: [["GitHub Actions", "gray"], ["Docker", "blue"]], mi: "stack", mt: "EC2 · Zero-Downtime", yr: "2025",
-      desc: "A CI/CD setup that builds, tests, and ships to AWS EC2 with zero-downtime releases.",
-      stack: ["GitHub Actions", "Docker", "AWS EC2", "NGINX", "PM2", "Bash"],
-      highlights: ["Multi-stage Docker builds with layer caching to cut build times", "Blue-green deploys to EC2 behind NGINX for zero downtime", "Automated rollback on failed health checks"] },
-    { group: "devops", title: "InfraStack", cat: "Infrastructure as Code", badge: "Live", bc: "live", tags: [["Terraform", "purple"], ["AWS ECS", "orange"]], mi: "stack", mt: "Auto-Scaling", yr: "2024",
-      desc: "Infrastructure-as-Code that provisions containerized services with auto-scaling.",
-      stack: ["Terraform", "AWS ECS", "ECR", "CloudFormation", "IAM"],
-      highlights: ["Reproducible environments via reusable Terraform modules", "ECS services with CPU/memory-based auto-scaling policies", "Least-privilege IAM roles and managed secrets"] },
-    { group: "devops", title: "MetricPulse", cat: "Observability & Monitoring", badge: "Live", bc: "live", tags: [["CloudWatch", "orange"], ["Grafana", "teal"]], mi: "mon", mt: "Live Dashboards", yr: "2024",
-      desc: "An observability stack with live dashboards, centralized logs, and alerting.",
-      stack: ["Node.js", "CloudWatch", "Grafana", "Prometheus", "Docker"],
-      highlights: ["Custom application metrics with CloudWatch alarms", "Grafana dashboards for latency and error rates", "SLO-based alerting to on-call channels"] },
-
-    // ---- Mobile Apps ----
-    { group: "mobile", title: "FitTrack", cat: "Fitness & Activity Tracker", badge: "Live", bc: "live", tags: [["React Native", "teal"], ["Node.js", "green"]], mi: "mon", mt: "iOS · Android", yr: "2025",
-      desc: "A cross-platform fitness tracker with workouts, streaks, and progress charts.",
-      stack: ["React Native", "Expo", "Node.js", "MongoDB", "Firebase"],
-      highlights: ["Offline-first storage with background sync", "Push notifications to keep workout streaks alive", "Progress and health-data visualizations"] },
-    { group: "mobile", title: "SplitEase", cat: "Expense Splitting App", badge: "Live", bc: "live", tags: [["React Native", "teal"], ["MongoDB", "green"]], mi: "mon", mt: "Realtime Sync", yr: "2024",
-      desc: "A group expense-splitting app with realtime balances and settle-ups.",
-      stack: ["React Native", "Node.js", "MongoDB", "Socket.io"],
-      highlights: ["Realtime shared ledgers across group members", "Smart settle-up suggestions to minimize transfers", "Multi-currency support"] },
-    { group: "mobile", title: "ChatWave", cat: "Realtime Messaging App", badge: "Live", bc: "live", tags: [["WebSockets", "blue"], ["Expo", "gray"]], mi: "mon", mt: "E2E Encrypted", yr: "2024",
-      desc: "A realtime messaging app with media sharing, presence, and end-to-end encryption.",
-      stack: ["React Native", "Node.js", "WebSockets", "Redis"],
-      highlights: ["1:1 and group chats with typing & presence indicators", "End-to-end encrypted messages", "Media sharing with push notifications"] },
-
-    // ---- Web Apps (MERN) ----
-    { group: "web", title: "TaskFlow", cat: "Project Management SaaS", badge: "Live", bc: "live", tags: [["React", "teal"], ["MongoDB", "green"]], mi: "mon", mt: "Kanban · Teams", yr: "2025",
-      desc: "A project-management SaaS with boards, teams, and realtime collaboration.",
-      stack: ["React", "Node.js", "MongoDB", "Socket.io", "Redis"],
-      highlights: ["Kanban boards with drag-and-drop", "Realtime collaboration and an activity feed", "Role-based team workspaces"] },
-    { group: "web", title: "ShopSphere", cat: "E-Commerce Platform", badge: "Live", bc: "live", tags: [["MERN", "blue"], ["Stripe", "purple"]], mi: "stack", mt: "Payments", yr: "2024",
-      desc: "A full-featured e-commerce platform with payments and an admin dashboard.",
-      stack: ["React", "Node.js", "MongoDB", "Stripe", "Redis"],
-      highlights: ["Cart, checkout & Stripe payment integration", "Admin dashboard for catalog and orders", "Search, filters, and inventory management"] },
-    { group: "web", title: "MeetSync", cat: "Video Conferencing App", badge: "Live", bc: "live", tags: [["WebRTC", "blue"], ["Socket.io", "gray"]], mi: "mon", mt: "HD Video", yr: "2024",
-      desc: "A browser-based video conferencing app with screen share and in-call chat.",
-      stack: ["React", "Node.js", "WebRTC", "Socket.io"],
-      highlights: ["HD multi-party video powered by WebRTC", "Screen sharing and in-call chat", "Shareable room links with a waiting room"] },
+    // ---- Figma files ----
+    { group: "ai", title: "Daily News App", cat: "News App · Figma", url: "https://www.figma.com/design/65RtEEqPhD6Q6Cozb2E6ux/Inshorts-Assignemt?node-id=0-1&t=L07rNzKORvdFp4eY-1", linkLabel: "Open in Figma", caseStudy: "Daily%20News%20App.pdf", badge: "Figma", bc: "case", tags: [["Mobile UI", "blue"], ["Web UI", "purple"]],
+      desc: "A daily news app design with Mobile UI and Web UI screens, shared as a Figma file.",
+      stack: ["Figma", "Mobile UI", "Web UI"] },
+    { group: "ai", title: "Retail App UI", cat: "Retail App · Figma", url: "https://www.figma.com/design/rlbUbTkCsNntza53gCecmm/Infinite-Locus-Assignment?node-id=0-1&t=L07rNzKORvdFp4eY-1", linkLabel: "Open in Figma", caseStudy: "Retail%20App%20UI.pdf", badge: "Figma", bc: "case", tags: [["Figma", "purple"], ["Retail", "blue"]],
+      desc: "A retail app UI design, shared as a Figma file.",
+      stack: ["Figma"] },
+    { group: "ai", title: "Design System", cat: "Figma Design File", url: "https://www.figma.com/design/JHHs3nV0rlb9imNmoIW58U/Design-system?t=L07rNzKORvdFp4eY-1", linkLabel: "Open in Figma", linkOnly: true, badge: "Figma", bc: "case", tags: [["Design Systems", "purple"], ["Figma", "blue"]],
+      desc: "A design system, shared as a Figma file.",
+      stack: ["Figma", "Design Systems"] },
+    { group: "ai", title: "Power BI Dashboard", cat: "Figma Design File", url: "https://www.figma.com/design/me6QhfuomxhmnkibMAxNqm/Power-BI-dashboard?node-id=0-1&t=L07rNzKORvdFp4eY-1", linkLabel: "Open in Figma", caseStudy: "Power%20BI%20dashboard.pdf", badge: "Figma", bc: "case", tags: [["Dashboard", "teal"], ["Power BI", "orange"]],
+      desc: "A Power BI dashboard design, shared as a Figma file.",
+      stack: ["Figma", "Dashboard Design"] },
+    { group: "ai", title: "Security Rule Engine UI", cat: "Figma Design File", url: "https://www.figma.com/design/f64ZWmQ3VwMEDbhIETnvfB/Create-Security-rule-engine-UI?node-id=0-1&t=L07rNzKORvdFp4eY-1", linkLabel: "Open in Figma", caseStudy: "Create%20Security%20rule%20engine%20UI.pdf", badge: "Figma", bc: "case", tags: [["Security", "gray"], ["Rule Engine", "blue"]],
+      desc: "A UI for creating security rules in a rule engine, shared as a Figma file.",
+      stack: ["Figma"] },
+    { group: "ai", title: "Truck Logistics Web/App UI", cat: "Figma Design File", url: "https://www.figma.com/design/S3hU96qqifE3A5L6yseRdL/Truck-logistics-Web-App-UI?node-id=0-1&t=L07rNzKORvdFp4eY-1", linkLabel: "Open in Figma", linkOnly: true, badge: "Figma", bc: "case", tags: [["Logistics", "orange"], ["Figma", "purple"]],
+      desc: "A truck logistics web and app UI design, shared as a Figma file.",
+      stack: ["Figma"] },
+    { group: "ai", title: "SupperTiffin", cat: "Food Subscription App", url: "https://www.figma.com/file/fV6v8XBN69cnm3mlW5RUV7/SupperTiffins?type=design&node-id=240%3A59&mode=design&t=CBLUvLyjyFZU7PoF-1", linkLabel: "Open in Figma", caseStudy: "https://ankurmeena.notion.site/Case-Study-SupperTiffin-A-Food-Subscription-App-eb09402e5c5e4837be2d10b377e85a46", badge: "Figma", bc: "case", tags: [["UX Research", "blue"], ["Food Subscription", "orange"]],
+      desc: "A product design case study for a food subscription app that lets people discover, schedule and subscribe to home-style tiffin meals.",
+      stack: ["Secondary Research", "User Interviews", "User Persona", "Competitor Analysis", "User Flow", "Wireframing", "Interface Design"],
+      highlights: ["Secondary and primary research, including user interviews, a user persona and affinity mapping to identify pain points", "Competitor analysis and ideation, leading to location-based kitchen discovery", "Architecture and user flow, wireframes, and interface design for meals, restaurant pages, plan selection, delivery slots and subscription management"] },
+    { group: "ai", title: "GolfTraxx", cat: "Golf App", url: "https://www.figma.com/file/RlW96aVMM7huhynjouf6FI/GolfTraxx?type=design&node-id=106%3A8&mode=design&t=GyprBxRElI81hhuM-1", linkLabel: "Open in Figma", caseStudy: "https://ankurmeena.notion.site/Case-Study-GolfTraxx-Revolutionizing-Golfing-Experience-71a2b62ca62c4bc2a2453a858627af0a", badge: "Figma", bc: "case", tags: [["Design Thinking", "purple"], ["UX Research", "blue"]],
+      desc: "A case study for an app that helps golfers with course information, game statistics tracking and playing in groups with friends.",
+      stack: ["Research", "Competitor Analysis", "Affinity Mapping", "Persona", "Storyboard", "User Flow", "Wireframing", "Interface Design"],
+      highlights: ["Empathise and define: research, competitor review, problem statement, affinity mapping, persona and storyboard", "Ideate: user flow, wireframing and interface design, following the design thinking method", "Covers detailed course information from a database of 40,000+ golf courses, game statistics tracking, and group play"] },
+    { group: "ai", title: "Blue Infinity", cat: "Web Solutions Website", url: "https://www.figma.com/file/2b6SLGvM7hWMF2NMzwxRr0/Blue-i?type=design&node-id=16%3A35&mode=design&t=TdEs7s6KMKn08tBN-1", linkLabel: "Open in Figma", caseStudy: "https://ankurmeena.notion.site/Blue-Infinity-Elevate-Your-Digital-Presence-a90b68e2fc3247d995c62d704013f87d", badge: "Figma", bc: "case", tags: [["Web Design", "blue"], ["Figma", "purple"]],
+      desc: "A website design for Blue Infinity, a web solutions team covering planning, design, development, testing and delivery.",
+      stack: ["Web Design", "Figma"] },
+    { group: "ai", title: "AUGMEE", cat: "Augmented Reality Dining App", url: "https://www.figma.com/file/pTLwwK8ZUD5TlRp0nWjbuL/AUGMEE?type=design&node-id=158%3A98&mode=design&t=VoAPJSQ6Sl89hAKp-1", linkLabel: "Open in Figma", caseStudy: "https://ankurmeena.notion.site/AUGMEE-Elevate-Your-Dining-Experience-with-Augmented-Reality-1a23a3c158a04ddda268bc23ec083154", badge: "Figma", bc: "case", tags: [["AR", "purple"], ["Prototype", "teal"]],
+      desc: "A dining app to scan a restaurant's menu, browse categories, nearby options and the latest trends, and explore dishes through an AR menu.",
+      stack: ["Prototyping", "Figma"] },
+    { group: "ai", title: "FFV Fast Delivery", cat: "Grocery Delivery App", url: "https://www.figma.com/file/2v4TCBvY8bsm3kVkzTwAOy/Grocery---app?type=design&node-id=354%3A2&mode=design&t=u7S8qExh4PVRvwk3-1", linkLabel: "Open in Figma", caseStudy: "https://ankurmeena.notion.site/FFV-Fast-Delivery-Quality-On-Time-Free-Returns-a317ba9d693a43faa8788cca6e64ff64", badge: "Figma", bc: "case", tags: [["App Design", "green"], ["Figma", "purple"]],
+      desc: "A grocery delivery app design built around guaranteed quality, on-time delivery and free, hassle-free returns.",
+      stack: ["App Design", "Figma"] },
   ];
 
   // the Featured Projects widget renders from this same list
@@ -1190,8 +1195,22 @@
     devops: "linear-gradient(135deg,#12212e,#1f6f8b)",
     mobile: "linear-gradient(135deg,#1b4d2f,#2f9d5a)",
     web: "linear-gradient(135deg,#1b2a6e,#4059d0)",
-    featured: "linear-gradient(135deg,#333,#555)",
+    featured: "linear-gradient(135deg,#1f2a44,#3b5bdb)",
   };
+  // the home widget paints image-less featured work with these same colours
+  window.PortfolioGroupGrad = GROUP_GRAD;
+
+  // the Figma mark, shown in place of the "Figma" badge text
+  const FIGMA_LOGO = '<svg class="pj__logo" viewBox="0 0 38 57" aria-hidden="true">' +
+    '<path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/>' +
+    '<path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/>' +
+    '<path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/>' +
+    '<path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/>' +
+    '<path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/></svg>';
+  // one badge builder for cards and detail pages; Figma projects get the logo
+  const badge = (p, cls) => p.badge === "Figma"
+    ? '<span class="' + cls + ' pj__badge--logo" role="img" aria-label="Figma" title="Figma">' + FIGMA_LOGO + "</span>"
+    : '<span class="' + cls + ' pj__badge--' + p.bc + '">' + p.badge + "</span>";
 
   // arrow glyph for the "View Details" action — same stroke and size as EXT
   const ARROW = '<svg class="pj__extic" viewBox="0 0 24 24" aria-hidden="true">' +
@@ -1208,8 +1227,9 @@
       .join("");
     // only Featured projects show an image; others are clean info cards
     const thumb = p.img
-      ? '<div class="pj__thumb" style="background:url(\'' + p.img + "') center / cover\">" +
-          '<span class="pj__badge pj__badge--' + p.bc + '">' + p.badge + "</span></div>"
+      // a screenshot fills the frame; a logo (fit: contain) sits whole on its own colour
+      ? '<div class="pj__thumb" style="background:' + (p.bg ? p.bg + " " : "") + "url('" + p.img + "') " + (p.pos || "center") + " / " + (p.fit || "cover") + ' no-repeat">' +
+          badge(p, "pj__badge") + "</div>"
       : "";
     // The card is no longer one big link. The two actions that matter are on it
     // directly, so nothing important hides behind a menu.
@@ -1218,17 +1238,21 @@
         '<div class="pj__body">' +
           '<div class="pj__row">' + MINIFOLDER +
             '<span class="pj__title">' + p.title + "</span>" +
-            (p.img ? "" : '<span class="pj__badge-inline pj__badge--' + p.bc + '">' + p.badge + "</span>") +
+            (p.img ? "" : badge(p, "pj__badge-inline")) +
           "</div>" +
           '<div class="pj__cat">' + p.cat + "</div>" +
           '<div class="pj__tags">' + tags + "</div>" +
           // with no Live Site beside it, View Details sits alone at the right edge
-          '<div class="pj__actions' + (p.url ? "" : " pj__actions--solo") + '">' +
-            '<button class="pj__act pj__act--primary" type="button" data-act="details">View Details' + ARROW + "</button>" +
+          '<div class="pj__actions' + (p.url && !p.linkOnly ? "" : " pj__actions--solo") + '">' +
+            // link-only projects show just their link; a project with a written case
+            // study opens it directly; the rest open their detail page
+            (p.linkOnly ? "" : p.caseStudy
+              ? '<a class="pj__act pj__act--primary" href="' + p.caseStudy + '" target="_blank" rel="noopener">View Case Study' + ARROW + "</a>"
+              : '<button class="pj__act pj__act--primary" type="button" data-act="details">' + (p.detailsLabel || "View Details") + ARROW + "</button>") +
             // no live URL: don't invent a second label (several of these are
             // badged "Live" already)
             (p.url
-              ? '<a class="pj__act pj__act--ghost" href="' + p.url + '" target="_blank" rel="noopener">Live Site' + EXT + "</a>"
+              ? '<a class="pj__act pj__act--ghost" href="' + p.url + '" target="_blank" rel="noopener">' + (p.linkLabel || "Live Site") + EXT + "</a>"
               : "") +
           "</div>" +
         "</div>" +
@@ -1247,22 +1271,25 @@
     // `pos` lets one image anchor off-centre in this wide, short banner, so a
     // logo near its top edge is not cropped away; everything else stays centred
     const hero = p.img
-      ? '<div class="pjd__hero" style="background:url(\'' + p.img + "') " + (p.pos || "center") + ' / cover"></div>'
+      ? '<div class="pjd__hero" style="background:' + (p.bg ? p.bg + " " : "") + "url('" + p.img + "') " + (p.pos || "center") + " / " + (p.fit || "cover") + ' no-repeat"></div>'
       : '<div class="pjd__hero" style="background:' + (GROUP_GRAD[p.group] || GROUP_GRAD.featured) + '">' +
           '<span class="pjd__hero-title">' + p.title + "</span></div>";
     return (
       '<div class="pjd">' + hero +
         '<div class="pjd__info">' +
           '<div class="pjd__head"><h2 class="pjd__title">' + p.title + "</h2>" +
-            '<span class="pj__badge-inline pj__badge--' + p.bc + '">' + p.badge + "</span></div>" +
+            badge(p, "pj__badge-inline") + "</div>" +
           '<div class="pjd__cat">' + p.cat + "</div>" +
           (p.desc ? '<p class="pjd__desc">' + p.desc + "</p>" : "") +
-          (chips ? '<div class="pj__dlabel">Tech Stack</div><div class="pj__stack">' + chips + "</div>" : "") +
-          (hl ? '<div class="pj__dlabel">What I built</div><ul class="pj__hl">' + hl + "</ul>" : "") +
+          (chips ? '<div class="pj__dlabel">Skills &amp; Methods</div><div class="pj__stack">' + chips + "</div>" : "") +
+          (hl ? '<div class="pj__dlabel">What I did</div><ul class="pj__hl">' + hl + "</ul>" : "") +
           '<div class="pjd__foot">' +
-            '<span class="pjd__meta-item">' + M[p.mi] + p.mt + "</span>" +
-            '<span class="pjd__meta-item">' + M.cal + p.yr + "</span>" +
-            (p.url ? '<a class="pjd__visit" href="' + p.url + '" target="_blank" rel="noopener">Visit Live Site ↗</a>' : "") +
+            (p.mt ? '<span class="pjd__meta-item">' + (M[p.mi] || "") + p.mt + "</span>" : "") +
+            (p.yr ? '<span class="pjd__meta-item">' + M.cal + p.yr + "</span>" : "") +
+            (p.caseStudy ? '<a class="pjd__visit" href="' + p.caseStudy + '" target="_blank" rel="noopener">View Case Study ↗</a>' : "") +
+            (p.url ? '<a class="pjd__visit' + (p.caseStudy ? " pjd__visit--more" : "") + '" href="' + p.url + '" target="_blank" rel="noopener">' + (p.linkLabel || "Visit Live Site") + " ↗</a>" : "") +
+            (p.design ? '<a class="pjd__visit pjd__visit--more" href="' + p.design + '" target="_blank" rel="noopener">' + (p.designLabel || "Open Design") + " ↗</a>" : "") +
+            (p.live ? '<a class="pjd__visit pjd__visit--more" href="' + p.live + '" target="_blank" rel="noopener">Visit Live Site ↗</a>' : "") +
           "</div>" +
         "</div>" +
       "</div>"
@@ -1297,11 +1324,8 @@
         '<div class="fw__list">' +
           item(I.recents, "Recents", "fw__item--active", "all") +
           '<div class="fw__section">Portfolio</div>' +
-          item(I.grid, "Featured Projects", "", "featured") +
-          item(I.robot, "AI / ML", "", "ai") +
-          item(I.layers, "Cloud & DevOps", "", "devops") +
-          item(I.phone, "Mobile Apps", "", "mobile") +
-          item(I.web, "Web Apps", "", "web") +
+          item(I.grid, "Live Projects", "", "featured") +
+          item(I.doc, "Figma Files", "", "ai") +
         "</div></aside>" +
       '<section class="fw__main">' +
         '<header class="fw__toolbar">' +
@@ -1347,8 +1371,8 @@
     });
     document.addEventListener("keydown", onKey);
 
-    // share → "Copy Link" popover (copies the GitHub URL, same as About Me)
-    const SHARE_URL = "https://github.com/MONUPRAJAPAT";
+    // share → "Copy Link" popover (copies the LinkedIn URL, same as About Me)
+    const SHARE_URL = "https://www.linkedin.com/in/ankur-meena/";
     const COPY_ICON =
       '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"/></svg>';
     const shareBtn = win.querySelector('.nw__circ[aria-label="Share"]');
@@ -1656,7 +1680,6 @@
     "dock__app--acrobat": "Resume",
     "dock__app--mail": "Contact",
     "dock__app--linkedin": "LinkedIn",
-    "dock__app--github": "GitHub",
   };
 
   const tip = document.createElement("div");
@@ -1791,7 +1814,7 @@
 
   const PLAYLIST = {
     title: "delulu but dancing",
-    owner: "Monu Prajapat",
+    owner: "Ankur Meena",
   };
 
   const mtof = (root, semis) => root * Math.pow(2, semis / 12);
@@ -2351,7 +2374,6 @@
     acrobat: ".dock .dock__app--acrobat",
     mail: ".dock .dock__app--mail",
     linkedin: ".dock .dock__app--linkedin",
-    github: ".dock .dock__app--github",
     ttt: '[data-game="ttt"]',
     memory: '[data-game="memory"]',
   };
@@ -2981,7 +3003,10 @@
 
   const FEATURED = ALL.filter((p) => p.group === "featured");
   if (!FEATURED.length) return;
-  const REST = ALL.length - FEATURED.length;
+  // the footer fits four thumbnails beside the "+N" chip and the button, even on
+  // a phone; any further featured projects are counted in the chip instead
+  const SHOWN = FEATURED.slice(0, 4);
+  const REST = ALL.length - SHOWN.length;
 
   const ICON_GO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg>';
   // the reference shows a due date here; ours shows where the project actually lives
@@ -2989,6 +3014,30 @@
 
   const host = (p) => {
     try { return new URL(p.url).host.replace(/^www\./, ""); } catch (e) { return null; }
+  };
+
+  // A screenshot fills its frame; a logo (fit: contain) sits whole on its own
+  // colour; work with no image gets its category colour and its name (the
+  // thumbnail takes the initial), so no featured item shows an empty frame.
+  const GRAD = window.PortfolioGroupGrad || {};
+  const paint = (el, p, isThumb) => {
+    const cls = isThumb ? "pjw__thumb--text" : "pjw__fthumb--text";
+    if (p.img) {
+      el.style.backgroundImage = 'url("' + p.img + '")';
+      el.style.backgroundSize = p.fit || "";
+      el.style.backgroundColor = p.bg || "";
+      el.style.backgroundPosition = p.pos || "";
+      el.style.backgroundRepeat = "no-repeat";
+      el.classList.remove(cls);
+      el.textContent = "";
+    } else {
+      el.style.backgroundImage = GRAD[p.group] || GRAD.featured || "none";
+      el.style.backgroundSize = "";
+      el.style.backgroundColor = "";
+      el.style.backgroundPosition = "";
+      el.classList.add(cls);
+      el.textContent = isThumb ? p.title.charAt(0) : p.title;
+    }
   };
 
   widgets.forEach((root) => {
@@ -3000,11 +3049,11 @@
     q("[data-pjw-icon]").innerHTML = ICON_GLOBE;
 
     // ---- thumbnails: one per featured project, then a chip for the remainder ----
-    FEATURED.forEach((p, i) => {
+    SHOWN.forEach((p, i) => {
       const b = document.createElement("button");
       b.type = "button";
       b.className = "pjw__thumb";
-      b.style.backgroundImage = 'url("' + p.img + '")';
+      paint(b, p, true);
       b.setAttribute("aria-label", "Feature " + p.title);
       b.addEventListener("click", () => show(i));
       thumbsEl.appendChild(b);
@@ -3022,7 +3071,7 @@
 
     function show(i) {
       const p = FEATURED[i];
-      q("[data-pjw-img]").style.backgroundImage = 'url("' + p.img + '")';
+      paint(q("[data-pjw-img]"), p, false);
       q("[data-pjw-name]").textContent = p.title;
       q("[data-pjw-desc]").textContent = p.desc || p.cat;
       // the column is far taller than the reference card, so the real stack fills
@@ -3088,19 +3137,18 @@
   if (!screen) return;
 
   const ME = {
-    name: "Monu Prajapat",
-    role: "Sr. Full Stack Engineer",
-    tagline: "Let's build something meaningful.",
-    title: "Full Stack Engineer & Tech Lead",
-    location: "India",
+    name: "Ankur Meena",
+    role: "Senior UI/UX Designer",
+    tagline: "Let's design something meaningful.",
+    title: "Senior UI/UX Designer · Fintech & Insurance",
+    location: "Gurugram, India",
     experience: "4+ Years",
-    company: "Eminence Technology",
-    focus: "MERN · Node.js · React",
-    email: "monuprajapat6270@gmail.com",
-    phone: "+91-9996105221",
-    linkedin: "https://www.linkedin.com/in/monuprajapat/",
-    github: "https://github.com/MONUPRAJAPAT",
-    resume: "Monu_Resume.pdf",
+    company: "Ensylon",
+    focus: "Product Design · Design Systems · UX Research",
+    email: "ankurmeena194@gmail.com",
+    phone: "+91-6377683376",
+    linkedin: "https://www.linkedin.com/in/ankur-meena/",
+    resume: "ankur-updated-resume.pdf",
   };
 
   const G_CLOSE = '<svg class="wl__g" viewBox="0 0 12 12"><path d="M3.4 3.4 8.6 8.6M8.6 3.4 3.4 8.6"/></svg>';
@@ -3109,7 +3157,6 @@
   const G_COLLAPSE = '<svg class="wl__g wl__g--fill" viewBox="0 0 12 12"><path d="M3 5.8 5.8 5.8 5.8 3Z"/><path d="M9 6.2 6.2 6.2 6.2 9Z"/></svg>';
 
   const I_DOC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>';
-  const I_GITHUB = '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5a10.5 10.5 0 0 0-3.32 20.47c.52.1.71-.23.71-.5v-1.75c-2.9.63-3.52-1.4-3.52-1.4-.48-1.2-1.16-1.53-1.16-1.53-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.94 1.6 2.46 1.14 3.06.87.1-.68.37-1.14.66-1.4-2.31-.26-4.75-1.16-4.75-5.14 0-1.14.41-2.06 1.08-2.79-.11-.27-.47-1.33.1-2.76 0 0 .88-.28 2.88 1.07a9.9 9.9 0 0 1 5.24 0c2-1.35 2.88-1.07 2.88-1.07.57 1.43.21 2.49.1 2.76.67.73 1.08 1.65 1.08 2.79 0 3.99-2.45 4.87-4.78 5.13.38.33.71.97.71 1.96v2.91c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>';
   const I_COPY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.4"/><path d="M15 5.5A2.5 2.5 0 0 0 12.5 3H6.4A2.4 2.4 0 0 0 4 5.4v6.1A2.5 2.5 0 0 0 6.5 14"/></svg>';
   const I_TICK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>';
 
@@ -3167,7 +3214,6 @@
           '<div class="cw__apps">' +
             '<a class="cw__app cw__app--doc" href="' + ME.resume + '" target="_blank" rel="noopener" aria-label="Resume (PDF)">' + I_DOC + "</a>" +
             '<a class="cw__app cw__app--li" href="' + ME.linkedin + '" target="_blank" rel="noopener" aria-label="LinkedIn"><span>in</span></a>' +
-            '<a class="cw__app cw__app--gh" href="' + ME.github + '" target="_blank" rel="noopener" aria-label="GitHub">' + I_GITHUB + "</a>" +
           "</div>" +
         "</aside>" +
 
@@ -3466,11 +3512,11 @@
 
   // ---- what the search can find ------------------------------------------
   // `keys` are extra words that should match beyond the title/subtitle, so
-  // "cv" finds the resume and "repo" finds GitHub.
+  // "cv" finds the resume and "network" finds LinkedIn.
   const APPS = [
     { title: "Projects", sub: "App", icon: IC.app, keys: "projects work portfolio finder case studies apps",
       run: () => window.PortfolioFinder && window.PortfolioFinder.open() },
-    { title: "About Me", sub: "App", icon: IC.note, keys: "about me bio profile notes who monu",
+    { title: "About Me", sub: "App", icon: IC.note, keys: "about me bio profile notes who ankur meena designer",
       run: () => window.PortfolioNotes && window.PortfolioNotes.open() },
     { title: "Resume", sub: "PDF", icon: IC.doc, keys: "resume cv curriculum vitae pdf download",
       run: () => dock("acrobat") && dock("acrobat").click() },
@@ -3480,8 +3526,6 @@
       run: () => window.SpotifyApp && window.SpotifyApp.open(bar) },
     { title: "LinkedIn", sub: "Link", icon: IC.link, keys: "linkedin social network profile connect",
       run: () => dock("linkedin") && dock("linkedin").click() },
-    { title: "GitHub", sub: "Link", icon: IC.link, keys: "github git repo repos code source open source",
-      run: () => dock("github") && dock("github").click() },
     { title: "Tic-Tac-Toe", sub: "Game", icon: IC.game, keys: "tic tac toe game play noughts crosses",
       run: () => document.querySelector('[data-game="ttt"]').click() },
     { title: "Memory", sub: "Game", icon: IC.game, keys: "memory game play cards match",
@@ -3489,11 +3533,8 @@
   ];
 
   const GROUPS = [
-    { g: "featured", title: "Featured Projects", keys: "featured highlighted best top live" },
-    { g: "ai", title: "AI / ML", keys: "ai ml machine learning llm openai rag" },
-    { g: "devops", title: "Cloud & DevOps", keys: "cloud devops aws infrastructure docker kubernetes ci cd" },
-    { g: "mobile", title: "Mobile Apps", keys: "mobile app ios android react native" },
-    { g: "web", title: "Web Apps", keys: "web website frontend fullstack saas" },
+    { g: "featured", title: "Live Projects", keys: "live site web app vercel featured" },
+    { g: "ai", title: "Figma Files", keys: "figma design file assignment design system dashboard power bi security rule engine truck logistics case study notion" },
   ];
 
   function catalogue() {
@@ -3588,7 +3629,7 @@
     }
     if (!results.length) {
       list.innerHTML =
-        '<div class="issnone">No Results<span>Try “resume”, “github”, “AWS” or a project name.</span></div>';
+        '<div class="issnone">No Results<span>Try “resume”, “LinkedIn”, “Figma” or a project name.</span></div>';
       return;
     }
     // Bucket by section so each heading appears once. Results arrive in score
