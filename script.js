@@ -1111,7 +1111,7 @@
 
   const PROJECTS = [
     // ---- Featured (live, real screenshots) ----
-    { group: "featured", title: "TruGamer", cat: "Unified Gaming Platform", url: "https://trugamer.com/", img: "proj-trugamer.jpg", badge: "Live", bc: "live", tags: [["Next.js", "blue"], ["IGDB API", "purple"]], mi: "mon", mt: "350K+ Games", yr: "2025",
+    { group: "featured", title: "TruGamer", cat: "Unified Gaming Platform", url: "https://trugamer.com/", img: "trugamer.png", pos: "center 18%", badge: "Live", bc: "live", tags: [["Next.js", "blue"], ["IGDB API", "purple"]], mi: "mon", mt: "350K+ Games", yr: "2025",
       desc: "A unified gaming platform that pulls games, news, and release calendars from Steam, Xbox, and PSN into a single hub.",
       stack: ["Next.js", "Node.js", "Strapi", "PostgreSQL", "Redis", "AWS", "IGDB API"],
       highlights: ["Built an IGDB ingestion pipeline for 350K+ games with batching, rate-limiting & retries — a 14-day non-stop run with zero data loss", "Integrated Steam/Xbox/PSN APIs with per-platform ID resolution (4–6 calls per platform per user)", "Priority-queue scheduling & response caching for 700+ active users"] },
@@ -1193,6 +1193,10 @@
     featured: "linear-gradient(135deg,#333,#555)",
   };
 
+  // arrow glyph for the "View Details" action — same stroke and size as EXT
+  const ARROW = '<svg class="pj__extic" viewBox="0 0 24 24" aria-hidden="true">' +
+    '<path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>';
+
   // external-link glyph for the "Live Site" action
   const EXT = '<svg class="pj__extic" viewBox="0 0 24 24" aria-hidden="true">' +
     '<path d="M14 4h6v6"/><path d="M20 4l-8.5 8.5"/>' +
@@ -1218,10 +1222,11 @@
           "</div>" +
           '<div class="pj__cat">' + p.cat + "</div>" +
           '<div class="pj__tags">' + tags + "</div>" +
-          '<div class="pj__actions">' +
-            '<button class="pj__act pj__act--primary" type="button" data-act="details">View Details</button>' +
+          // with no Live Site beside it, View Details sits alone at the right edge
+          '<div class="pj__actions' + (p.url ? "" : " pj__actions--solo") + '">' +
+            '<button class="pj__act pj__act--primary" type="button" data-act="details">View Details' + ARROW + "</button>" +
             // no live URL: don't invent a second label (several of these are
-            // badged "Live" already) — just let View Details take the row
+            // badged "Live" already)
             (p.url
               ? '<a class="pj__act pj__act--ghost" href="' + p.url + '" target="_blank" rel="noopener">Live Site' + EXT + "</a>"
               : "") +
@@ -1239,8 +1244,10 @@
     const hl = (p.highlights || [])
       .map((h) => "<li>" + h + "</li>")
       .join("");
+    // `pos` lets one image anchor off-centre in this wide, short banner, so a
+    // logo near its top edge is not cropped away; everything else stays centred
     const hero = p.img
-      ? '<div class="pjd__hero" style="background:url(\'' + p.img + "') center / cover\"></div>"
+      ? '<div class="pjd__hero" style="background:url(\'' + p.img + "') " + (p.pos || "center") + ' / cover"></div>'
       : '<div class="pjd__hero" style="background:' + (GROUP_GRAD[p.group] || GROUP_GRAD.featured) + '">' +
           '<span class="pjd__hero-title">' + p.title + "</span></div>";
     return (
@@ -2365,12 +2372,37 @@
       '<g transform="translate(26 26) scale(0.0938)" fill="#fff">' +
       '<path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64c0 247.4 200.6 448 448 448 18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/>' +
       "</g></svg>",
+    // The dock's Notes icon, redrawn 1:1. The dock paints it with CSS in a 52px
+    // tile (fixed-pixel line pitch and perforation), which is why a clone would
+    // not scale — so every value below is lifted from .dock__app--notes and laid
+    // out in that same 52-unit grid, letting the SVG scale with the tile.
     notes:
-      '<svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#fdfdfb"/>' +
-      '<rect width="100" height="27" fill="#ffcf2e"/>' +
-      '<g fill="#d6d4cd"><rect x="15" y="42" width="70" height="4.5" rx="2.2"/>' +
-      '<rect x="15" y="58" width="70" height="4.5" rx="2.2"/>' +
-      '<rect x="15" y="74" width="52" height="4.5" rx="2.2"/></g></svg>',
+      '<svg viewBox="0 0 52 52">' +
+      "<defs>" +
+      '<linearGradient id="iosNotesBand" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0" stop-color="#ffdd55"/><stop offset="1" stop-color="#f8ca20"/></linearGradient>' +
+      // box-shadow: 0 2px 3px rgba(0,0,0,.18) — a 3px blur is a 1.5 std deviation
+      '<filter id="iosNotesShadow" x="-10%" y="-20%" width="120%" height="180%">' +
+      '<feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000" flood-opacity="0.18"/></filter>' +
+      // perforation dot: solid to 0.9px, fading out by 1.4px
+      '<radialGradient id="iosNotesDot"><stop offset="0.643" stop-color="#a9a59b"/>' +
+      '<stop offset="1" stop-color="#a9a59b" stop-opacity="0"/></radialGradient>' +
+      '<pattern id="iosNotesPerf" x="0" y="14.04" width="5" height="8" patternUnits="userSpaceOnUse">' +
+      '<circle cx="2.5" cy="4" r="1.4" fill="url(#iosNotesDot)"/></pattern>' +
+      "</defs>" +
+      // cream paper
+      '<rect width="52" height="52" fill="#f2efe7"/>' +
+      // ruled lines: 13px pitch from a 3px offset, 6px side inset, each a dark
+      // 1px rule with a 1px highlight under it
+      '<g fill="#c7c3b8"><rect x="6" y="14" width="40" height="1"/>' +
+      '<rect x="6" y="27" width="40" height="1"/><rect x="6" y="40" width="40" height="1"/></g>' +
+      '<g fill="#fff" fill-opacity="0.6"><rect x="6" y="15" width="40" height="1"/>' +
+      '<rect x="6" y="28" width="40" height="1"/><rect x="6" y="41" width="40" height="1"/></g>' +
+      // yellow header band, 27% tall, casting its shadow onto the paper
+      '<rect width="52" height="14.04" fill="url(#iosNotesBand)" filter="url(#iosNotesShadow)"/>' +
+      // dotted perforation row directly under the band
+      '<rect y="14.04" width="52" height="8" fill="url(#iosNotesPerf)"/>' +
+      "</svg>",
   };
 
   // cloned SVG icons carry <defs> ids (e.g. mailBody, finderBlue). Duplicated in
@@ -3257,11 +3289,14 @@
   // so when that is refused it falls back to a muted play and the speaker button
   // is the way in. The button is the only dependable path on a first visit.
   const sound = lock.querySelector(".lock__sound");
+  const tip = lock.querySelector(".lock__tip");
 
   function setSoundUI(on) {
     lock.classList.toggle("lock--sound", on);
     sound.setAttribute("aria-pressed", String(on));
     sound.setAttribute("aria-label", on ? "Turn sound off" : "Turn sound on");
+    // the tooltip names what a click will do next, as macOS controls do
+    if (tip) tip.textContent = on ? "Mute" : "Unmute";
   }
   function soundOn() {
     if (!vid) return;
@@ -3294,6 +3329,13 @@
     if (vid.muted) soundOn();
     else { vid.muted = true; setSoundUI(false); }
   });
+  // the always-on hint is a click target as well, so "Unmute" does what it says
+  if (tip) {
+    tip.addEventListener("click", (e) => {
+      e.stopPropagation();
+      sound.click();
+    });
+  }
 
   let unlocked = false;
   function unlock() {

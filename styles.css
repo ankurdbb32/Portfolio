@@ -2829,8 +2829,9 @@ button.menubar__item:focus-visible {
 }
 
 /* Adobe Acrobat: flat red with white "A" mark (measured from reference) */
+/* Resume: a generic PDF document tile (the page art lives in the SVG) */
 .dock__app--acrobat {
-  background: #fa0f00;
+  background: #fff;
   border-radius: 22%;
 }
 .dock__app--acrobat svg {
@@ -6548,12 +6549,30 @@ button.menubar__item:focus-visible {
   cursor: pointer;
   transition: background 0.14s ease, color 0.14s ease, border-color 0.14s ease;
 }
+/* borderless text action in black on the white card; the arrow says it is
+   clickable, and a light grey fill confirms it on hover */
 .pj__act--primary {
-  background: #1d1d1f;
-  color: #fff;
+  background: none;
+  color: #1d1d1f;
+  border: 0;
 }
 .pj__act--primary:hover {
-  background: #333336;
+  background: #f2f2f4;
+}
+/* a card with no live site: View Details keeps its natural width and moves to
+   the right edge instead of stretching across the whole row */
+.pj__actions--solo {
+  justify-content: flex-end;
+}
+.pj__actions--solo .pj__act {
+  flex: 0 0 auto;
+  /* no edge to line up, so the arrow itself ends on the card's content edge
+     (the right end of the divider above); the left padding keeps the tap target */
+  padding: 0 0 0 14px;
+}
+.pj__actions--solo .pj__act:hover {
+  background: none;
+  opacity: 0.6;
 }
 .pj__act--ghost {
   background: #fff;
@@ -7313,5 +7332,107 @@ button.menubar__item:focus-visible {
   }
   .noteswin .nw__toolbar {
     justify-content: flex-end;
+  }
+}
+
+/* ===================================================================== */
+/* ============ LOCK SCREEN — speaker tooltip (Mute / Unmute) ========== */
+/* ===================================================================== */
+/* A light glass pill to the right of the speaker, since the button hugs the top
+   left corner and anything above or to the left would clip. It names the action
+   a click will take and stays on screen as the prompt to turn sound on. It is
+   a sibling rather than a child of the button so the button's hover scale does
+   not blur its text. */
+.lock__tip {
+  position: absolute;
+  top: 39px; /* the button's vertical centre: 20px inset + half of 38px */
+  left: 68px; /* 20px inset + 38px button + 10px gap */
+  z-index: 3;
+  padding: 6px 11px;
+  border-radius: 8px;
+  /* light glass with dark type, bright enough to catch the eye over the video;
+     near-opaque so the arrow (which cannot share the pill's blur) matches it */
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+  color: #1c1c1e;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer; /* clicking the hint works too — it forwards to the speaker */
+  transform: translate(0, -50%);
+  /* always on: it is the invitation to turn the sound on, so it cannot wait
+     for a hover. It settles in just after the lock screen appears. */
+  animation: lockTipIn 0.5s cubic-bezier(0.2, 0.9, 0.3, 1) 0.9s both;
+  transition: background 0.14s ease;
+}
+.lock__tip:hover {
+  background: #fff;
+}
+@keyframes lockTipIn {
+  from {
+    opacity: 0;
+    transform: translate(-6px, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+/* small arrow pointing back at the speaker. A triangle that sits wholly
+   outside the pill: a rotated square overlapping a translucent pill doubles the
+   colour where they meet and shows as a diamond. */
+.lock__tip::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -5px;
+  width: 5px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  transform: translateY(-50%);
+}
+/* the arrow takes the hover tint along with the pill */
+.lock__tip:hover::before {
+  background: #fff;
+}
+/* phones: the hint matters most on touch, so it stays — just a touch smaller */
+@media (max-width: 720px) {
+  .lock__tip {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lock__tip {
+    animation: none;
+  }
+}
+
+/* ---- Phone: "View all projects" becomes a plain text action, flush right ----
+   No pill: the label sits on the card itself and its last letter lines up with
+   the right end of the divider above, the card's content edge. The left and
+   vertical padding stay so the tap target keeps its size. */
+@media (max-width: 720px) {
+  .ios .pjw__viewall,
+  .ios .pjw__viewall:hover {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    padding: 9px 0 9px 12px;
+    margin-left: auto;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 0.12s ease;
+  }
+  .ios .pjw__viewall:active {
+    opacity: 0.55;
   }
 }
