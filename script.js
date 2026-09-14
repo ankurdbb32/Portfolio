@@ -597,7 +597,7 @@
     linkedin: S('<rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="7.6" cy="8" r="1.1" fill="currentColor" stroke="none"/><path d="M7.6 10.8v6.2"/><path d="M11 17v-6.2"/><path d="M11 13.3c.4-1 1.4-1.8 2.7-1.8 1.6 0 2.7 1.1 2.7 3V17"/>'),
     pin: S('<path d="M12 21c4-4 6.3-7.2 6.3-10.5a6.3 6.3 0 1 0-12.6 0C5.7 13.8 8 17 12 21z"/><circle cx="12" cy="10.4" r="2.3"/>'),
   };
-  const PORTFOLIO_URL = "https://www.linkedin.com/in/ankur-meena/"; // shown/copied by the Share button
+  const PORTFOLIO_URL = "https://ankurdbb-portfolio.vercel.app/"; // shown/copied by the Share button
 
   // ---- content builders ----
   const P = (t) => '<p class="nw__p">' + t + "</p>";
@@ -696,30 +696,45 @@
   const CONTENT = {
     "About Me":
       '<h1 class="nw__h1">About Me</h1>' +
-      P(`Hello, I'm Ankur.`) +
-      P(`I'm a Senior UI/UX Designer with a B.Tech (Hons.) from IIT Roorkee, designing end-to-end product experiences across fintech, insurance, hiring, and EdTech, for web and mobile.`) +
-      P(`At Ensylon, I lead product design for EquiTrust's Fintech and Insurance digital ecosystem, including the Quotient hiring platform and 4+ enterprise insurance tools across policy, retirement, and annuity workflows.`) +
-      P(`Between design roles, I spent a year as a Software Development Engineer on Apple Maps via ThoughtGenesis, working on visualization logic and data-driven UI behavior for geographic data layers.`) +
+      P(`I'm a Senior UI/UX Designer with a B.Tech (Hons.) from IIT Roorkee, focused on designing end-to-end digital products across fintech, insurance, hiring, EdTech, and enterprise SaaS.`) +
+      P(`My experience sits at the intersection of user needs, business goals, and technology. I work on complex products where the challenge is often not just designing an interface, but understanding the problem, simplifying information, and creating experiences that are intuitive, scalable, and practical to build.`) +
       HR +
-      H2(`What I Do`) +
-      P(`I take products from research to developer-ready design: structuring user journeys, building information architecture and interaction models, prototyping, and testing with real users.`) +
-      TAGS([`User Research`, `User Journey Mapping`, `Information Architecture`, `Wireframing`, `User Flows`, `High-Fidelity Prototyping`, `Interaction Design`, `Usability Testing`, `Design Systems`, `Developer Handoff`]) +
+      H2(`My Experience`) +
+      P(`I've worked across web and mobile products, taking designs from early-stage research and problem definition through information architecture, user flows, wireframes, prototyping, usability testing, and developer handoff.`) +
+      P(`My work has involved designing for complex enterprise workflows, data-heavy interfaces, dashboards, financial and insurance experiences, hiring platforms, and AI-powered products. I collaborate closely with product managers, developers, stakeholders, and users to turn complex requirements into clear and usable product experiences.`) +
+      P(`Before moving fully into product design, I also worked as a Software Development Engineer on Apple Maps. That experience gave me a strong understanding of how products are built from the engineering side and helped shape the way I approach design today — with equal attention to user experience, technical feasibility, data, and implementation.`) +
+      HR +
+      H2(`How I Think About Design`) +
+      P(`I believe good design starts long before the first frame is created in Figma.`) +
+      P(`My process begins by understanding why a problem exists, who is experiencing it, and what outcome the product needs to achieve. From there, I structure the information, map the user journey, identify friction points, and explore different interaction models before moving into visual design.`) +
+      P(`I try to avoid designing isolated screens. Instead, I think in terms of systems, journeys, states, and relationships between experiences.`) +
+      P(`My approach is generally:`) +
+      P(`<strong>Understand → Define → Structure → Explore → Prototype → Test → Refine → Handoff</strong>`) +
+      P(`I use research and testing to validate assumptions, but I also believe design decisions should balance user needs with business objectives and technical constraints.`) +
+      HR +
+      H2(`What I Bring`) +
+      TAGS([`User Research & Usability Testing`, `User Journey Mapping`, `Information Architecture`, `User Flows & Interaction Models`, `Wireframing`, `High-Fidelity Prototyping`, `Interaction Design`, `Design Systems`, `Dashboard & Data Visualization`, `Enterprise & SaaS Product Design`, `AI/LLM & Conversational UX`, `AI Copilot Experiences`, `Responsive Web & Mobile Design`, `Developer Handoff`]) +
       HR +
       H2(`Impact`) +
-      P(`Delivered 30+ wireframes, user flows, and high-fidelity prototypes, reducing design iteration cycles by ~30% across stakeholder reviews.`) +
-      P(`Conducted structured user research with 30+ participants in 2-week cycles, improving task completion rates by ~25% across hiring and internal workflows.`) +
-      P(`Built and scaled reusable design system components across hiring and insurance products, reducing design-to-development turnaround time by ~35%.`) +
-      P(`Delivered developer-ready specifications, interaction states, and edge cases, improving implementation efficiency by ~34% and reducing rework.`) +
+      P(`I focus on creating design processes and systems that improve not just the final product, but how efficiently teams build it.`) +
+      P(`My work has included:`) +
+      UL([`Delivering 30+ wireframes, user flows, and high-fidelity prototypes, helping reduce design iteration cycles by ~30%.`, `Conducting structured research with 30+ participants across two-week testing cycles, contributing to ~25% improvements in task completion.`, `Building reusable design-system components that reduced design-to-development turnaround by ~35%.`, `Creating detailed specifications, interaction states, and edge cases that improved implementation efficiency by ~34% and reduced development rework.`]) +
       HR +
-      H2(`What I Design`) +
-      TAGS([`Enterprise Product Design`, `SaaS Product Design`, `AI/LLM UX Design`, `Conversational UI Design`, `AI Copilot Experience Design`, `Dashboard & Analytics Design`, `Data Visualization`, `Mobile App Design`, `Web Application Design`]) +
-      HR +
-      H2(`Recognition`) +
-      P(`Recipient of the Best Design Award in the Design Rush competition, organized by IIT BHU, out of 1200+ participants, for the design of Trado, a crypto trading app, while heading the IIT Roorkee Design Team.`) +
+      H2(`What I Like Designing`) +
+      P(`I'm particularly interested in products where design has to make complexity feel simple.`) +
+      P(`My areas of interest include:`) +
+      TAGS([`Enterprise Products`, `SaaS`, `Fintech`, `Insurance`, `AI/LLM UX`, `Conversational Interfaces`, `AI Copilots`, `Dashboards`, `Data Visualization`, `Web Applications`, `Mobile Applications`]) +
       HR +
       H2(`AI in My Workflow`) +
-      P(`I work with AI tools across the design process, and completed LinkedIn Learning's Using AI in the UX Design Process.`) +
-      TAGS([`Cursor`, `Lovable AI`, `V0 by Vercel`, `ChatGPT`, `Claude`, `Gemini`, `Stitch`, `UX Pilot`, `Readdy.ai`]),
+      P(`AI has become an active part of my design process — not as a replacement for design thinking, but as a way to explore, iterate, and move faster.`) +
+      P(`I use AI throughout different stages of the workflow, including research exploration, ideation, UX writing, interaction exploration, prototyping, design validation, and development collaboration.`) +
+      P(`Tools I currently work with include:`) +
+      TAGS([`Cursor`, `Lovable AI`, `v0 by Vercel`, `ChatGPT`, `Claude`, `Gemini`, `Stitch`, `UX Pilot`, `Readdy.ai`]) +
+      P(`I've also completed LinkedIn Learning's Using AI in the UX Design Process, and continue to explore how AI can improve both the way products are designed and the experiences those products provide.`) +
+      HR +
+      H2(`Recognition`) +
+      P(`I received the Best Design Award at the Design Rush competition organised by IIT BHU, selected from 1,200+ participants, for a crypto trading app created while leading the IIT Roorkee Design Team.`) +
+      P(`For me, design is ultimately about making complexity understandable, interactions intentional, and products useful — while creating systems that can evolve with the people and businesses using them.`),
 
     "Professional Experience":
       '<h1 class="nw__h1">Professional Experience</h1>' +
@@ -736,24 +751,24 @@
       '<h1 class="nw__h1">Projects</h1>' +
       H2(`Live Projects`) +
       PROJ(`Quotient, Hiring Platform for EquiTrust (Ensylon)`, `User Journeys · User Research · Prototyping · Design Systems`, [`Designed and optimized multi-step user journeys covering candidate onboarding, profile creation, job workflows, and recruiter interactions`, `Conducted structured user research with 30+ participants in 2-week cycles, improving task completion rates by ~25% across hiring and internal workflows`, '<a class="nw__email" href="https://nexus-ahse-psi.vercel.app/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
-      PROJ(`Employee Portal, iConnect · Ensylon`, ``, ['<a class="nw__email" href="https://employee-portal-seven-delta.vercel.app/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
-      PROJ(`Nexus, Platform Dashboard · Nexus Party`, ``, ['<a class="nw__email" href="https://nexus-phi-gilt.vercel.app/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
+      PROJ(`Employee Portal, iConnect · Employee Self-Service HR Portal`, `Dashboard Design · Workflow Design · Information Architecture · Web App`, [`An employee self-service portal where staff manage attendance, leave, payroll, documents, requests and exits in one place`, `Designed a self-service dashboard with quick actions, announcements, team availability and monthly holidays`, `Structured request and approval flows for leave, work from home, on-duty and service requests, with clear Pending, Approved and Rejected states`, `Mapped modules for attendance check-in/out, salary slips, tax documents, reimbursements, profile and document management, and company policies`, `Designed the resignation and exit journey, from the notice-period check to the exit checklist and progress timeline`, '<a class="nw__email" href="https://employee-portal-seven-delta.vercel.app/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
+      PROJ(`Nexus, Insurance Distribution Platform Dashboard · Nexus Party`, `Dashboard Design · Data Visualization · Enterprise SaaS · AI Assistant UX`, [`A multi-tenant admin platform for insurance distribution, managing organizations, agencies, agents, carriers, commissions and payment operations`, `Designed a data-heavy command centre bringing together revenue trends, agent activity and operational health`, `Structured multi-tenant admin flows for tenant provisioning, branding with live preview, SSO/MFA, and roles and permissions`, `Created operations workflows for commission statement upload, reconciliation, exception queues and ACH (NACHA) batch processing`, `Covered the Nexus AI assistant, privacy and consent tools, audit trails, and light and dark themes`, '<a class="nw__email" href="https://nexus-phi-gilt.vercel.app/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
       PROJ(`Oolook, AI Creative Studio & Social Manager`, `Information Architecture · Interaction Design · Usability Testing`, [`Designed end-to-end user experiences across web and mobile platforms, from onboarding to key feature interactions`, `Created scalable information architecture and interaction models, improving task completion rates by ~25% across primary user flows`, `Conducted usability testing and iterative design improvements, increasing user satisfaction by 15-20%`, '<a class="nw__email" href="https://oolook.in/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
-      PROJ(`Chez Suzette, Restaurant Website`, `Web Design`, ['<a class="nw__email" href="https://www.chezsuzette.sg/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
-      PROJ(`V.-R., Architecture & Renovation Landing Page`, `Landing Page · Wix`, ['<a class="nw__email" href="https://mehakwebsitedesign.wixsite.com/my-site" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
-      PROJ(`GlobeFarer, Logistics Landing Page`, `Landing Page · Wix`, ['<a class="nw__email" href="https://mehakwebsitedesign.wixsite.com/global" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
+      PROJ(`Chez Suzette, French Restaurant Website · Singapore`, `Web Design · Responsive Web/Mobile · Hospitality`, [`The website for Chez Suzette, a French restaurant, café and wine bar on Teck Lim Road, Singapore`, `Designed a story-led homepage that moves from the menu to the restaurant's ambience, the Cave à Vin wine bar, promotions and private dining`, `Kept booking within reach throughout the site, with Reserve Now, Enquire Now and WhatsApp actions`, `Structured dedicated pages for the menu, events and private dining, gallery, reviews and the founder's story`, '<a class="nw__email" href="https://www.chezsuzette.sg/" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
+      PROJ(`V.-R., Architecture & Interior Design Landing Page`, `Landing Page · Wix · Visual Design`, [`A single-page site for an architecture and design studio covering architecture, 3D modeling, interiors, landscape and building design`, `Designed an image-led hero and a featured-work portfolio grouped by project category`, `Explained the studio's approach through a simple three-step process: Brainstorm, Solution, and Modify & Refine`, `Built trust with a stats band, skills section, journey articles and a newsletter signup`, '<a class="nw__email" href="https://mehakwebsitedesign.wixsite.com/my-site" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
+      PROJ(`GlobeFarer, Logistics Company Landing Page`, `Landing Page · Wix · Visual Design`, [`A landing page for a global shipping and logistics company offering freight forwarding, warehousing and distribution, customs clearance and value-added services`, `Designed a service-led layout covering warehouse storage, solutions, services, fleet and divisions`, `Placed Track Your Order in the header so shipment tracking is always one click away`, `Built credibility with client testimonials, team profiles, client logos and a stats band`, '<a class="nw__email" href="https://mehakwebsitedesign.wixsite.com/global" target="_blank" rel="noopener">Visit Live Site ↗</a>']) +
       H2(`Figma Files`) +
-      PROJ(`Daily News App, News App · Figma`, `Figma · Mobile UI · Web UI`, ['<a class="nw__email" href="Daily%20News%20App.pdf" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/design/65RtEEqPhD6Q6Cozb2E6ux/Inshorts-Assignemt?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
-      PROJ(`Retail App UI, Retail App · Figma`, `Figma`, ['<a class="nw__email" href="Retail%20App%20UI.pdf" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/design/rlbUbTkCsNntza53gCecmm/Infinite-Locus-Assignment?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
-      PROJ(`Design System, Figma Design File`, `Figma · Design Systems`, ['<a class="nw__email" href="https://www.figma.com/design/JHHs3nV0rlb9imNmoIW58U/Design-system?t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
-      PROJ(`Power BI Dashboard, Figma Design File`, `Figma · Dashboard Design`, ['<a class="nw__email" href="Power%20BI%20dashboard.pdf" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/design/me6QhfuomxhmnkibMAxNqm/Power-BI-dashboard?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
-      PROJ(`Security Rule Engine UI, Figma Design File`, `Figma`, ['<a class="nw__email" href="Create%20Security%20rule%20engine%20UI.pdf" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/design/f64ZWmQ3VwMEDbhIETnvfB/Create-Security-rule-engine-UI?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
-      PROJ(`Truck Logistics Web/App UI, Figma Design File`, `Figma`, ['<a class="nw__email" href="https://www.figma.com/design/S3hU96qqifE3A5L6yseRdL/Truck-logistics-Web-App-UI?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
-      PROJ(`SupperTiffin, Food Subscription App`, `Secondary Research · User Interviews · User Persona · Competitor Analysis · User Flow · Wireframing · Interface Design`, ['<a class="nw__email" href="https://ankurmeena.notion.site/Case-Study-SupperTiffin-A-Food-Subscription-App-eb09402e5c5e4837be2d10b377e85a46" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/fV6v8XBN69cnm3mlW5RUV7/SupperTiffins?type=design&node-id=240%3A59&mode=design&t=CBLUvLyjyFZU7PoF-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
-      PROJ(`GolfTraxx, Golf App`, `Research · Competitor Analysis · Affinity Mapping · Persona · Storyboard · User Flow · Wireframing · Interface Design`, ['<a class="nw__email" href="https://ankurmeena.notion.site/Case-Study-GolfTraxx-Revolutionizing-Golfing-Experience-71a2b62ca62c4bc2a2453a858627af0a" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/RlW96aVMM7huhynjouf6FI/GolfTraxx?type=design&node-id=106%3A8&mode=design&t=GyprBxRElI81hhuM-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
-      PROJ(`Blue Infinity, Web Solutions Website`, `Web Design · Figma`, ['<a class="nw__email" href="https://ankurmeena.notion.site/Blue-Infinity-Elevate-Your-Digital-Presence-a90b68e2fc3247d995c62d704013f87d" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/2b6SLGvM7hWMF2NMzwxRr0/Blue-i?type=design&node-id=16%3A35&mode=design&t=TdEs7s6KMKn08tBN-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
-      PROJ(`AUGMEE, Augmented Reality Dining App`, `Prototyping · Figma`, ['<a class="nw__email" href="https://ankurmeena.notion.site/AUGMEE-Elevate-Your-Dining-Experience-with-Augmented-Reality-1a23a3c158a04ddda268bc23ec083154" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/pTLwwK8ZUD5TlRp0nWjbuL/AUGMEE?type=design&node-id=158%3A98&mode=design&t=VoAPJSQ6Sl89hAKp-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
-      PROJ(`FFV Fast Delivery, Grocery Delivery App`, `App Design · Figma`, ['<a class="nw__email" href="https://ankurmeena.notion.site/FFV-Fast-Delivery-Quality-On-Time-Free-Returns-a317ba9d693a43faa8788cca6e64ff64" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/2v4TCBvY8bsm3kVkzTwAOy/Grocery---app?type=design&node-id=354%3A2&mode=design&t=u7S8qExh4PVRvwk3-1" target="_blank" rel="noopener">Open in Figma ↗</a>']),
+      PROJ(`Daily News App, Paper Intelligence · News Learning Layer for Inshorts`, `UX Research · Information Architecture · Wireframing · Design System · Prototyping · Usability Testing · Mobile UI · Web UI`, [`"Paper Intelligence", a 7-day case study that adds a learning layer to Inshorts, helping readers follow news stories as they develop over time, across iOS screens and a 3-column desktop web layout`, `Designed a story-following system (Follow Story, What's New Since You Last Visited, My Stories) so readers can keep track of developing news`, `Built an AI Explainer with three depth levels, a story timeline and an interactive knowledge graph linking stories to related topics`, `Added a learning dashboard, a daily brief and story-completed states that reward staying informed`, `Worked through research, persona, journey map, JTBD, information architecture, user flows, 13 wireframes, a design system, prototype and usability testing`,'<a class="nw__email" href="Daily%20News%20App.pdf" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/design/65RtEEqPhD6Q6Cozb2E6ux/Inshorts-Assignemt?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`Retail App UI, Drop Commerce App for a D2C Fashion Brand`, `Mobile App Design · E-commerce UX · Competitive Analysis · Design Principles · Figma`, [`A mobile shopping experience for a premium D2C fashion brand that sells limited "drops", keeping shoppers excited and confident from the drop page to checkout and beyond`, `Designed a dark, editorial drop landing page that builds urgency with a live countdown, stock levels and a people-waiting count`, `Built product detail, cart and checkout screens with virtual try-on, a clear cost breakdown, delivery estimates and multiple payment options`, `Designed an order confirmation screen with order tracking and a preview of the next drop to bring shoppers back`, `Grounded the design in personas, pain points, JTBD, an experience audit, opportunity mapping and competitive analysis`,'<a class="nw__email" href="Retail%20App%20UI.pdf" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/design/rlbUbTkCsNntza53gCecmm/Infinite-Locus-Assignment?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`Design System, Figma Design File`, `Design Systems · Component Libraries · Figma`, [`A design system built in Figma to keep product interfaces consistent`, `Organised reusable UI foundations and components in one shared Figma file`,'<a class="nw__email" href="https://www.figma.com/design/JHHs3nV0rlb9imNmoIW58U/Design-system?t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`Power BI Dashboard, Executive Operations Dashboard Redesign`, `Dashboard Design · Data Visualization · Information Architecture · Power BI`, [`A concept redesign that turns a legacy manufacturing Power BI dashboard into a predictive decision tool for a VP of Global Operations`, `Structured the dashboard in four layers, from a five-second executive health check to regional comparison, predictive maintenance and prioritised actions`, `Designed a decision chain linking sensor data and failure risk to downtime cost and a recommended action`, `Built a dark visual system with traffic-light status colours and a clear type scale, kept within Power BI's constraints`,'<a class="nw__email" href="Power%20BI%20dashboard.pdf" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/design/me6QhfuomxhmnkibMAxNqm/Power-BI-dashboard?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`Security Rule Engine UI, Guided Security Rule Builder · ThreatModeler`, `UX Research · Personas · Task Flows · Enterprise UX · Figma`, [`A UX case study for ThreatModeler's Security Rule Engine, making security rule creation simpler and guided so even non-technical users can set rules up correctly`, `Structured rule creation as a guided flow: rule setup, trigger selection, condition builder, actions, then review and simulate`, `Explored feature concepts including a Smart Rule Assistant, natural-language rule creation, a visual logic map and a real-time impact simulator`, `Built the research foundation with competitor analysis (Microsoft Defender for Cloud, Snyk), three personas, task mapping, root cause analysis and an Eisenhower prioritisation matrix`,'<a class="nw__email" href="Create%20Security%20rule%20engine%20UI.pdf" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/design/f64ZWmQ3VwMEDbhIETnvfB/Create-Security-rule-engine-UI?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`Truck Logistics Web/App UI, Figma Design File`, `Web UI · Mobile UI · Logistics · Figma`, [`Web and mobile app UI for a truck logistics product, designed in Figma`, `Covers both the web and the mobile app experience in one Figma file`,'<a class="nw__email" href="https://www.figma.com/design/S3hU96qqifE3A5L6yseRdL/Truck-logistics-Web-App-UI?node-id=0-1&t=L07rNzKORvdFp4eY-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`SupperTiffin, Food Subscription App`, `Secondary Research · User Interviews · Affinity Mapping · User Persona · Competitor Analysis · User Flow · Wireframing · Interface Design · Prototyping`, [`A tiffin subscription feature inside a food delivery app, helping students, working professionals, single parents and travellers in urban India find home-style meals from local kitchens within 5 km`, `Conducted secondary research and 4 user interviews, then used affinity mapping to surface 10 pain points, including unreliable delivery times, unclear pricing and no meal customisation`, `Benchmarked Swiggy, Zomato and Homeal, and framed How Might We questions to guide ideation`, `Designed the full subscription journey: kitchen discovery with a Veg-only filter, restaurant pages, 7-day, 15-day or monthly plans, delivery slots and cart`, `Designed subscription management to skip, swap, pause or reschedule meals, plus edge cases like item unavailability, then prototyped in Figma and gathered feedback from the interviewees`,'<a class="nw__email" href="https://ankurmeena.notion.site/Case-Study-SupperTiffin-A-Food-Subscription-App-eb09402e5c5e4837be2d10b377e85a46" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/fV6v8XBN69cnm3mlW5RUV7/SupperTiffins?type=design&node-id=240%3A59&mode=design&t=CBLUvLyjyFZU7PoF-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`GolfTraxx, Golf App`, `Research · Competitor Analysis · Affinity Mapping · Persona · Storyboard · User Flow · Wireframing · Interface Design`, [`A golf app offering detailed course information (maps, greens, bunkers, hazards and distances) from a database of 40,000+ courses, game statistics tracking, and group play with friends`, `Worked as user researcher, UX designer and UI designer across the full design thinking process`, `Researched golf app usage with National Golf Foundation data and reviewed competitors such as Golf Shot and Coach's Eye to find a clear point of difference`, `Synthesised findings through affinity mapping in Miro, then defined the problem statement, persona and a storyboard around organising group games`, `Structured the user flow and took low-fidelity wireframes to high-fidelity UI for course details, stat tracking and group play`,'<a class="nw__email" href="https://ankurmeena.notion.site/Case-Study-GolfTraxx-Revolutionizing-Golfing-Experience-71a2b62ca62c4bc2a2453a858627af0a" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/RlW96aVMM7huhynjouf6FI/GolfTraxx?type=design&node-id=106%3A8&mode=design&t=GyprBxRElI81hhuM-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`Blue Infinity, Web Solutions Website`, `Web Design · Visual Design · Figma`, [`A marketing website for Blue Infinity, a web solutions provider covering planning, design, development, testing and delivery`, `Designed the site around the brand message "Elevate Your Digital Presence", led by a strong hero and brand introduction`, `Structured the content around the service lifecycle, from planning through to delivery`, `Delivered the design as an interactive Figma prototype`,'<a class="nw__email" href="https://ankurmeena.notion.site/Blue-Infinity-Elevate-Your-Digital-Presence-a90b68e2fc3247d995c62d704013f87d" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/2b6SLGvM7hWMF2NMzwxRr0/Blue-i?type=design&node-id=16%3A35&mode=design&t=TdEs7s6KMKn08tBN-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`AUGMEE, Augmented Reality Dining App`, `Mobile App Design · AR Experience · Prototyping · Figma`, [`A dining app that scans a restaurant's menu to show its categories, nearby options and the latest trends`, `Designed the menu-scanning flow and category browsing to make choosing what to order quicker`, `Designed an augmented reality menu that lets diners see dishes visually before they choose`, `Built a clickable Figma prototype to demonstrate the experience`,'<a class="nw__email" href="https://ankurmeena.notion.site/AUGMEE-Elevate-Your-Dining-Experience-with-Augmented-Reality-1a23a3c158a04ddda268bc23ec083154" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/pTLwwK8ZUD5TlRp0nWjbuL/AUGMEE?type=design&node-id=158%3A98&mode=design&t=VoAPJSQ6Sl89hAKp-1" target="_blank" rel="noopener">Open in Figma ↗</a>']) +
+      PROJ(`FFV Fast Delivery, Grocery Delivery App`, `App Design · Mobile UI · Figma`, [`A grocery delivery app built around guaranteed quality, on-time delivery, free delivery and hassle-free returns`, `Designed the app UI around trust: orders that arrive on time and intact, with easy returns`, `Carried the quality and on-time delivery promise through the app's messaging and visual presentation`, `Shared the work as an interactive Figma design`,'<a class="nw__email" href="https://ankurmeena.notion.site/FFV-Fast-Delivery-Quality-On-Time-Free-Returns-a317ba9d693a43faa8788cca6e64ff64" target="_blank" rel="noopener">View Case Study ↗</a>', '<a class="nw__email" href="https://www.figma.com/file/2v4TCBvY8bsm3kVkzTwAOy/Grocery---app?type=design&node-id=354%3A2&mode=design&t=u7S8qExh4PVRvwk3-1" target="_blank" rel="noopener">Open in Figma ↗</a>']),
 
     "Skills":
       '<h1 class="nw__h1">Skills</h1>' +
@@ -1126,25 +1141,25 @@
 
   const PROJECTS = [
     // ---- Live projects ----
-    { group: "featured", title: "Quotient", cat: "Hiring Platform · EquiTrust (Ensylon)", url: "https://nexus-ahse-psi.vercel.app/", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["User Research", "blue"], ["Design Systems", "purple"]], mi: "stack", mt: "~25% Task Completion", yr: "2025 – 2026",
+    { group: "featured", title: "Quotient", cat: "Hiring Platform", url: "https://nexus-ahse-psi.vercel.app/", desktopOnly: true, poster: "Quotient.png", badge: "Live", bc: "live", tags: [["Web Design", "blue"], ["Dashboard", "purple"]], mi: "stack", mt: "~25% Task Completion", yr: "2025 – 2026",
       desc: "Multi-step hiring journeys for EquiTrust's Quotient platform, from candidate onboarding and profile creation to job workflows and recruiter interactions.",
       stack: ["User Journeys", "User Research", "Wireframing", "User Flows", "High-Fidelity Prototyping", "Design Systems"],
       highlights: ["Designed and optimized multi-step user journeys covering candidate onboarding, profile creation, job workflows, and recruiter interactions", "Conducted structured user research with 30+ participants in 2-week cycles, improving task completion rates by ~25% across hiring and internal workflows", "Built and scaled reusable design system components across hiring and insurance products, reducing design-to-development turnaround time by ~35%"] },
-    { group: "featured", title: "Employee Portal", cat: "iConnect · Ensylon", url: "https://employee-portal-seven-delta.vercel.app/", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["Ensylon", "purple"], ["Web App", "blue"]],
+    { group: "featured", title: "Employee Portal", cat: "iConnect", url: "https://employee-portal-seven-delta.vercel.app/", desktopOnly: true, poster: "Employee%20Portal.png", badge: "Live", bc: "live", tags: [["Employee Management", "purple"], ["Web App", "blue"]],
       desc: "An employee portal for Ensylon, live as iConnect." },
-    { group: "featured", title: "Nexus", cat: "Platform Dashboard · Nexus Party", url: "https://nexus-phi-gilt.vercel.app/", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["Dashboard", "teal"], ["Web App", "blue"]],
+    { group: "featured", title: "Nexus", cat: "Platform Dashboard · Nexus Party", url: "https://nexus-phi-gilt.vercel.app/", desktopOnly: true, poster: "nexus.png", badge: "Live", bc: "live", tags: [["Dashboard", "teal"], ["Web App", "blue"]],
       desc: "A platform dashboard for Nexus Party." },
-    { group: "featured", title: "Oolook", cat: "AI Creative Studio & Social Manager", url: "https://oolook.in/", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["Information Architecture", "blue"], ["Usability Testing", "green"]], mi: "mon", mt: "15–20% Satisfaction", yr: "2023 – 2025",
+    { group: "featured", title: "Oolook", cat: "AI Creative Studio & Social Manager", url: "https://oolook.in/", poster: "Oolook.png", badge: "Live", bc: "live", tags: [["UI/UX", "blue"], ["Responsive Web/Mobile", "green"]], mi: "mon", mt: "15–20% Satisfaction", yr: "2023 – 2025",
       desc: "An AI platform for creators and marketing teams to generate content, schedule posts, and track analytics, with end-to-end web and mobile experiences from onboarding to key feature interactions.",
       stack: ["Information Architecture", "Interaction Design", "Usability Testing", "High-Fidelity Prototyping"],
       highlights: ["Designed end-to-end user experiences across web and mobile platforms, structuring core user journeys from onboarding to key feature interactions", "Created scalable information architecture and interaction models, improving task completion rates by ~25% across primary user flows", "Conducted usability testing and iterative design improvements, increasing user satisfaction by 15-20% based on feedback and usage patterns", "Delivered high-fidelity prototypes and developer-ready specifications, reducing ambiguity during implementation and improving delivery speed"] },
-    { group: "featured", title: "Chez Suzette", cat: "Restaurant Website", url: "https://www.chezsuzette.sg/", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["Web Design", "blue"], ["Restaurant", "orange"]],
+    { group: "featured", title: "Chez Suzette", cat: "Restaurant Website", url: "https://www.chezsuzette.sg/", badge: "Live", bc: "live", tags: [["Responsive Web/Mobile", "blue"], ["Restaurant", "orange"]],
       desc: "A restaurant website for Chez Suzette, a caf\u00e9, restaurant and wine bar in Singapore, with the menu, gallery, reservations and contact information.",
       stack: ["Web Design"] },
-    { group: "featured", title: "V.-R.", cat: "Architecture & Renovation Landing Page", url: "https://mehakwebsitedesign.wixsite.com/my-site", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["Landing Page", "blue"], ["Wix", "gray"]],
+    { group: "featured", title: "V.-R.", cat: "Architecture & Renovation Landing Page", url: "https://mehakwebsitedesign.wixsite.com/my-site", desktopOnly: true, badge: "Live", bc: "live", tags: [["Landing Page", "blue"], ["Wix", "gray"]],
       desc: "A landing page for V.-R., focused on forward-thinking architecture and home renovation.",
       stack: ["Landing Page", "Wix"] },
-    { group: "featured", title: "GlobeFarer", cat: "Logistics Landing Page", url: "https://mehakwebsitedesign.wixsite.com/global", linkLabel: "Visit Live Site", linkOnly: true, badge: "Live", bc: "live", tags: [["Landing Page", "blue"], ["Wix", "gray"]],
+    { group: "featured", title: "GlobeFarer", cat: "Logistics Landing Page", url: "https://mehakwebsitedesign.wixsite.com/global", desktopOnly: true, badge: "Live", bc: "live", tags: [["Landing Page", "blue"], ["Wix", "gray"]],
       desc: "A landing page for GlobeFarer, a logistics platform covering warehousing, distribution, customs clearance, value-added services and freight forwarding.",
       stack: ["Landing Page", "Wix"] },
 
@@ -1185,6 +1200,19 @@
       desc: "A grocery delivery app design built around guaranteed quality, on-time delivery and free, hassle-free returns.",
       stack: ["App Design", "Figma"] },
   ];
+
+  // Recents deals Live and Figma work alternately, so neither kind is buried
+  // below the other
+  const RECENTS = (() => {
+    const live = PROJECTS.filter((p) => p.group === "featured");
+    const rest = PROJECTS.filter((p) => p.group !== "featured");
+    const out = [];
+    for (let i = 0; i < Math.max(live.length, rest.length); i++) {
+      if (live[i]) out.push(live[i]);
+      if (rest[i]) out.push(rest[i]);
+    }
+    return out;
+  })();
 
   // the Featured Projects widget renders from this same list
   window.PortfolioProjects = PROJECTS;
@@ -1268,14 +1296,8 @@
     const hl = (p.highlights || [])
       .map((h) => "<li>" + h + "</li>")
       .join("");
-    // `pos` lets one image anchor off-centre in this wide, short banner, so a
-    // logo near its top edge is not cropped away; everything else stays centred
-    const hero = p.img
-      ? '<div class="pjd__hero" style="background:' + (p.bg ? p.bg + " " : "") + "url('" + p.img + "') " + (p.pos || "center") + " / " + (p.fit || "cover") + ' no-repeat"></div>'
-      : '<div class="pjd__hero" style="background:' + (GROUP_GRAD[p.group] || GROUP_GRAD.featured) + '">' +
-          '<span class="pjd__hero-title">' + p.title + "</span></div>";
     return (
-      '<div class="pjd">' + hero +
+      '<div class="pjd">' +
         '<div class="pjd__info">' +
           '<div class="pjd__head"><h2 class="pjd__title">' + p.title + "</h2>" +
             badge(p, "pj__badge-inline") + "</div>" +
@@ -1338,7 +1360,7 @@
           "</div>" +
         "</header>" +
         '<div class="fw__grid fw__grid--projects">' +
-          PROJECTS.map(card).join("") +
+          RECENTS.map(card).join("") +
         "</div>" +
         '<div class="fw__detail" style="display:none"></div>' +
         '<div class="fw__footer">3 items</div>' +
@@ -1371,8 +1393,8 @@
     });
     document.addEventListener("keydown", onKey);
 
-    // share → "Copy Link" popover (copies the LinkedIn URL, same as About Me)
-    const SHARE_URL = "https://www.linkedin.com/in/ankur-meena/";
+    // share → "Copy Link" popover (copies the portfolio URL, same as About Me)
+    const SHARE_URL = "https://ankurdbb-portfolio.vercel.app/";
     const COPY_ICON =
       '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"/></svg>';
     const shareBtn = win.querySelector('.nw__circ[aria-label="Share"]');
@@ -1421,7 +1443,7 @@
     const subEl = win.querySelector(".fw__subtitle");
     const footEl = win.querySelector(".fw__footer");
     const navItems = [...win.querySelectorAll(".fw__item[data-group]")];
-    const state = { group: "all", label: "Recents", list: PROJECTS, query: "" };
+    const state = { group: "all", label: "Recents", list: RECENTS, query: "" };
 
     // everything worth typing about a project: name, category, blurb, stack, tags
     function haystack(p) {
@@ -1437,7 +1459,7 @@
     function renderGroup(group, label) {
       state.group = group;
       state.label = label;
-      const inGroup = group === "all" ? PROJECTS : PROJECTS.filter((p) => p.group === group);
+      const inGroup = group === "all" ? RECENTS : PROJECTS.filter((p) => p.group === group);
       const q = state.query.trim().toLowerCase();
       state.list = q ? inGroup.filter((p) => matches(p, q)) : inGroup;
       grid.innerHTML = state.list.length
@@ -1796,20 +1818,30 @@
   });
 })();
 
-/* ===================== LO-FI AUDIO ENGINE (shared) =====================
-   One generative Web-Audio engine, driven by two surfaces: the Music app
-   window and the Spotify player widget on the desktop. Both subscribe to the
-   same state, so whatever you do in one is reflected instantly in the other. */
+/* ===================== MUSIC ENGINE (shared) =====================
+   The playlist is real songs, streamed through Spotify's official embed — the
+   site hosts no audio. One embed controller is driven by every music surface
+   (the Music app window, the Spotify widget on the desktop and the iOS home,
+   and the Spotify app window); they all subscribe to the same state, so they
+   never disagree. Visitors signed in to Spotify in this browser hear the full
+   track; everyone else hears Spotify's 30-second preview. */
 (function () {
-  // "tracks" = generative moods (chords are semitone offsets from root).
-  // `dur` is the nominal length used by the playlist UI + auto-advance.
+  // `dur` is the song's full length, shown in the playlist; the progress bar
+  // uses the length Spotify actually reports (30s for a preview).
   const TRACKS = [
-    { name: "Midnight Study", artist: "Lo-Fi · Generative", album: "Generative Sessions", bpm: 72, root: 220.0, wave: "sine",
-      chords: [[0, 3, 7, 10], [-2, 3, 5, 10], [-4, 0, 3, 7], [-5, -2, 2, 5]], rain: false, dur: 204 },
-    { name: "Rainy Focus", artist: "Lo-Fi · Generative", album: "Generative Sessions", bpm: 66, root: 196.0, wave: "triangle",
-      chords: [[0, 3, 7, 10], [5, 8, 12, 15], [-2, 2, 5, 9], [-4, 0, 3, 7]], rain: true, dur: 222 },
-    { name: "Sunday Coding", artist: "Lo-Fi · Generative", album: "Generative Sessions", bpm: 78, root: 261.63, wave: "sine",
-      chords: [[0, 4, 7, 11], [-3, 2, 5, 9], [-5, 0, 4, 7], [2, 5, 9, 12]], rain: false, dur: 189 },
+    // `art` is the album cover Spotify's oEmbed endpoint serves for each track
+    { name: "Intro", artist: "The xx", album: "xx", spotify: "2usrT8QIbIk9y0NEtQwS4j", dur: 128,
+      art: "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02a46d603701aa0342e8cca64e" },
+    { name: "A Moment Apart", artist: "ODESZA", album: "A Moment Apart", spotify: "59wlTaYOL5tDUgXnbBQ3my", dur: 234,
+      art: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0245951a69fe39a6e163122eab" },
+    { name: "Borderline", artist: "Tame Impala", album: "The Slow Rush", spotify: "5hM5arv9KDbCHS0k9uqwjr", dur: 238,
+      art: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0258267bd34420a00d5cf83a49" },
+    { name: "Kerala", artist: "Bonobo", album: "Migration", spotify: "5DAjrJqXqYtgr67pVhmUeR", dur: 238,
+      art: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0255fa09a768d1ef5ea5d279f9" },
+    { name: "Awake", artist: "Tycho", album: "Awake", spotify: "5lB3bZKPhng9s4hKB1sSIe", dur: 284,
+      art: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0267c9bbca5eaeb448a7eea834" },
+    { name: "I Want to Break Free", artist: "Queen", album: "The Works", spotify: "1MsBRSbt5dqJSw3RxXtvCM", dur: 199,
+      art: "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e025be5f807f6f0549e198a44b4" },
   ];
 
   const PLAYLIST = {
@@ -1817,25 +1849,35 @@
     owner: "Ankur Meena",
   };
 
-  const mtof = (root, semis) => root * Math.pow(2, semis / 12);
   const fmt = (s) => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+  const uriOf = (i) => "spotify:track:" + TRACKS[i].spotify;
 
-  // audio state (a single engine for the whole page)
-  let actx, master, analyser, freqData, NOISE, vol = 0.6;
-  let playing = false, cur = 0, step = 0, nextT = 0;
-  let sched = null, rafId = null, elapsed = 0, elapsedTimer = null;
-  let crackle = null, rain = null;
+  // warm the cache with the six small covers, so every player shows its artwork
+  // the moment it opens instead of filling in a beat later
+  TRACKS.forEach((t) => {
+    if (t.art) new Image().src = t.art;
+  });
+
+  // playback state (a single controller for the whole page)
+  let controller = null;   // Spotify embed controller, once the API has loaded
+  let loaded = -1;         // index of the track the embed currently holds
+  let playing = false;     // what the embed last reported
+  let wantPlaying = false; // what the visitor last asked for
+  let playOnReady = false; // start the track as soon as a fresh load is ready
+  let cur = 0, elapsed = 0, liveDur = 0, rafId = null, startTimer = null;
 
   const listeners = new Set(); // state subscribers (UI surfaces)
-  const meters = new Set();    // arrays of bar elements to animate from the analyser
+  const meters = new Set();    // arrays of bar elements animated while playing
 
   function getState() {
+    const t = TRACKS[cur];
     return {
       playing: playing,
       index: cur,
-      track: TRACKS[cur],
+      // the length Spotify reports for what is loaded, else the song's length
+      track: liveDur && loaded === cur ? Object.assign({}, t, { dur: liveDur }) : t,
       elapsed: elapsed,
-      volume: vol,
+      volume: 1,
       tracks: TRACKS,
       playlist: PLAYLIST,
     };
@@ -1847,174 +1889,139 @@
     });
   }
 
-  function noiseBuffer() {
-    const len = actx.sampleRate * 2;
-    const buf = actx.createBuffer(1, len, actx.sampleRate);
-    const d = buf.getChannelData(0);
-    for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
-    return buf;
-  }
-  function noiseLayer(type, cutoff, gainVal) {
-    const src = actx.createBufferSource();
-    src.buffer = NOISE; src.loop = true;
-    const f = actx.createBiquadFilter(); f.type = type; f.frequency.value = cutoff;
-    const g = actx.createGain(); g.gain.value = gainVal;
-    src.connect(f).connect(g).connect(master);
-    src.start();
-    return { src, g };
-  }
-  function stopLayer(layer) {
-    if (!layer) return;
-    try { layer.src.stop(); } catch (e) {}
-  }
-  function kick(t) {
-    const o = actx.createOscillator(), g = actx.createGain();
-    o.type = "sine";
-    o.frequency.setValueAtTime(130, t);
-    o.frequency.exponentialRampToValueAtTime(48, t + 0.12);
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(0.9, t + 0.006);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.32);
-    o.connect(g).connect(master);
-    o.start(t); o.stop(t + 0.34);
-  }
-  function hat(t, vel) {
-    const src = actx.createBufferSource(); src.buffer = NOISE;
-    const hp = actx.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 7000;
-    const g = actx.createGain();
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(vel, t + 0.005);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
-    src.connect(hp).connect(g).connect(master);
-    src.start(t); src.stop(t + 0.06);
-  }
-  function pad(t, freqs, dur) {
-    const g = actx.createGain();
-    const lp = actx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1900; lp.Q.value = 0.6;
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(0.15, t + 0.6);
-    g.gain.setValueAtTime(0.15, t + Math.max(0.7, dur - 0.8));
-    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    freqs.forEach((f, i) => {
-      const o = actx.createOscillator();
-      o.type = TRACKS[cur].wave;
-      o.frequency.value = f;
-      o.detune.value = (i - 1.5) * 4;
-      o.connect(g);
-      o.start(t); o.stop(t + dur + 0.05);
-    });
-    g.connect(lp).connect(master);
-  }
-
-  function scheduleStep(s, t) {
-    const T = TRACKS[cur];
-    const secPer8th = (60 / T.bpm) / 2;
-    const e = s % 8;                 // eighth-note within the bar
-    const bar = Math.floor(s / 8);
-    if (e === 0) {
-      const chord = T.chords[bar % T.chords.length].map((n) => mtof(T.root, n));
-      pad(t, chord, secPer8th * 8);  // sustain the chord across the bar
-      kick(t);
-    }
-    if (e === 4) kick(t);
-    if (e % 2 === 1) hat(t, 0.08);        // off-beat hats give the groove
-    else if (e !== 0 && e !== 4) hat(t, 0.045);
-  }
-  function scheduler() {
-    while (nextT < actx.currentTime + 0.12) {
-      scheduleStep(step, nextT);
-      nextT += (60 / TRACKS[cur].bpm) / 2;
-      step++;
-    }
-  }
-
-  function ensureAudio() {
-    if (actx) return;
-    actx = new (window.AudioContext || window.webkitAudioContext)();
-    master = actx.createGain(); master.gain.value = vol;
-    analyser = actx.createAnalyser(); analyser.fftSize = 128;
-    freqData = new Uint8Array(analyser.frequencyBinCount);
-    master.connect(analyser).connect(actx.destination);
-    NOISE = noiseBuffer();
-    crackle = noiseLayer("highpass", 5200, 0.012);   // subtle vinyl hiss
-  }
-
-  // ---- analyser-driven bars, shared by every mounted meter ----
+  // ---- equaliser bars: the embed's audio can't be analysed, so while a song
+  // plays the bars move on overlapping sine waves instead ----
   function restBars(bars) {
     bars.forEach((b) => (b.style.transform = "scaleY(0.1)"));
   }
-  function vizFrame() {
-    if (!analyser) { rafId = null; return; }
-    analyser.getByteFrequencyData(freqData);
-    const half = freqData.length;
+  function vizFrame(t) {
     meters.forEach((bars) => {
-      const n = bars.length;
-      for (let i = 0; i < n; i++) {
-        const idx = Math.floor(((i + 1) / n) * half);
-        const v = freqData[Math.min(idx, half - 1)] / 255;
-        bars[i].style.transform = "scaleY(" + (0.1 + v * 1.05).toFixed(3) + ")";
-      }
+      bars.forEach((b, i) => {
+        const v = 0.5 + 0.28 * Math.sin(t / 170 + i * 1.7) + 0.22 * Math.sin(t / 93 + i * 2.9);
+        b.style.transform = "scaleY(" + Math.max(0.12, Math.min(1.1, v)).toFixed(3) + ")";
+      });
     });
     rafId = requestAnimationFrame(vizFrame);
   }
-  function startViz() {
-    if (rafId == null) rafId = requestAnimationFrame(vizFrame);
-  }
-  function stopViz() {
-    if (rafId != null) { cancelAnimationFrame(rafId); rafId = null; }
-    meters.forEach(restBars);
+  function syncViz() {
+    if (playing && rafId == null) rafId = requestAnimationFrame(vizFrame);
+    if (!playing && rafId != null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+      meters.forEach(restBars);
+    }
   }
 
-  function onSecond() {
-    elapsed++;
-    // a real playlist rolls on to the next song when this one ends
-    if (elapsed >= TRACKS[cur].dur) { switchTo(cur + 1); return; }
+  // ---- the embed: kept out of view, the custom players are its controls ----
+  const host = document.createElement("div");
+  host.className = "spembed";
+  host.setAttribute("aria-hidden", "true");
+  const slot = document.createElement("div");
+  host.appendChild(slot);
+  document.body.appendChild(host);
+
+  function load(i) {
+    loaded = i;
+    liveDur = 0;
+    controller.loadUri(uriOf(i));
+  }
+
+  function onUpdate(e) {
+    const d = e.data || {};
+    if (d.duration) liveDur = Math.round(d.duration / 1000);
+    elapsed = Math.floor((d.position || 0) / 1000);
+    playing = !d.isPaused;
+    if (playing) clearTimeout(startTimer);
+    // a song that played to its end rolls on to the next, like a real playlist
+    if (d.isPaused && wantPlaying && d.duration && d.position >= d.duration - 1000) {
+      switchTo(cur + 1);
+      return;
+    }
+    syncViz();
     emit();
+  }
+
+  window.onSpotifyIframeApiReady = function (IFrameAPI) {
+    IFrameAPI.createController(slot, { uri: uriOf(cur), width: 300, height: 80 }, function (c) {
+      controller = c;
+      loaded = cur;
+      c.addListener("playback_update", onUpdate);
+      c.addListener("ready", function () {
+        if (playOnReady) {
+          playOnReady = false;
+          c.play();
+        }
+      });
+      // a tap that came in before the API finished loading still counts
+      if (wantPlaying) play();
+    });
+  };
+  const api = document.createElement("script");
+  api.src = "https://open.spotify.com/embed/iframe-api/v1";
+  api.async = true;
+  document.body.appendChild(api);
+
+  // If Spotify never starts (blocked by the browser, offline, or the API didn't
+  // load), stop showing a song as playing instead of leaving it stuck at 0:00.
+  function awaitStart() {
+    clearTimeout(startTimer);
+    startTimer = setTimeout(function () {
+      if (!wantPlaying) return;
+      wantPlaying = false;
+      playOnReady = false;
+      playing = false;
+      syncViz();
+      emit();
+    }, 10000);
   }
 
   function play() {
-    ensureAudio();
-    if (actx.state === "suspended") actx.resume();
+    wantPlaying = true;
+    if (controller) {
+      if (loaded !== cur) {
+        playOnReady = true;
+        load(cur);
+      } else if (elapsed > 0) {
+        controller.resume();
+      } else {
+        controller.play();
+      }
+    }
+    // show the tap straight away; Spotify's next update confirms it
     playing = true;
-    nextT = actx.currentTime + 0.06;
-    if (TRACKS[cur].rain && !rain) rain = noiseLayer("highpass", 900, 0.05);
-    if (!sched) sched = setInterval(scheduler, 25);
-    if (!elapsedTimer) elapsedTimer = setInterval(onSecond, 1000);
-    startViz();
+    awaitStart();
+    syncViz();
     emit();
   }
   function pause() {
+    wantPlaying = false;
+    playOnReady = false;
+    clearTimeout(startTimer);
+    if (controller) controller.pause();
     playing = false;
-    clearInterval(sched); sched = null;
-    clearInterval(elapsedTimer); elapsedTimer = null;
-    stopViz();
-    if (actx) actx.suspend();
+    syncViz();
     emit();
   }
-  function toggle() { playing ? pause() : play(); }
+  function toggle() { wantPlaying ? pause() : play(); }
 
   function switchTo(i) {
     cur = ((i % TRACKS.length) + TRACKS.length) % TRACKS.length;
-    step = 0; elapsed = 0;
-    if (rain && !TRACKS[cur].rain) { stopLayer(rain); rain = null; }
-    if (playing) {
-      if (TRACKS[cur].rain && !rain && actx) rain = noiseLayer("highpass", 900, 0.05);
-      if (actx) nextT = actx.currentTime + 0.06;
+    elapsed = 0;
+    if (controller) {
+      playOnReady = wantPlaying;
+      load(cur);
     }
+    playing = wantPlaying;
+    if (wantPlaying) awaitStart();
+    syncViz();
     emit();
   }
 
   // clicking a row in the playlist: play it, or pause if it's already the one playing
   function playTrack(i) {
     if (i === cur) { toggle(); return; }
+    wantPlaying = true;
     switchTo(i);
-    if (!playing) play(); else emit();
-  }
-
-  function setVolume(v) {
-    vol = Math.min(1, Math.max(0, v));
-    if (master && actx) master.gain.setTargetAtTime(vol, actx.currentTime, 0.02);
-    emit();
   }
 
   window.LoFi = {
@@ -2029,7 +2036,7 @@
     },
     addMeter: function (bars) {
       meters.add(bars);
-      if (playing) startViz(); else restBars(bars);
+      if (!playing) restBars(bars);
     },
     removeMeter: function (bars) { meters.delete(bars); },
     play: play,
@@ -2039,7 +2046,8 @@
     playTrack: playTrack,
     next: function () { switchTo(cur + 1); },
     prev: function () { switchTo(cur - 1); },
-    setVolume: setVolume,
+    // Spotify's embed has no volume control; the system volume applies
+    setVolume: function () {},
   };
 })();
 
@@ -2131,8 +2139,12 @@
     function render(s) {
       trackEl.textContent = s.track.name;
       artistEl.textContent = s.track.artist;
-      labelEl.textContent = s.track.name.split(" ")[0];
-      root.dataset.track = String(s.index);
+      // the album cover becomes the record's centre label
+      labelEl.style.backgroundImage = s.track.art ? 'url("' + s.track.art + '")' : "";
+      labelEl.classList.toggle("has-cover", !!s.track.art);
+      labelEl.textContent = s.track.art ? "" : s.track.artist;
+      // three colour themes, cycled across however many songs the playlist has
+      root.dataset.track = String(s.index % 3);
       countEl.textContent = (s.index + 1) + " / " + s.tracks.length;
       elapsedEl.textContent = LoFi.fmt(s.elapsed);
       playBtn.innerHTML = s.playing ? PAUSE : PLAY;
@@ -2609,7 +2621,7 @@
     if (!target) return;
     item.addEventListener("click", (e) => {
       e.preventDefault();
-      // Contact opens the Contacts window; the dock's Mail icon still does mailto
+      // Contact opens the Contacts window (so does the dock's Mail icon)
       if (key === "contact" && window.ContactsApp) {
         window.ContactsApp.open(item);
         return;
@@ -2620,7 +2632,7 @@
 })();
 
 /* ===================== SPOTIFY PLAYER WIDGET =====================
-   A Spotify-styled surface over the shared lo-fi engine. Every instance
+   A Spotify-styled surface over the shared music engine. Every instance
    (desktop column + iOS home) renders from the same state, so the Music app
    window, the desktop widget and the phone widget never disagree. */
 (function () {
@@ -2725,6 +2737,11 @@
 
       setText("[data-spw-track]", s.track.name);
       setText("[data-spw-artist]", s.track.artist);
+      // the playing song's album cover replaces the placeholder note
+      qa(".spw__mini-art, .spw__tile-art").forEach((e) => {
+        e.style.backgroundImage = s.track.art ? 'url("' + s.track.art + '")' : "";
+        e.classList.toggle("has-cover", !!s.track.art);
+      });
       setText("[data-spw-elapsed]", LoFi.fmt(s.elapsed));
       setText("[data-spw-total]", LoFi.fmt(s.track.dur));
       // the compact card counts down, like the reference
@@ -2732,12 +2749,11 @@
       const pct = Math.min(100, (s.elapsed / s.track.dur) * 100) + "%";
       qa("[data-spw-fill]").forEach((e) => (e.style.width = pct));
       if (statusEl) {
-        // the now-playing bar already names the track, so this line carries what
-        // the rest of the widget can't: there are no audio files behind any of
-        // this — every note is built from oscillators at play time.
+        // the now-playing bar already names the track, so this line says where
+        // the sound comes from
         statusEl.textContent = s.playing
-          ? "Synthesizing live · " + s.track.bpm + " BPM"
-          : "Generative lo-fi — synthesized live in your browser";
+          ? "Streaming from Spotify"
+          : "Real tracks, streamed by Spotify";
       }
       root.classList.toggle("spw--playing", s.playing);
 
@@ -2785,7 +2801,7 @@
   };
 
   const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  // these tracks are built at play time, so "added" is genuinely this session
+  // "date added" is today, the way a freshly opened playlist reads
   const today = new Date();
   const ADDED = today.getDate() + " " + MONTHS[today.getMonth()] + " " + today.getFullYear();
 
@@ -2819,7 +2835,9 @@
             '<span class="sp__rowbars"><i></i><i></i><i></i><i></i></span>' +
           "</div>" +
           '<div class="sp__cell sp__cell--title">' +
-            '<span class="sp__thumb">' + I.cover + "</span>" +
+            (t.art
+              ? '<span class="sp__thumb has-cover" style="background-image:url(\'' + t.art + '\')"></span>'
+              : '<span class="sp__thumb">' + I.cover + "</span>") +
             "<span class=\"sp__titlemeta\">" +
               '<span class="sp__rowname">' + t.name + "</span>" +
               '<span class="sp__rowartist">' + t.artist + "</span>" +
@@ -2849,7 +2867,12 @@
       '<div class="sp">' +
         '<div class="sp__scroll">' +
           '<header class="sp__hero">' +
-            '<div class="sp__cover">' + I.cover + "</div>" +
+            // like Spotify, a playlist's cover is a mosaic of its first four albums
+            (LoFi.TRACKS.length >= 4 && LoFi.TRACKS.slice(0, 4).every((t) => t.art)
+              ? '<div class="sp__cover sp__cover--mosaic">' +
+                  LoFi.TRACKS.slice(0, 4).map((t) => '<img src="' + t.art + '" alt="">').join("") +
+                "</div>"
+              : '<div class="sp__cover">' + I.cover + "</div>") +
             '<div class="sp__heroinfo">' +
               '<span class="sp__kind">Public Playlist</span>' +
               '<h1 class="sp__title">' + LoFi.PLAYLIST.title + "</h1>" +
@@ -2945,6 +2968,9 @@
       });
       win.querySelector("[data-sp-track]").textContent = s.track.name;
       win.querySelector("[data-sp-artist]").textContent = s.track.artist;
+      const npArt = win.querySelector(".sp__npart");
+      npArt.style.backgroundImage = s.track.art ? 'url("' + s.track.art + '")' : "";
+      npArt.classList.toggle("has-cover", !!s.track.art);
       win.querySelector("[data-sp-elapsed]").textContent = LoFi.fmt(s.elapsed);
       win.querySelector("[data-sp-total]").textContent = LoFi.fmt(s.track.dur);
       win.querySelector("[data-sp-fill]").style.width =
@@ -3022,7 +3048,17 @@
   const GRAD = window.PortfolioGroupGrad || {};
   const paint = (el, p, isThumb) => {
     const cls = isThumb ? "pjw__thumb--text" : "pjw__fthumb--text";
-    if (p.img) {
+    // A project's `poster` is artwork made for this home-screen card only; the
+    // Projects window never reads it, so its cards and detail pages are unchanged.
+    if (p.poster) {
+      el.style.backgroundImage = 'url("' + p.poster + '")';
+      el.style.backgroundSize = "cover";
+      el.style.backgroundColor = "";
+      el.style.backgroundPosition = "center";
+      el.style.backgroundRepeat = "no-repeat";
+      el.classList.remove(cls);
+      el.textContent = "";
+    } else if (p.img) {
       el.style.backgroundImage = 'url("' + p.img + '")';
       el.style.backgroundSize = p.fit || "";
       el.style.backgroundColor = p.bg || "";
@@ -3101,6 +3137,85 @@
   });
 })();
 
+/* ===================== DESKTOP-ONLY SITE VIEWER =====================
+   Some live sites were built for desktop only and fall apart at phone width.
+   A new tab can't make another site render its desktop layout, so on a phone
+   their links open here instead: the site loads in a frame a desktop wide and
+   is scaled down to fit the screen. One capture-phase listener covers every
+   link to them (project cards, detail pages, About Me, the home widget). */
+(function () {
+  const DESK_W = 1280;
+  const norm = (u) => {
+    try { const x = new URL(u, location.href); return (x.host + x.pathname).replace(/\/+$/, ""); } catch (e) { return ""; }
+  };
+  const SITES = new Map();
+  (window.PortfolioProjects || []).forEach((p) => {
+    if (p.desktopOnly && p.url) SITES.set(norm(p.url), p);
+  });
+  if (!SITES.size) return;
+
+  const phone = window.matchMedia("(max-width: 720px), (pointer: coarse) and (max-width: 1024px)");
+  const EXT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-8.5 8.5"/><path d="M18 14.5V19a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 19V8a1.5 1.5 0 0 1 1.5-1.5H10"/></svg>';
+
+  function openViewer(p) {
+    const host = norm(p.url).split("/")[0].replace(/^www\./, "");
+    const el = document.createElement("div");
+    el.className = "dsv";
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-modal", "true");
+    el.setAttribute("aria-label", p.title + " desktop view");
+    el.innerHTML =
+      '<div class="dsv__bar">' +
+        '<button class="dsv__done" type="button">Done</button>' +
+        '<div class="dsv__titles"><div class="dsv__title"></div>' +
+          '<div class="dsv__host"></div></div>' +
+        '<a class="dsv__open" target="_blank" rel="noopener" aria-label="Open in new tab">' + EXT + "</a>" +
+      "</div>" +
+      '<div class="dsv__stage"><div class="dsv__loading">Loading desktop view…</div>' +
+        '<iframe class="dsv__frame" referrerpolicy="no-referrer-when-downgrade"></iframe></div>';
+    el.querySelector(".dsv__title").textContent = p.title;
+    el.querySelector(".dsv__host").textContent = host;
+    el.querySelector(".dsv__open").href = p.url;
+    const stage = el.querySelector(".dsv__stage");
+    const frame = el.querySelector(".dsv__frame");
+    frame.title = p.title;
+    frame.addEventListener("load", () => el.classList.add("dsv--loaded"));
+
+    // the frame is always a desktop wide; only its on-screen size is scaled
+    const fit = () => {
+      const s = stage.clientWidth / DESK_W;
+      frame.style.width = DESK_W + "px";
+      frame.style.height = stage.clientHeight / s + "px";
+      frame.style.transform = "scale(" + s + ")";
+    };
+    const onKey = (e) => { if (e.key === "Escape") close(); };
+    function close() {
+      el.classList.remove("dsv--open");
+      window.removeEventListener("resize", fit);
+      document.removeEventListener("keydown", onKey);
+      setTimeout(() => el.remove(), 260);
+    }
+    el.querySelector(".dsv__done").addEventListener("click", close);
+    window.addEventListener("resize", fit);
+    document.addEventListener("keydown", onKey);
+
+    document.body.appendChild(el);
+    fit();
+    frame.src = p.url;
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("dsv--open")));
+  }
+
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a[href]");
+    if (!a || !phone.matches || a.classList.contains("dsv__open")) return;
+    const p = SITES.get(norm(a.href));
+    if (!p) return;
+    e.preventDefault();
+    e.stopPropagation();
+    openViewer(p);
+  }, true);
+})();
+
 /* ===================== AMBIENT VIDEO CARD =====================
    Autoplay needs the muted + playsinline combination, and browsers still hand
    back a rejected promise sometimes — the poster stands in when that happens.
@@ -3142,7 +3257,7 @@
     tagline: "Let's design something meaningful.",
     title: "Senior UI/UX Designer · Fintech & Insurance",
     location: "Gurugram, India",
-    experience: "4+ Years",
+    experience: "5+ Years",
     company: "Ensylon",
     focus: "Product Design · Design Systems · UX Research",
     email: "ankurmeena194@gmail.com",
@@ -3282,6 +3397,18 @@
   }
 
   window.ContactsApp = { open: open };
+
+  // The dock's Mail icon (tooltip "Contact") used to be a bare mailto: link,
+  // which does nothing in a browser with no mail app set up. It opens the
+  // Contacts window instead, the same as the phone's Contacts icon; the email
+  // address is one tap away inside it.
+  const dockMail = document.querySelector(".dock .dock__app--mail");
+  if (dockMail) {
+    dockMail.addEventListener("click", (e) => {
+      e.preventDefault();
+      open(dockMail);
+    });
+  }
 })();
 
 /* ===================== LOCK SCREEN =====================
@@ -3522,7 +3649,7 @@
       run: () => dock("acrobat") && dock("acrobat").click() },
     { title: "Contacts", sub: "App", icon: IC.call, keys: "contact contacts call phone email reach hire",
       run: () => window.ContactsApp && window.ContactsApp.open(bar) },
-    { title: "Spotify", sub: "App", icon: IC.music, keys: "spotify music songs playlist lofi delulu",
+    { title: "Spotify", sub: "App", icon: IC.music, keys: "spotify music songs playlist delulu the xx odesza tame impala bonobo tycho queen",
       run: () => window.SpotifyApp && window.SpotifyApp.open(bar) },
     { title: "LinkedIn", sub: "Link", icon: IC.link, keys: "linkedin social network profile connect",
       run: () => dock("linkedin") && dock("linkedin").click() },

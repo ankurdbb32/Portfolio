@@ -2041,23 +2041,8 @@ button.menubar__item:focus-visible {
   margin: 0 auto;
   padding: 26px 28px 44px;
 }
-.pjd__hero {
-  height: 300px;
-  border-radius: 16px;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  padding: 24px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
-}
-.pjd__hero-title {
-  color: #fff;
-  font-size: 36px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
 .pjd__info {
-  padding-top: 22px;
+  padding-top: 0;
 }
 .pjd__head {
   display: flex;
@@ -2886,7 +2871,7 @@ button.menubar__item:focus-visible {
   display: block;
 }
 
-/* ===================== MUSIC — GENERATIVE LO-FI PLAYER ===================== */
+/* ===================== MUSIC — PLAYER (streams through Spotify) ===================== */
 .musicwin {
   width: 420px;
 }
@@ -3361,9 +3346,6 @@ button.menubar__item:focus-visible {
   /* project detail page → mobile friendly */
   .pjd {
     padding: 18px 16px 44px;
-  }
-  .pjd__hero {
-    height: 200px;
   }
   .pjd__title {
     font-size: 22px;
@@ -4345,11 +4327,13 @@ button.menubar__item:focus-visible {
    timeline stays uniform instead of wrapping only the longest title. */
 /* Wide desktop columns are roomy enough to put the date beside the role again. */
 @media (min-width: 1181px) {
+  /* no wrap: a long role breaks onto a second line and its date stays on the
+     right, level with the first line like every other entry */
   .desktop .exp__row {
     flex-direction: row;
     align-items: baseline;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 2px 14px;
   }
   .desktop .exp__date {
@@ -6528,7 +6512,6 @@ button.menubar__item:focus-visible {
   gap: 8px;
   margin-top: auto;      /* pinned to the bottom, so rows line up across the grid */
   padding-top: 16px;
-  border-top: 0.5px solid rgba(0, 0, 0, 0.07);
 }
 .pj__act {
   flex: 1 1 0;
@@ -6566,8 +6549,8 @@ button.menubar__item:focus-visible {
 }
 .pj__actions--solo .pj__act {
   flex: 0 0 auto;
-  /* no edge to line up, so the arrow itself ends on the card's content edge
-     (the right end of the divider above); the left padding keeps the tap target */
+  /* no edge to line up, so the arrow itself ends on the card's content edge;
+     the left padding keeps the tap target */
   padding: 0 0 0 14px;
 }
 .pj__actions--solo .pj__act:hover {
@@ -6942,11 +6925,14 @@ button.menubar__item:focus-visible {
     flex-direction: row;
     align-items: baseline;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 2px 14px;
+    flex-wrap: nowrap;
+    /* a phone is narrow: a tighter gap and a slightly smaller date give the role
+       enough width that "Software Development / Engineer" stays on two lines */
+    gap: 2px 8px;
   }
   .ios .exp__date {
     padding-top: 2px;
+    font-size: 10.5px;
   }
   .ios .widget--exp {
     min-height: 250px; /* the height the three entries distribute across */
@@ -7508,4 +7494,161 @@ button.menubar__item:focus-visible {
 }
 .pjd__head .pj__badge--logo .pj__logo {
   height: 24px;
+}
+
+/* ===================================================================== */
+/* ======= DESKTOP-ONLY SITE VIEWER — desktop layout scaled to a phone ==== */
+/* ===================================================================== */
+.dsv {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  background: #1c1c1e;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.24s ease, transform 0.24s ease;
+}
+.dsv--open {
+  opacity: 1;
+  transform: none;
+}
+.dsv__bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
+  background: rgba(28, 28, 30, 0.94);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+.dsv__done {
+  flex: 0 0 auto;
+  border: 0;
+  background: none;
+  padding: 6px 0;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0a84ff;
+  cursor: pointer;
+}
+.dsv__titles {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
+}
+.dsv__title {
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dsv__host {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dsv__open {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+.dsv__open svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.dsv__stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: #fff;
+}
+.dsv__frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+  transform-origin: 0 0;
+  background: #fff;
+}
+.dsv__loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #8a8a8e;
+}
+.dsv--loaded .dsv__loading {
+  display: none;
+}
+
+/* ---- the Spotify embed that plays the songs: invisible, since the site's own
+   players are its controls. It must stay inside the viewport — Chrome throttles
+   off-screen cross-origin frames, and parked off-screen the embed never loads
+   or plays. Near-zero opacity hides it without that throttling. ---- */
+.spembed {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  height: 80px;
+  opacity: 0.01;
+  pointer-events: none;
+}
+/* Spotify's embed has no volume control, so the volume sliders are hidden
+   rather than left doing nothing (visibility keeps their layout space) */
+.music__vol,
+.sp__right .sp__vol,
+.sp__right .sp__ico--static {
+  visibility: hidden;
+}
+
+/* ---- album covers: every artwork slot shows the song's real cover, and the
+   placeholder note is hidden behind it ---- */
+.spw__mini-art.has-cover,
+.spw__tile-art.has-cover,
+.sp__thumb.has-cover,
+.sp__npart.has-cover,
+.music__label.has-cover {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.spw__mini-art.has-cover svg,
+.spw__tile-art.has-cover svg,
+.sp__npart.has-cover svg {
+  display: none;
+}
+.sp__cover--mosaic {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  overflow: hidden;
+  background: #121212;
+}
+.sp__cover--mosaic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
