@@ -7436,3 +7436,76 @@ button.menubar__item:focus-visible {
     opacity: 0.55;
   }
 }
+
+/* ===================================================================== */
+/* ====== FEATURED WORK WITHOUT A SCREENSHOT — colour art + name ======= */
+/* ===================================================================== */
+/* Some featured case studies have no image to show. Rather than an empty frame,
+   the widget paints a colour field with the project's name on it, and its
+   thumbnail carries the initial, so every featured item reads at a glance. */
+.pjw__fthumb--text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  color: #fff;
+  font-size: clamp(22px, 2.6vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  text-align: center;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.22);
+}
+.pjw__thumb--text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+/* ---- detail page with more than one link (a case study, its design file, its
+   live site): the first stays the filled button and is pushed right; the rest
+   sit beside it as outlined buttons, so the order of importance reads at once ---- */
+.pjd__visit--more {
+  margin-left: 0;
+  background: transparent;
+  color: #007aff;
+  box-shadow: inset 0 0 0 1px rgba(0, 122, 255, 0.45);
+}
+.pjd__visit--more:hover {
+  background: rgba(0, 122, 255, 0.08);
+}
+
+/* ---- a card whose only action is its live-site link: the outlined button keeps
+   its own padding and hover (the solo rule above was written for the borderless
+   View Details) and sits at the right edge at its natural width ---- */
+.pj__actions--solo .pj__act--ghost {
+  padding: 0 16px;
+}
+.pj__actions--solo .pj__act--ghost:hover {
+  opacity: 1;
+  background: #f2f2f4;
+  border-color: rgba(0, 0, 0, 0.28);
+}
+
+/* ---- Figma projects wear the Figma mark instead of a text pill: no pill
+   behind it (the brand colours would clash with the purple), just the logo
+   sized to sit on the title line ---- */
+.pj__badge--logo {
+  background: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+.pj__badge--logo .pj__logo {
+  display: block;
+  height: 18px;
+  width: auto;
+}
+.pjd__head .pj__badge--logo .pj__logo {
+  height: 24px;
+}
