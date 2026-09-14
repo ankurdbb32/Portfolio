@@ -25,8 +25,9 @@ body {
   min-height: 100vh;
   color: #fff;
   overflow: hidden;
-  /* static wallpaper — fills the whole viewport, no letterbox */
-  background: #0a0a0a url("wallpaper.png?v=2") center / cover no-repeat fixed;
+  /* first frame, before the rotation module takes over with its own layers;
+     the colour is this image's average so there is no flash while it decodes */
+  background: #211d25 url("backgound11.jpg") center / cover no-repeat fixed;
 }
 
 /* Full-viewport scene — columns hug the screen edges (no letterbox padding). */
@@ -77,6 +78,27 @@ body {
 
 .menubar__item {
   cursor: default;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 2px 7px;
+  border-radius: 5px;
+  line-height: 1.2;
+}
+/* clickable menus stay completely flat — no highlight on hover */
+button.menubar__item {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+button.menubar__item:hover {
+  background: none;
+}
+/* keyboard focus still needs to be visible; a mouse never triggers this */
+button.menubar__item:focus-visible {
+  outline: 1.5px solid rgba(255, 255, 255, 0.7);
+  outline-offset: -1px;
 }
 
 .menubar__item--bold {
@@ -128,18 +150,27 @@ body {
   flex: 1 1 auto;
   min-height: 0; /* never let tall content push the dock off-screen */
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  align-items: stretch; /* columns fill the height so no dead space under the cards */
+  /* a real gap between the columns instead of space-between's drifting voids —
+     the middle column stretches to take up whatever is left */
+  gap: var(--widget-gap);
   padding: var(--desktop-pad);
-  /* keeps the center of the screen open for the wallpaper subject */
 }
 
 /* ===================== WIDGET COLUMNS ===================== */
 .widget-col {
   width: var(--col-w);
+  flex: 0 0 auto; /* the side columns stay tile-width */
   display: flex;
   flex-direction: column;
   gap: var(--widget-gap);
+}
+/* the middle column is the flexible one: it fills the space the side columns
+   don't use, so the row spans the desktop with only the gap showing through */
+.desktop .widget-col--mid {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
 }
 
 /* a row that holds two small widgets side by side */
@@ -276,7 +307,7 @@ body {
   padding: 0;
   gap: 0;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(30px) saturate(180%);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
   border: 0.5px solid rgba(255, 255, 255, 0.6);
@@ -363,11 +394,13 @@ body {
 }
 
 /* row: role/company on the left, dates on the right */
+/* Stacked by default — role, then date, then company. Wide desktop columns opt
+   back into the side-by-side layout below, where the date genuinely fits. */
 .exp__row {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
+  gap: 1px;
 }
 
 .exp__info {
@@ -387,7 +420,6 @@ body {
   color: #6a6a6c;
   margin-top: 3px;
   line-height: 1.3;
-  white-space: nowrap;
 }
 
 .exp__date {
@@ -396,7 +428,6 @@ body {
   font-weight: 500;
   color: #9a9a9a;
   white-space: nowrap;
-  padding-top: 2px;
 }
 
 /* ===================== FEATURED PROJECTS WIDGET ===================== */
@@ -407,145 +438,10 @@ body {
   justify-content: flex-start;
   padding: 0;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(30px) saturate(180%);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
   border: 0.5px solid rgba(255, 255, 255, 0.6);
-}
-.pjw__header {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 15px 20px;
-  background:
-    linear-gradient(115deg, transparent 0, rgba(255, 255, 255, 0.55) 45%, transparent 73%),
-    rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(22px) saturate(160%);
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.5);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
-}
-.pjw__icon {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: #3a3a3c;
-  stroke-width: 1.8;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-}
-.pjw__title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #1d1d1f;
-  letter-spacing: 0.2px;
-}
-.pjw__list {
-  flex: 1 1 auto;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: 16px 14px;
-  overflow-y: auto;
-}
-/* full-bleed gradient card; name/subtext overlaid on a bottom scrim */
-.pjw__card {
-  position: relative;
-  flex: 1 1 0;
-  min-height: 0;
-  display: block;
-  border-radius: 16px;
-  overflow: hidden;
-  text-decoration: none;
-  background: var(--bg, #444);
-  border: 0.5px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  transition: transform 0.16s ease, box-shadow 0.16s ease;
-}
-.pjw__card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
-}
-.pjw__badge {
-  position: absolute;
-  z-index: 2;
-  top: 12px;
-  left: 12px;
-  font-size: 10.5px;
-  font-weight: 600;
-  color: #fff;
-  padding: 3px 10px;
-  border-radius: 100px;
-}
-.pjw__overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 30px 16px 14px;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.78) 0%,
-    rgba(0, 0, 0, 0.5) 45%,
-    rgba(0, 0, 0, 0) 100%
-  );
-}
-.pjw__badge--live {
-  background: rgba(48, 200, 94, 0.95);
-}
-.pjw__badge--case {
-  background: rgba(124, 58, 237, 0.95);
-}
-.pjw__info {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 11px 14px 13px;
-}
-.pjw__name {
-  font-size: 15.5px;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.25;
-}
-.pjw__cat {
-  font-size: 12.5px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: 3px;
-}
-.pjw__viewall {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin: 0 14px 14px;
-  padding: 12px;
-  border: 0;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.06);
-  color: #1d1d1f;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-.pjw__viewall:hover {
-  background: rgba(0, 0, 0, 0.1);
-}
-.pjw__viewall svg {
-  width: 17px;
-  height: 17px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
 /* ===================== FEATURED PROJECT WIDGET (legacy carousel) ===================== */
@@ -920,8 +816,8 @@ body {
   gap: 8px;
 }
 .wl {
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   border: 0;
   padding: 0;
@@ -941,8 +837,8 @@ body {
 }
 /* glyphs inside the traffic lights */
 .wl__g {
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
   display: block;
   opacity: 0; /* hidden until this specific dot is hovered */
   transition: opacity 0.12s ease;
@@ -974,7 +870,9 @@ body {
 .winmodal__title {
   flex: 1 1 auto;
   text-align: center;
-  margin-right: 52px; /* balance the traffic lights */
+  /* balance the traffic lights: their 61px block (3 x 15 + 2 x 8 gap) plus the
+     10px gap the bar puts between the lights and the title */
+  margin-right: 71px;
   font-size: 13px;
   font-weight: 600;
   color: #3a3a3c;
@@ -1139,7 +1037,7 @@ body {
   max-width: 1400px;
   max-height: 900px;
   display: flex;
-  background: #ececed;
+  background: white;
   border-radius: 26px;
   overflow: hidden;
   /* soft ambient shadow so the window floats above the (undimmed) desktop */
@@ -1147,11 +1045,22 @@ body {
     0 0 0 0.5px rgba(0, 0, 0, 0.08);
   transform: scale(0.12);
   opacity: 0;
-  transition: transform 0.34s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.22s ease;
+  transition: transform 0.34s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.22s ease,
+    width 0.3s cubic-bezier(0.2, 0.9, 0.25, 1),
+    height 0.3s cubic-bezier(0.2, 0.9, 0.25, 1);
 }
 .winmodal--open .noteswin {
   transform: scale(1);
   opacity: 1;
+}
+/* green-button expand → fill the whole desktop */
+.noteswin--max,
+.finderwin--max {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 0;
 }
 /* sidebar — white floating drawer, 4px inset on left/top/bottom, curved corners */
 .nw__sidebar {
@@ -1163,7 +1072,7 @@ body {
   background: #fff;
   border-radius: 20px;
   /* soft shadow on the RIGHT side only (negative spread hides top/left/bottom) */
-  box-shadow: 14px 0 22px -12px rgba(0, 0, 0, 0.22);
+  box-shadow: 8px 0 10px -12px rgba(0, 0, 0, 0.22);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1181,12 +1090,13 @@ body {
   gap: 8px;
 }
 .nw__lights .wl {
-  width: 12px;
-  height: 12px;
-  cursor: default;
-}
-.nw__lights .wl--close {
+  width: 15px;
+  height: 15px;
   cursor: pointer;
+}
+.nw__lights .wl__g {
+  width: 15px;
+  height: 15px;
 }
 .nw__side-actions {
   display: flex;
@@ -1657,14 +1567,24 @@ body {
   max-width: 1400px;
   max-height: 900px;
   display: flex;
-  background: #ececed;
+  background: white;
   border-radius: 26px;
   overflow: hidden;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.32), 0 6px 20px rgba(0, 0, 0, 0.18),
     0 0 0 0.5px rgba(0, 0, 0, 0.08);
   transform: scale(0.12);
   opacity: 0;
-  transition: transform 0.34s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.22s ease;
+  transition: transform 0.34s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.22s ease,
+    width 0.3s cubic-bezier(0.2, 0.9, 0.25, 1),
+    height 0.3s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+/* maximize must beat this later-in-file base width/height (green button → full screen) */
+.finderwin.finderwin--max {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 0;
 }
 .winmodal--open .finderwin {
   transform: scale(1);
@@ -1679,7 +1599,9 @@ body {
   margin: 6px 0 6px 6px;
   background: #fff;
   border-radius: 20px;
-  box-shadow: 14px 0 22px -12px rgba(0, 0, 0, 0.22);
+  /* the same right-edge shadow About Me's drawer casts (was 14px 0 22px, which
+     read noticeably heavier beside it) */
+  box-shadow: 8px 0 10px -12px rgba(0, 0, 0, 0.22);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1692,12 +1614,13 @@ body {
   padding: 0 16px;
 }
 .fw__side-top .wl {
-  width: 12px;
-  height: 12px;
-  cursor: default;
-}
-.fw__side-top .wl--close {
+  width: 15px;
+  height: 15px;
   cursor: pointer;
+}
+.fw__side-top .wl__g {
+  width: 15px;
+  height: 15px;
 }
 .fw__list {
   flex: 1 1 auto;
@@ -1908,6 +1831,8 @@ body {
 /* project card grid */
 .fw__grid--projects {
   grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+  grid-auto-rows: max-content; /* rows hug content so cards never get squished */
+  align-items: start;
   gap: 20px;
   padding: 22px 26px;
 }
@@ -1919,6 +1844,8 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  color: inherit;
   transition: box-shadow 0.16s ease, transform 0.16s ease;
 }
 .pj:hover {
@@ -1930,6 +1857,7 @@ body {
   aspect-ratio: 16 / 10;
   overflow: hidden;
   display: flex;
+  flex: 0 0 auto; /* keep the thumbnail's height; don't let a short card shrink it */
 }
 .pj__mock {
   width: 100%;
@@ -1981,27 +1909,12 @@ body {
   color: #1d1d1f;
   min-width: 0;
 }
-.pj__star {
-  flex: 0 0 auto;
-  border: 0;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  color: #c2c2c6;
-}
-.pj__star svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linejoin: round;
-}
 .pj__cat {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #2f6bf0;
-  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  /* muted, not link-blue: the actions below are the things to click now */
+  color: #6e6e73;
+  margin-top: 5px;
 }
 .pj__tags {
   display: flex;
@@ -2021,42 +1934,192 @@ body {
 .pj__tag--orange { background: #fdeede; color: #d9820a; }
 .pj__tag--teal { background: #dcf5f0; color: #0f9b8e; }
 .pj__tag--gray { background: #eeeef1; color: #6a6a70; }
-.pj__meta {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: 14px;
+.pj__more:hover {
+  color: #007aff;
+}
+.pj--open .pj__more {
+  color: #007aff;
+}
+
+/* inline status badge for imageless cards (no thumbnail to sit on) */
+.pj__badge-inline {
+  flex: 0 0 auto;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+
+/* expandable details panel (tech stack + highlights) */
+.pj__details {
+  display: none;
+  margin-top: 12px;
   padding-top: 12px;
   border-top: 0.5px solid rgba(0, 0, 0, 0.07);
-  color: #8a8a8e;
 }
-.pj__metaitem {
+.pj--open .pj__details {
+  display: block;
+}
+.pj__desc {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #4a4a4c;
+}
+.pj__dlabel {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #9a9a9e;
+  margin: 14px 0 7px;
+}
+.pj__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.pj__chip {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #37373a;
+  background: #f0f0f3;
+  border: 0.5px solid rgba(0, 0, 0, 0.05);
+  border-radius: 100px;
+  padding: 3px 10px;
+}
+.pj__hl {
+  margin: 0;
+  padding-left: 16px;
+}
+.pj__hl li {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #4a4a4c;
+  margin-bottom: 6px;
+}
+.pj__hl li:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ---- back button in the Finder toolbar ---- */
+.fw__back {
+  border: 0;
+  background: none;
+  padding: 6px;
+  margin-right: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #1d1d1f;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 12.5px;
+  flex: 0 0 auto;
 }
-.pj__metaitem svg {
-  width: 15px;
-  height: 15px;
+.fw__back:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+.fw__back svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---- project detail "page" ---- */
+.fw__detail {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  background: #fff;
+}
+.pjd {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 26px 28px 44px;
+}
+.pjd__hero {
+  height: 300px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+}
+.pjd__hero-title {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.pjd__info {
+  padding-top: 22px;
+}
+.pjd__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pjd__title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1d1d1f;
+}
+.pjd__cat {
+  font-size: 14px;
+  color: #6a6a6c;
+  font-weight: 500;
+  margin-top: 4px;
+}
+.pjd__desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #3a3a3c;
+  margin-top: 16px;
+}
+.pjd__foot {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.08);
+  color: #8a8a8e;
+}
+.pjd__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+.pjd__meta-item svg {
+  width: 16px;
+  height: 16px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.6;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.pj__more {
+.pjd__visit {
   margin-left: auto;
-  border: 0;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  color: #b0b0b4;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+  background: #007aff;
+  padding: 9px 18px;
+  border-radius: 100px;
 }
-.pj__more svg {
-  width: 18px;
-  height: 18px;
+.pjd__visit:hover {
+  background: #0066d6;
 }
+
 /* featured card */
 .pj__thumb--feat {
   background: #f4f5f7;
@@ -2143,6 +2206,22 @@ body {
 }
 .nw__job .nw__ul {
   margin: 2px 0 0;
+}
+/* project tech stack rendered as chips AFTER the bullets (never clashes with the name) */
+.nw__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.nw__stack-chip {
+  font-size: 12px;
+  font-weight: 500;
+  color: #37373a;
+  background: #f0f0f3;
+  border: 0.5px solid rgba(0, 0, 0, 0.05);
+  border-radius: 100px;
+  padding: 4px 11px;
 }
 .nw__job .nw__ul .nw__li:last-child {
   margin-bottom: 0;
@@ -2589,8 +2668,9 @@ body {
   align-self: center;
   margin-bottom: 28px;
   display: flex;
-  align-items: center;
+  align-items: flex-end; /* magnified icons grow upward, out of the pill */
   gap: 12px;
+  height: 68px;
   padding: 8px 12px;
   border-radius: 22px;
   background: rgba(60, 60, 65, 0.4);
@@ -2598,13 +2678,17 @@ body {
   -webkit-backdrop-filter: blur(24px);
   border: 0.5px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+  overflow: visible; /* let magnified icons overflow above the pill */
 }
 
 /* macOS-style hover tooltip (single element, positioned via JS) */
 .dock__tooltip {
   position: absolute;
-  bottom: calc(100% + 12px);
-  transform: translateX(-50%) translateY(6px) scale(0.96);
+  left: 0;
+  top: 0;
+  /* JS sets left/top to the (magnified) icon's top-centre; sit just above it */
+  transform: translate(-50%, calc(-100% - 6px)) scale(0.96);
+  transform-origin: bottom center;
   padding: 5px 13px;
   border-radius: 9px;
   font-size: 13px;
@@ -2632,7 +2716,7 @@ body {
 }
 .dock__tooltip--show {
   opacity: 1;
-  transform: translateX(-50%) translateY(0) scale(1);
+  transform: translate(-50%, calc(-100% - 12px)) scale(1);
 }
 
 .dock__app {
@@ -2646,11 +2730,14 @@ body {
   overflow: hidden;
   text-decoration: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.25);
-  transition: transform 0.16s ease;
+  flex: 0 0 auto;
+  /* JS drives width/height for cursor-proximity magnification; ease the reset */
+  transition: width 0.18s cubic-bezier(0.2, 0.9, 0.25, 1),
+    height 0.18s cubic-bezier(0.2, 0.9, 0.25, 1);
 }
-
-.dock__app:hover {
-  transform: translateY(-6px) scale(1.05);
+/* while the cursor is moving over the dock, follow instantly (no lag) */
+.dock--magnifying .dock__app {
+  transition: none;
 }
 
 .dock__app svg {
@@ -2742,8 +2829,9 @@ body {
 }
 
 /* Adobe Acrobat: flat red with white "A" mark (measured from reference) */
+/* Resume: a generic PDF document tile (the page art lives in the SVG) */
 .dock__app--acrobat {
-  background: #fa0f00;
+  background: #fff;
   border-radius: 22%;
 }
 .dock__app--acrobat svg {
@@ -2772,14 +2860,4579 @@ body {
   font-size: 30px;
 }
 
-/* Ensylon: exact logo image, cropped to the squircle */
-.dock__app--behance {
-  background: #265df5;
+/* GitHub: mark centered on the squircle tile */
+.dock__app--github {
+  background: #24292f;
   border-radius: 22.5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.dock__app--behance img {
+.dock__app--github svg {
+  width: 70%;
+  height: 70%;
+  display: block;
+}
+/* System Settings — iOS/macOS interlocking gears on a silver tile */
+.dock__app--settings {
+  background: linear-gradient(180deg, #97999f 0%, #62656b 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dock__app--settings svg {
+  width: 84%;
+  height: 84%;
+  display: block;
+}
+
+/* ===================== MUSIC — GENERATIVE LO-FI PLAYER ===================== */
+.musicwin {
+  width: 420px;
+}
+/* maximize to full screen like the games (beat .musicwin's later width rule) */
+.winmodal__window--max.musicwin {
+  width: 100%;
+  max-width: 100%;
+}
+/* full-bleed: no grey body gutters on the sides (and none when maximized) */
+.musicwin .winmodal__body {
+  padding: 0;
+  align-items: stretch;
+}
+.winmodal__window--max.musicwin .winmodal__body {
+  padding: 0;
+}
+.music {
+  flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 24px 26px 26px;
+  background: linear-gradient(165deg, #eef2ff 0%, #f6eefc 55%, #fdeef4 100%);
+  transition: background 0.5s ease;
+}
+.music[data-track="1"] {
+  background: linear-gradient(165deg, #e8eef6 0%, #dfe7f2 55%, #d7e6ee 100%);
+}
+.music[data-track="2"] {
+  background: linear-gradient(165deg, #fff2e6 0%, #ffe9ea 55%, #fbe6f2 100%);
+}
+.winmodal__window--max .music {
+  justify-content: center;
+  height: 100%;
+}
+
+/* vinyl record album art */
+.music__art {
+  position: relative;
+  width: 156px;
+  height: 156px;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, #1c1c22 0 2px, #26262e 2px 4px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: music-spin 6s linear infinite;
+  animation-play-state: paused;
+}
+.music--playing .music__art {
+  animation-play-state: running;
+}
+.music__art::after {
+  /* spindle hole */
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #f6f6f8;
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+.music__label {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: #fff;
+  background: radial-gradient(circle at 35% 30%, #ff8a5c, #d0417a 75%);
+}
+.music[data-track="1"] .music__label {
+  background: radial-gradient(circle at 35% 30%, #6aa9ff, #3d5bd0 75%);
+}
+.music[data-track="2"] .music__label {
+  background: radial-gradient(circle at 35% 30%, #ffb14e, #e0632f 75%);
+}
+@keyframes music-spin {
+  to { transform: rotate(360deg); }
+}
+
+.music__meta {
+  text-align: center;
+}
+.music__track {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1d1d22;
+}
+.music__artist {
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: #7b7b84;
+}
+
+/* equalizer */
+.music__eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 42px;
+}
+.music__bar {
+  width: 5px;
+  height: 42px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #ff7aa8, #a05cff);
+  transform: scaleY(0.1);
+  transform-origin: bottom;
+  transition: transform 0.06s linear;
+}
+.music[data-track="1"] .music__bar {
+  background: linear-gradient(180deg, #6aa9ff, #4059d0);
+}
+.music[data-track="2"] .music__bar {
+  background: linear-gradient(180deg, #ffb14e, #e0632f);
+}
+
+/* transport controls */
+.music__controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.music__btn {
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: #3a3a42;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s ease, color 0.12s ease;
+}
+.music__btn:hover {
+  color: #111;
+  transform: scale(1.08);
+}
+.music__btn:active {
+  transform: scale(0.94);
+}
+.music__glyph {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 0;
+}
+.music__play--big {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(160deg, #ff7aa8, #a05cff);
+  box-shadow: 0 8px 20px rgba(160, 92, 255, 0.4);
+}
+.music[data-track="1"] .music__play--big {
+  background: linear-gradient(160deg, #6aa9ff, #4059d0);
+  box-shadow: 0 8px 20px rgba(64, 89, 208, 0.4);
+}
+.music[data-track="2"] .music__play--big {
+  background: linear-gradient(160deg, #ffb14e, #e0632f);
+  box-shadow: 0 8px 20px rgba(224, 99, 47, 0.4);
+}
+.music__play--big:hover {
+  color: #fff;
+}
+.music__play--big .music__glyph {
+  width: 30px;
+  height: 30px;
+}
+
+/* time + volume */
+.music__time {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+  color: #8a8a92;
+  font-variant-numeric: tabular-nums;
+}
+.music__vol {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+.music__volic {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: #8a8a92;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.music__slider {
+  flex: 1 1 auto;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 3px;
+  background: #d7d7de;
+  cursor: pointer;
+}
+.music__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+.music__slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+/* iOS home is mobile-only (hidden on desktop) */
+.ios {
+  display: none;
+}
+
+/* ===================== macOS-style Experience + Featured Projects (desktop) ===================== */
+.desktop .widget--exp,
+.desktop .widget--projects {
+  /* same frosted glass the iOS home uses — blends into the wallpaper */
+  background: rgba(120, 120, 128, 0.26);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border: 0;
+  border-radius: 26px;
+  box-shadow: none;
+}
+/* flatten the skeuomorphic frosted header band into a clean macOS-widget header */
+.desktop .exp__header,
+.desktop .exp__title,
+.desktop .exp__icon,
+/* timeline text on glass */
+.desktop .exp__role {
+  color: #fff;
+}
+.desktop .exp__company {
+  color: rgba(255, 255, 255, 0.78);
+}
+.desktop .exp__date {
+  color: rgba(255, 255, 255, 0.72);
+}
+.desktop .exp__item:not(:last-child)::before {
+  background: rgba(255, 255, 255, 0.3);
+}
+.desktop .exp__dot {
+  background: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+/* keep the "current role" marker readable on glass */
+.desktop .exp__item--current .exp__dot,
+.ios .exp__item--current .exp__dot {
+  background: #ff9500;
+  border-color: #ff9500;
+  box-shadow: 0 0 0 4px rgba(255, 149, 0, 0.22);
+}
+
+/* ---- desktop cards fill their column instead of leaving dead space ---- */
+.desktop .widget-col {
+  min-height: 0;
+}
+.desktop .widget--exp {
+  height: auto;
+  flex: 1 1 auto;
+  min-height: 250px; /* header + three entries + rails; below this fit() scales */
+}
+.desktop .widget--projects {
+  height: auto;
+  flex: 1 1 auto;
+  min-height: 320px;
+}
+/* the three entries share the timeline's height evenly — the rail runs edge to
+   edge and the card never ends in a blank strip */
+.desktop .exp__timeline {
+  min-height: 0;
+  padding: 18px 20px 18px 44px;
+}
+.desktop .exp__item {
+  /* grow into spare height, but never shrink below the text — a shrinking basis
+     let short columns squeeze the entries into one another */
+  flex: 1 0 auto;
+}
+/* the last entry keeps its natural height so it sits flush with the card's bottom
+   padding — the two above absorb the slack, which spaces every dot equally */
+.desktop .exp__item:last-child {
+  flex: 0 0 auto;
+}
+
+/* ===================================================================== */
+/* ===================== MOBILE / iPHONE EXPERIENCE ==================== */
+/* ===================================================================== */
+@media (max-width: 720px) {
+  /* ---------- STATUS BAR (strip the desktop menus) ---------- */
+  .menubar {
+    height: 44px;
+    padding: 0 20px;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .menubar__apple,
+  .menubar__item {
+    display: none;
+  }
+  .menubar__left {
+    gap: 0;
+  }
+  .menubar__right {
+    gap: 8px;
+  }
+  .menubar__clock {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* ---------- iPhone: hide the macOS desktop + dock, show the iOS home ---------- */
+  .desktop,
+  .dock {
+    display: none !important;
+  }
+  .ios {
+    display: block;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px 18px 40px;
+  }
+  .widget {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* ---------- APPS OPEN FULL-SCREEN (like tapping an iPhone app) ------- */
+  .winmodal__window,
+  .noteswin,
+  .finderwin,
+  .musicwin,
+  .settingswin {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    border-radius: 0 !important;
+  }
+
+  /* Notes: traffic lights + a horizontal tab strip on top, content below */
+  .noteswin {
+    flex-direction: column;
+  }
+  .nw__sidebar {
+    width: 100%;
+    flex: 0 0 auto;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  }
+  .nw__side-top {
+    height: 46px;
+    padding: 0 16px;
+  }
+  .nw__folders {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 6px;
+    padding: 8px 12px 10px;
+    scrollbar-width: none;
+  }
+  .nw__folders::-webkit-scrollbar {
+    display: none;
+  }
+  .nw__folder {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 8px 13px;
+  }
+  .nw__main {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .nw__toolbar {
+    height: 52px;
+    padding: 0 16px;
+  }
+  /* About Me: drop the search pill on mobile, keep just the share button */
+  .noteswin .nw__search {
+    display: none;
+  }
+  .nw__content {
+    padding: 20px 18px 28px;
+  }
+
+  /* Finder: sidebar → top bar with a horizontal, scrollable category tab strip */
+  .finderwin {
+    flex-direction: column;
+  }
+  .fw__sidebar {
+    width: 100%;
+    flex: 0 0 auto;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  }
+  .fw__side-top {
+    padding: 0 16px;
+    height: 46px;
+  }
+  .fw__list {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 6px;
+    padding: 6px 12px 10px;
+    scrollbar-width: none;
+  }
+  .fw__list::-webkit-scrollbar {
+    display: none;
+  }
+  .fw__list .fw__section {
+    display: none; /* hide the "Portfolio" divider label inline */
+  }
+  .fw__item {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 8px 13px;
+  }
+  .fw__main {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .fw__toolbar {
+    padding: 0 16px;
+  }
+  /* Featured Projects: drop the search pill on mobile, keep just the share button */
+  .finderwin .nw__search {
+    display: none;
+  }
+  .fw__grid--projects {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+  /* project detail page → mobile friendly */
+  .pjd {
+    padding: 18px 16px 44px;
+  }
+  .pjd__hero {
+    height: 200px;
+  }
+  .pjd__title {
+    font-size: 22px;
+  }
+  .pjd__foot {
+    gap: 12px;
+  }
+  .pjd__visit {
+    margin-left: 0;
+  }
+
+  /* Music already centers; full-screen looks great as-is */
+  .musicwin .winmodal__body {
+    padding: 0;
+  }
+}
+
+/* ===================== iOS HOME SCREEN (mobile) ===================== */
+@media (max-width: 720px) {
+  .ios__search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 40px;
+    margin: 8px 0 20px;
+    border-radius: 12px;
+    background: rgba(120, 120, 128, 0.26);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 16px;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  .ios__search svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .ios__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: stretch; /* widgets match their neighbour's height (e.g. Core Stack ↔ Games) */
+  }
+
+  /* generic iOS widget card */
+  .ios__widget {
+    border-radius: 22px;
+    padding: 16px;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  }
+  .ios__about,
+  .ios__skills {
+    min-height: 158px;
+    display: flex;
+    flex-direction: column;
+  }
+  .ios__about {
+    background: linear-gradient(155deg, #3a2b6e, #7c3aed 58%, #ff5c8a);
+  }
+  .ios__skills {
+    background: rgba(28, 28, 32, 0.55);
+    backdrop-filter: blur(30px) saturate(140%);
+    -webkit-backdrop-filter: blur(30px) saturate(140%);
+    border: 0.5px solid rgba(255, 255, 255, 0.08);
+  }
+  .ios__skills-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 12px;
+  }
+  .ios__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .ios__chips span {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+  }
+
+  /* App Library folder box */
+  .ios__folder {
+    background: rgba(120, 120, 128, 0.26);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border-radius: 26px;
+    padding: 14px 14px 4px;
+    align-self: start;
+  }
+  .ios__folder-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .ios__folder-label {
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 12px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  }
+  .ios__app {
+    border: 0;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    display: block;
+    aspect-ratio: 1;
+    transition: transform 0.12s ease;
+  }
+  .ios__app:active {
+    transform: scale(0.9);
+  }
+  /* invisible placeholder keeps a folder's 2x2 size even with fewer apps */
+  .ios__app--empty {
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .ios__app-ic {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 23%;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  /* normalize whatever icon got cloned in so it fills the tile */
+  .ios__app-ic > * {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 23% !important;
+    box-shadow: none !important;
+    display: flex !important;
+    position: static !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+  .ios__app-ic img {
+    object-fit: cover;
+  }
+  .ios__app-ic svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* reused widgets (Experience / Projects) inside the iOS home */
+  .ios .widget--exp,
+  .ios .widget--projects {
+    height: auto;
+    min-height: 0;
+    margin-bottom: 16px;
+  }
+
+  /* Settings window on mobile: sidebar → slim top bar, main fills */
+  .settingswin {
+    flex-direction: column;
+  }
+  .set__sidebar {
+    width: 100%;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    height: 48px;
+    border-right: 0;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  }
+  .set__search,
+  .set__list {
+    display: none;
+  }
+  .set__main {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .set__grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+
+/* iOS polish for the Experience + Featured Projects widgets on mobile */
+@media (max-width: 720px) {
+  .ios .widget--exp,
+  .ios .widget--projects {
+    background: rgba(255, 255, 255, 0.97);
+    border: 0;
+    border-radius: 24px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+
+  /* Experience timeline. NOTE: .ios .exp__header and .ios .exp__title used to be
+     stranded at the head of this selector list — their own declaration block was
+     lost in an earlier edit, so both silently inherited the timeline's padding
+     and the header rendered 38px taller than the Mac's. They are styled below. */
+  .ios .exp__timeline {
+    gap: 20px;
+    padding: 16px 20px 22px 44px;
+  }
+  .ios .exp__role {
+    font-size: 15px;
+  }
+
+
+}
+
+/* iOS back button replaces the macOS traffic lights inside full-screen apps */
+.ios-back {
+  display: none;
+}
+@media (max-width: 720px) {
+  /* hide the close/min/max dots on phones */
+  .winmodal .wl {
+    display: none !important;
+  }
+  .ios-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    color: #007aff;
+    font-size: 16.5px;
+    font-weight: 500;
+    padding: 4px 10px 4px 0;
+    margin-right: auto; /* push any title/content to the right */
+    -webkit-tap-highlight-color: transparent;
+    flex: 0 0 auto;
+  }
+  .ios-back svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .ios-back span {
+    margin-left: -3px;
+  }
+  /* the header rows that held the lights now hold the back button */
+  .nw__side-top,
+  .fw__side-top,
+  .set__side-top {
+    justify-content: flex-start;
+  }
+  /* clean white top bar behind the Home button (like About Me — no grey band) */
+  .winmodal__bar,
+  .set__sidebar {
+    background: #fff !important;
+  }
+}
+
+/* Extra squeeze for small phones */
+@media (max-width: 380px) {
+  .dock__app {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+  }
+  .widget--lg {
+    min-height: 230px;
+  }
+}
+
+/* ===================== SYSTEM SETTINGS — WALLPAPER PICKER ===================== */
+.settingswin {
+  position: relative;
+  width: 780px;
+  max-width: 92%;
+  height: 560px;
+  max-height: 86%;
+  display: flex;
+  background: #ececed;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.32), 0 6px 20px rgba(0, 0, 0, 0.18),
+    0 0 0 0.5px rgba(0, 0, 0, 0.08);
+  transform: scale(0.12);
+  opacity: 0;
+  transition: transform 0.34s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.22s ease,
+    width 0.3s cubic-bezier(0.2, 0.9, 0.25, 1),
+    height 0.3s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+.winmodal--open .settingswin {
+  transform: scale(1);
+  opacity: 1;
+}
+.settingswin.settingswin--max {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 0;
+}
+
+/* sidebar */
+.set__sidebar {
+  width: 220px;
+  flex: 0 0 auto;
+  background: #e6e6e8;
+  border-right: 0.5px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+.set__side-top {
+  height: 46px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+.set__side-top .wl {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+.set__side-top .wl__g {
+  width: 15px;
+  height: 15px;
+}
+.set__search {
+  margin: 2px 12px 10px;
+  height: 28px;
+  border-radius: 7px;
+  background: rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 9px;
+  color: #8a8a8e;
+  font-size: 13px;
+}
+.set__search svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+.set__list {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 2px 8px 12px;
+}
+.set__item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 9px;
+  border-radius: 7px;
+  font-size: 13.5px;
+  color: #1d1d1f;
+  cursor: default;
+  margin-bottom: 1px;
+}
+.set__item[data-pane] {
+  cursor: pointer;
+}
+.set__item--active {
+  background: #0a84ff;
+  color: #fff;
+}
+.set__item-ic {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.set__item-ic svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.set__sep {
+  height: 10px;
+}
+
+/* main pane */
+.set__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f7;
+}
+.set__header {
+  flex: 0 0 auto;
+  padding: 20px 26px 10px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.07);
+}
+.set__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1d1d1f;
+}
+.set__sub {
+  font-size: 13px;
+  color: #8a8a8e;
+  margin-top: 3px;
+}
+.set__body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 16px 26px 30px;
+}
+.set__section-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #6a6a6c;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin: 4px 0 12px;
+}
+.set__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+  gap: 16px;
+}
+.set__wall {
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  align-items: stretch;
+}
+.set__wall-thumb {
+  aspect-ratio: 16 / 10;
+  border-radius: 10px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  position: relative;
+  border: 2.5px solid transparent;
+  transition: transform 0.14s ease;
+}
+.set__wall:hover .set__wall-thumb {
+  transform: translateY(-2px);
+}
+.set__wall--active .set__wall-thumb {
+  border-color: #0a84ff;
+}
+.set__wall--active .set__wall-thumb::after {
+  content: "";
+  position: absolute;
+  bottom: 7px;
+  right: 7px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0a84ff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E") center / 13px no-repeat;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+.set__wall-name {
+  font-size: 12.5px;
+  color: #1d1d1f;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* live wallpaper: full-screen looping video behind the scene */
+.wallpaper-video {
+  position: fixed;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
+/* LIVE badge on live-wallpaper thumbnails */
+.set__wall-live {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 2px 7px;
+  border-radius: 100px;
+}
+.set__grid {
+  margin-bottom: 22px;
+}
+.set__grid:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== mobile Settings overrides (must come AFTER the base settings CSS above) ===== */
+@media (max-width: 720px) {
+  .settingswin {
+    flex-direction: column;
+  }
+  .set__sidebar {
+    width: 100%;
+    height: 48px;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    background: #fff;
+    border-right: 0;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+  }
+  .set__search,
+  .set__list {
+    display: none;
+  }
+  .set__main {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .set__grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+
+/* ===== mobile: Experience + Featured Projects use the same frosted glass as the app folders ===== */
+@media (max-width: 720px) {
+  .ios .widget--exp,
+  .ios .widget--projects {
+    background: rgba(120, 120, 128, 0.26);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border: 0;
+    border-radius: 26px;
+    box-shadow: none; /* blend into the wallpaper exactly like the app folders */
+  }
+  .ios .exp__header,
+  .ios .exp__title,
+  .ios .exp__icon,
+  .ios .exp__role {
+    color: #fff;
+  }
+  .ios .exp__company {
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .ios .exp__date {
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .ios .exp__item:not(:last-child)::before {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  .ios .exp__dot {
+    background: #fff;
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+/* ===================================================================== */
+/* ============ THREE-COLUMN DESKTOP (left · projects · music) ========== */
+/* ===================================================================== */
+/* Three columns of two small widgets each must fit side by side, so the tile
+   size becomes fluid: 6 tiles + 5 gaps + the desktop padding == the viewport,
+   capped at the original 172px so wide screens look exactly as before. */
+@media (min-width: 721px) {
+  :root {
+    --widget-sm: clamp(
+      104px,
+      calc((100vw - 2 * var(--desktop-pad) - 5 * var(--widget-gap)) / 6),
+      172px
+    );
+  }
+}
+
+/* ===================== SPOTIFY PLAYER WIDGET ===================== */
+.spw {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 0;
+  overflow: hidden;
+  color: #fff;
+  border: 0;
+  border-radius: 26px;
+  /* Spotify's playlist page: the cover's colour bleeds from the top into #121212 */
+  background:
+    linear-gradient(
+      180deg,
+      rgba(29, 185, 84, 0.44) 0%,
+      rgba(22, 101, 56, 0.32) 17%,
+      rgba(18, 18, 18, 0.88) 46%,
+      rgba(18, 18, 18, 0.94) 100%
+    ),
+    rgba(18, 18, 18, 0.7);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  box-shadow: none;
+}
+
+/* ---- brand row ---- */
+.spw__head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 16px 18px 0;
+}
+.spw__logo {
+  width: 19px;
+  height: 19px;
+  fill: #1ed760;
+  flex: 0 0 auto;
+}
+.spw__brand {
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #fff;
+}
+
+/* ---- playlist header: big square cover + title ----
+   The cover is the widget's flexible element: it soaks up whatever height the
+   column has spare, so the card fills its column without a dead strip while the
+   list and the player bar keep their natural size. */
+.spw__coverwrap {
+  flex: 1 1 auto;
+  min-height: 0; /* the cover shrinks first when the column is short */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 18px 0;
+}
+.spw__cover {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  /* bound by BOTH axes so the art stays a true square: without the width half,
+     a tall column would stretch it into a rectangle once max-width clamped it */
+  max-height: min(300px, calc(var(--col-w) - 36px));
+  border-radius: 8px;
+  background: linear-gradient(145deg, #1ed760 0%, #12a150 52%, #0a5c34 100%);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.spw__cover svg {
+  width: 58%;
+  height: 58%;
   display: block;
+}
+.spw__cover-note {
+  fill: rgba(255, 255, 255, 0.94);
+}
+.spw__heroinfo {
+  flex: 0 0 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+  padding: 13px 18px 0;
+}
+.spw__kind {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+.spw__plname {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  line-height: 1.12;
+  color: #fff;
+}
+.spw__plmeta {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* ---- status line + the big green play button ---- */
+.spw__actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 18px 2px;
+}
+.spw__bigplay {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 50%;
+  background: #1ed760;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.42);
+  transition: transform 0.14s ease, background 0.14s ease;
+}
+.spw__bigplay:hover {
+  transform: scale(1.06);
+  background: #1fdf64;
+}
+.spw__bigplay svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+  display: block;
+}
+.spw__nowlabel {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.58);
+  line-height: 1.3;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* ---- track list ---- */
+.spw__list {
+  list-style: none;
+  flex: 0 0 auto; /* never shrink — every song in the playlist stays visible */
+  min-height: 0;
+  overflow-y: auto;
+  padding: 8px 10px 4px;
+  margin: 0;
+}
+.spw__list::-webkit-scrollbar {
+  width: 6px;
+}
+.spw__list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 3px;
+}
+.spw__row {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+.spw__row:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.spw__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+}
+.spw__numic {
+  display: none;
+}
+.spw__numic svg {
+  width: 14px;
+  height: 14px;
+  fill: #1ed760;
+  display: block;
+}
+/* the playing row swaps its number for a speaker, Spotify-style */
+.spw__row--current .spw__numtext {
+  display: none;
+}
+.spw__row--current .spw__numic {
+  display: block;
+}
+.spw__rowmeta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.spw__rowtitle {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.spw__row--current .spw__rowtitle {
+  color: #1ed760;
+}
+.spw__rowartist {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.58);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.spw__rowdur {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- now-playing bar ---- */
+.spw__now {
+  flex: 0 0 auto;
+  padding: 11px 18px 15px;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.22);
+}
+.spw__nowtop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.spw__nowmeta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.spw__nowtitle {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.spw__nowartist {
+  font-size: 10.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.spw__eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 15px;
+  flex: 0 0 auto;
+}
+.spw__eqbar {
+  width: 3px;
+  height: 100%;
+  border-radius: 1.5px;
+  background: #1ed760;
+  transform: scaleY(0.1);
+  transform-origin: bottom;
+  transition: transform 0.06s linear;
+}
+.spw__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 9px;
+}
+.spw__elapsed,
+.spw__total {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  font-variant-numeric: tabular-nums;
+  flex: 0 0 auto;
+}
+.spw__track {
+  flex: 1 1 auto;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.24);
+  overflow: hidden;
+}
+.spw__fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 2px;
+  background: #fff;
+  transition: width 0.35s linear, background 0.2s ease;
+}
+.spw--playing .spw__fill {
+  background: #1ed760;
+}
+.spw__ctrls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 9px;
+}
+.spw__btn {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: none;
+  color: rgba(255, 255, 255, 0.78);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.12s ease, transform 0.12s ease;
+}
+.spw__btn:hover {
+  color: #fff;
+}
+.spw__btn svg {
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
+  display: block;
+}
+.spw__btn--play {
+  width: 34px;
+  height: 34px;
+  background: #fff;
+  color: #000;
+}
+.spw__btn--play:hover {
+  transform: scale(1.07);
+  color: #000;
+}
+.spw__btn--play svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---- desktop: fill the right column like the other cards ---- */
+.desktop .spw {
+  height: auto;
+  flex: 1 1 auto;
+  /* brand + title + actions + 3 rows + player bar, plus a legible cover */
+  min-height: 500px;
+}
+
+
+/* Narrow desktops shrink the columns (see the fluid --widget-sm above). Once a
+   role and its date no longer sit on one line, stack them for every entry so the
+   timeline stays uniform instead of wrapping only the longest title. */
+/* Wide desktop columns are roomy enough to put the date beside the role again. */
+@media (min-width: 1181px) {
+  .desktop .exp__row {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2px 14px;
+  }
+  .desktop .exp__date {
+    padding-top: 2px;
+  }
+}
+@media (min-width: 721px) and (max-width: 1180px) {
+  /* stacked rows are a line taller, so the card needs more room before fit() scales */
+  .desktop .widget--exp {
+    min-height: 285px;
+  }
+}
+
+/* ===================== WALLPAPER CROSSFADE LAYERS =====================
+   Two stacked layers behind the desktop; the rotation fades one into the other. */
+.wp-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.1s ease;
+}
+.wp-layer--on {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wp-layer {
+    transition: none;
+  }
+}
+
+/* ===================================================================== */
+/* ========== SPOTIFY WIDGET — COMPACT "NOW PLAYING" CARD ============== */
+/* ===================================================================== */
+/* Modelled on the iOS Control Center card: art + title/artist + live bars,
+   a scrubber row with elapsed and remaining, then the transport row. The slot
+   that holds the audio-output button on iOS holds the full-size toggle here. */
+.spw__mini {
+  display: none;
+  flex-direction: column;
+  padding: 16px 18px 15px;
+  gap: 14px;
+}
+.spw--compact .spw__mini {
+  display: flex;
+}
+/* in compact form the expanded player's sections step aside */
+.spw--compact .spw__head,
+.spw--compact .spw__coverwrap,
+.spw--compact .spw__heroinfo,
+.spw--compact .spw__actions,
+.spw--compact .spw__list,
+.spw--compact .spw__now {
+  display: none;
+}
+/* the card hugs its content instead of filling the column */
+.desktop .spw--compact {
+  flex: 0 0 auto;
+  height: auto;
+  min-height: 0;
+  /* flatter tint than the full player, like the reference's art-derived colour */
+  background:
+    linear-gradient(150deg, rgba(29, 185, 84, 0.3) 0%, rgba(18, 18, 18, 0.9) 68%),
+    rgba(18, 18, 18, 0.74);
+}
+
+.spw__mini-top {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.spw__mini-art {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 auto;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #1ed760 0%, #12a150 52%, #0a5c34 100%);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.spw__mini-art svg {
+  width: 58%;
+  height: 58%;
+  display: block;
+}
+.spw__mini-meta {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.spw__mini-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.spw__mini-artist {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.56);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.spw__mini-top .spw__eq {
+  height: 17px;
+}
+
+.spw__mini-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.spw__mini-bar .spw__elapsed,
+.spw__mini-bar .spw__total {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+}
+.spw__mini-bar .spw__track {
+  height: 6px;
+  border-radius: 3px;
+}
+
+/* transport: prev/play/next centred, the size toggle pinned to the right */
+.spw__mini-ctrls {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  /* Symmetric inset: keeps the trio centred on the card (like the reference)
+     while reserving the right-hand slot for the size toggle, which is absolutely
+     positioned against the padding box and so still sits flush right. */
+  padding: 2px 34px;
+}
+.spw__mini-btn {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  border: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: none;
+  color: rgba(255, 255, 255, 0.94);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.12s ease, transform 0.12s ease;
+}
+.spw__mini-btn svg {
+  width: 27px;
+  height: 27px;
+  fill: currentColor;
+  display: block;
+}
+.spw__mini-btn:hover {
+  transform: scale(1.08);
+}
+.spw__mini-btn--play svg {
+  width: 25px;
+  height: 25px;
+}
+.spw__mini-expand {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  color: rgba(255, 255, 255, 0.62);
+}
+.spw__mini-expand svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+}
+.spw__mini-expand:hover {
+  color: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* Whichever view becomes visible eases in rather than popping. Going from
+   display:none to a visible box restarts the animation, so this fires on each
+   size change (and once, harmlessly, on first paint). */
+@media (prefers-reduced-motion: no-preference) {
+  .spw--compact .spw__mini,
+  .spw:not(.spw--compact) .spw__coverwrap,
+  .spw:not(.spw--compact) .spw__list {
+    animation: spw-fade 0.36s ease both;
+  }
+}
+@keyframes spw-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Narrower columns: tighten the compact transport so the centred trio can never
+   reach the size toggle pinned at the right. This has to sit AFTER the compact
+   card's base rules — at equal specificity, source order decides, media query or
+   not, so declaring it earlier in the file would silently lose. */
+@media (min-width: 721px) and (max-width: 1180px) {
+  .spw__mini-ctrls {
+    gap: 16px;
+    padding: 2px 32px;
+  }
+  .spw__mini-btn {
+    width: 33px;
+    height: 33px;
+  }
+  .spw__mini-btn svg {
+    width: 23px;
+    height: 23px;
+  }
+  .spw__mini-btn--play svg {
+    width: 21px;
+    height: 21px;
+  }
+  .spw__mini-expand {
+    width: 30px;
+    height: 30px;
+  }
+  .spw__mini-expand svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+/* ===================================================================== */
+/* ===================== SPOTIFY APP WINDOW ============================ */
+/* ===================================================================== */
+/* Opened by the compact widget's size toggle. Laid out from the reference
+   playlist page: art-tinted hero, action bar, track table, player bar. */
+.spotwin {
+  position: relative;
+  width: 92%;
+  height: 88%;
+  max-width: 1180px;
+  max-height: 820px;
+  display: flex;
+  flex-direction: column;
+  background: #121212;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 0.5px rgba(0, 0, 0, 0.4);
+}
+/* must beat the base width/height above (green button → full screen) */
+.spotwin.spotwin--max {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 0;
+}
+/* dark title bar so the chrome belongs to the app */
+.spotwin__bar {
+  flex: 0 0 auto;
+  background: #0b0b0b;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+.spotwin__bar .winmodal__title {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.sp {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-size: 14px;
+}
+.sp__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  /* the cover's colour bleeds down and dissolves into the page, like Spotify */
+  background:
+    linear-gradient(180deg, #1aa251 0%, #157a3d 20%, #0e4425 38%, #121212 58%);
+}
+.sp__scroll::-webkit-scrollbar {
+  width: 12px;
+}
+.sp__scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 6px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+/* ---- hero ---- */
+.sp__hero {
+  display: flex;
+  align-items: flex-end;
+  gap: 26px;
+  padding: 40px 32px 26px;
+}
+.sp__cover {
+  width: 200px;
+  height: 200px;
+  flex: 0 0 auto;
+  border-radius: 6px;
+  background: linear-gradient(145deg, #1ed760 0%, #12a150 52%, #0a5c34 100%);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sp__cover svg {
+  width: 56%;
+  height: 56%;
+  display: block;
+}
+.sp__heroinfo {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 6px;
+}
+.sp__kind {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+}
+.sp__title {
+  font-size: clamp(38px, 5.6vw, 84px);
+  line-height: 1.02;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  margin: 2px 0 4px;
+}
+.sp__owner {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.82);
+}
+.sp__avatar {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #46a3ff, #1d6fd0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+.sp__ownername {
+  font-weight: 700;
+  color: #fff;
+}
+.sp__dot {
+  color: rgba(255, 255, 255, 0.62);
+}
+.sp__count {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ---- action bar ---- */
+.sp__actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 20px 32px 8px;
+}
+.sp__bigplay {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 50%;
+  background: #1ed760;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.14s ease, background 0.14s ease;
+}
+.sp__bigplay:hover {
+  transform: scale(1.05);
+  background: #1fdf64;
+}
+.sp__bigplay svg {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+  display: block;
+}
+.sp__ico {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: rgba(255, 255, 255, 0.68);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.12s ease, transform 0.12s ease;
+}
+.sp__ico svg {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+  display: block;
+}
+.sp__ico:hover {
+  color: #fff;
+  transform: scale(1.06);
+}
+.sp__ico--static {
+  cursor: default;
+}
+.sp__ico--static:hover {
+  transform: none;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+/* ---- track table ---- */
+.sp__table {
+  padding: 22px 20px 26px;
+}
+.sp__head,
+.sp__row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 2.3fr) minmax(0, 1.4fr) minmax(0, 1.2fr) 108px;
+  align-items: center;
+  gap: 14px;
+  padding: 0 12px;
+}
+.sp__head {
+  height: 38px;
+  margin-bottom: 8px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.sp__head .sp__cell--dur {
+  justify-content: flex-start;
+}
+.sp__head svg {
+  width: 17px;
+  height: 17px;
+}
+.sp__row {
+  height: 58px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.sp__row:hover,
+.sp__row:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+.sp__cell {
+  min-width: 0;
+}
+.sp__cell--num {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.62);
+  font-variant-numeric: tabular-nums;
+}
+.sp__rowplay,
+.sp__rowbars {
+  display: none;
+}
+.sp__rowplay svg {
+  width: 15px;
+  height: 15px;
+  fill: #fff;
+  display: block;
+}
+/* hovering a row swaps its number for a play triangle */
+.sp__row:hover .sp__num,
+.sp__row:focus-visible .sp__num {
+  display: none;
+}
+.sp__row:hover .sp__rowplay,
+.sp__row:focus-visible .sp__rowplay {
+  display: block;
+}
+/* the current track shows its number in green, or live bars while playing */
+.sp__row--current .sp__num {
+  color: #1ed760;
+}
+.sp__row--playing .sp__num,
+.sp__row--playing:hover .sp__rowplay {
+  display: none;
+}
+.sp__row--playing .sp__rowbars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 15px;
+}
+.sp__row--playing:hover .sp__rowbars {
+  display: none;
+}
+.sp__row--playing:hover .sp__rowplay {
+  display: block;
+}
+.sp__rowbars i {
+  width: 2.5px;
+  height: 100%;
+  border-radius: 1px;
+  background: #1ed760;
+  transform: scaleY(0.15);
+  transform-origin: bottom;
+  transition: transform 0.06s linear;
+}
+.sp__cell--title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.sp__thumb {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  border-radius: 4px;
+  background: linear-gradient(145deg, #1ed760 0%, #12a150 52%, #0a5c34 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sp__thumb svg {
+  width: 58%;
+  height: 58%;
+  display: block;
+}
+.sp__titlemeta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sp__rowname {
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sp__row--current .sp__rowname {
+  color: #1ed760;
+}
+.sp__rowartist {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.62);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sp__row:hover .sp__rowartist {
+  color: rgba(255, 255, 255, 0.82);
+}
+.sp__cell--album,
+.sp__cell--date {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.62);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sp__row:hover .sp__cell--album {
+  color: #fff;
+}
+.sp__cell--dur {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.62);
+  font-variant-numeric: tabular-nums;
+}
+.sp__saved,
+.sp__rowmore {
+  opacity: 0;
+  display: flex;
+  transition: opacity 0.12s ease;
+}
+.sp__saved svg {
+  width: 17px;
+  height: 17px;
+  fill: #1ed760;
+  display: block;
+}
+.sp__rowmore svg {
+  width: 19px;
+  height: 19px;
+  fill: rgba(255, 255, 255, 0.8);
+  display: block;
+}
+.sp__row:hover .sp__saved,
+.sp__row:hover .sp__rowmore,
+.sp__row--current .sp__saved {
+  opacity: 1;
+}
+.sp__durtext {
+  min-width: 34px;
+  text-align: right;
+}
+
+/* ---- player bar ---- */
+.sp__bar {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px 14px;
+  background: #000;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+.sp__np {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.sp__npart {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  border-radius: 5px;
+  background: linear-gradient(145deg, #1ed760 0%, #12a150 52%, #0a5c34 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sp__npart svg {
+  width: 58%;
+  height: 58%;
+  display: block;
+}
+.sp__npmeta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sp__nptitle {
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sp__npartist {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.62);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sp__npsaved svg {
+  width: 17px;
+  height: 17px;
+  fill: #1ed760;
+  display: block;
+}
+.sp__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+.sp__transport {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.sp__ico--lg svg {
+  width: 24px;
+  height: 24px;
+}
+.sp__playbtn {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s ease;
+}
+.sp__playbtn:hover {
+  transform: scale(1.07);
+}
+.sp__playbtn svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+  display: block;
+}
+.sp__scrub {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 520px;
+}
+.sp__time {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  font-variant-numeric: tabular-nums;
+  flex: 0 0 auto;
+}
+.sp__track {
+  flex: 1 1 auto;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.24);
+  overflow: hidden;
+}
+.sp__fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 2px;
+  background: #fff;
+  transition: width 0.35s linear, background 0.2s ease;
+}
+.sp--playing .sp__fill {
+  background: #1ed760;
+}
+.sp__right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.sp__right .sp__ico svg {
+  width: 20px;
+  height: 20px;
+}
+.sp__vol {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 110px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.28);
+  cursor: pointer;
+}
+.sp__vol::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  border: 0;
+}
+
+/* narrower windows: drop the columns Spotify drops first */
+@media (max-width: 1080px) {
+  .sp__head,
+  .sp__row {
+    grid-template-columns: 30px minmax(0, 2.4fr) minmax(0, 1.3fr) 96px;
+  }
+  .sp__cell--date {
+    display: none;
+  }
+}
+@media (max-width: 860px) {
+  .sp__head,
+  .sp__row {
+    grid-template-columns: 30px minmax(0, 1fr) 88px;
+  }
+  .sp__cell--album {
+    display: none;
+  }
+  .sp__hero {
+    padding: 28px 22px 20px;
+  }
+  .sp__cover {
+    width: 148px;
+    height: 148px;
+  }
+}
+
+/* Spotify dock tile: the brand mark is a green disc with the arcs knocked out,
+   so a dark tile behind it reads as the real icon. */
+.dock__app--spotify {
+  background: #121212;
+  border-radius: 22.5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dock__app--spotify svg {
+  width: 84%;
+  height: 84%;
+  fill: #1ed760;
+  display: block;
+}
+
+/* ---- Spotify window on phones: the desktop three-column player bar has no
+   room at 390px, so the page stacks the way the real app does ---- */
+@media (max-width: 720px) {
+  .sp__hero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+    padding: 26px 20px 18px;
+  }
+  .sp__cover {
+    width: 190px;
+    height: 190px;
+  }
+  .sp__heroinfo {
+    align-items: center;
+    padding-bottom: 0;
+  }
+  .sp__title {
+    font-size: 32px;
+    letter-spacing: -0.03em;
+  }
+  .sp__owner {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 2px;
+  }
+  .sp__actions {
+    justify-content: center;
+    padding: 16px 20px 2px;
+  }
+  .sp__table {
+    padding: 14px 8px 20px;
+  }
+  .sp__head,
+  .sp__row {
+    gap: 10px;
+    padding: 0 8px;
+  }
+
+  /* player bar: one column — track, then scrubber, then transport */
+  .sp__bar {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px 16px 14px;
+  }
+  .sp__np {
+    order: 1;
+  }
+  .sp__center {
+    order: 2;
+    gap: 10px;
+  }
+  .sp__scrub {
+    max-width: none;
+  }
+  /* phones have hardware volume — the slider only steals room here */
+  .sp__right {
+    display: none;
+  }
+  .sp__transport {
+    gap: 34px;
+  }
+  .sp__playbtn {
+    width: 44px;
+    height: 44px;
+  }
+  .sp__playbtn svg {
+    width: 20px;
+    height: 20px;
+  }
+  .sp__ico--lg svg {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+
+/* ===================================================================== */
+/* ====== SPOTIFY TILE (mobile) — the iOS Spotify widget, 1:1 ========== */
+/* ===================================================================== */
+/* Artwork top-left, brand badge top-right, track + play along the bottom,
+   app name underneath. Every size below is a percentage of the card width,
+   so the proportions hold at any phone width. */
+@media (max-width: 720px) {
+  .spw--tile {
+    /* stretches to the row height, so the card is exactly as tall as the folder
+       card beside it — no fixed height to drift at other phone widths */
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+  }
+  .spw__tile {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8.5%;
+    border-radius: 26px;
+    overflow: hidden;
+    /* the real widget tints itself from the album art — ours is green */
+    background:
+      linear-gradient(160deg, rgba(35, 120, 74, 0.72) 0%, rgba(20, 52, 36, 0.82) 100%);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+  }
+
+  /* ---- top: artwork + brand badge ---- */
+  .spw__tile-head {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .spw__tile-art {
+    width: 62%;
+    aspect-ratio: 1 / 1;
+    flex: 0 0 auto;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    border-radius: 9px;
+    background: linear-gradient(145deg, #1ed760 0%, #12a150 52%, #0a5c34 100%);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.38);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.14s ease;
+  }
+  .spw__tile-art:active {
+    transform: scale(0.95);
+  }
+  .spw__tile-art svg {
+    width: 58%;
+    height: 58%;
+    display: block;
+  }
+  .spw__tile-badge {
+    flex: 0 0 auto;
+    width: 15%;
+    display: block;
+  }
+  .spw__tile-badge svg {
+    width: 100%;
+    height: auto;
+    fill: #fff; /* arcs knock out to the card colour, like the real mark */
+    display: block;
+  }
+
+  /* ---- bottom: track + play ---- */
+  .spw__tile-foot {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .spw__tile-meta {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .spw__tile-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    color: #fff;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .spw__tile-artist {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.62);
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .spw__tile-play {
+    width: 23%;
+    aspect-ratio: 1 / 1;
+    flex: 0 0 auto;
+    border: 0;
+    padding: 0;
+    border-radius: 50%;
+    background: #fff;
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.12s ease;
+  }
+  .spw__tile-play:active {
+    transform: scale(0.93);
+  }
+  .spw__tile-play svg {
+    width: 46%;
+    height: 46%;
+    fill: currentColor;
+    display: block;
+  }
+
+  /* Core Stack now spans the row on its own */
+  .ios__skills--wide {
+    min-height: 0;
+    margin-bottom: 16px;
+  }
+}
+
+/* ===================================================================== */
+/* ============== FEATURED PROJECTS — dark "All Projects" card ========= */
+/* ===================================================================== */
+/* Header + count, one featured project in an inset panel (art, label, name,
+   description, meta row, circular arrow), then overlapping thumbnails and a
+   pill button along the bottom. */
+.pjw {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 18px;
+  overflow: hidden;
+}
+
+/* ---- header ---- */
+.pjw__top {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  /* pulled out to the card edges so the rule runs full-bleed, exactly like the
+     Experience card's header divider */
+  margin: -18px -18px 0;
+  padding: 16px 18px 13px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.22);
+}
+.pjw__ic {
+  flex: 0 0 auto;
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.7;
+  stroke-linejoin: round;
+  display: block;
+}
+.pjw__h {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: #fff;
+  line-height: 1.15;
+}
+
+/* ---- featured panel ---- */
+/* No panel fill or border: the card's own frosted background is the only layer,
+   so the featured project reads as part of the card rather than a box on a box. */
+.pjw__feature {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  text-decoration: none;
+  background: none;
+  border: 0;
+}
+.pjw__fthumb {
+  /* the screenshot takes the panel's spare height, capped so a landscape shot
+     never gets cropped into a portrait sliver */
+  /* Takes all the panel's spare height. The old height cap existed to stop a
+     360px-wide column cropping the shot into a portrait sliver; now that the
+     middle column absorbs the row's slack it is always wide enough that the
+     frame stays landscape, so the cap would only reintroduce a gap. */
+  flex: 1 1 auto;
+  min-height: 150px;
+  width: 100%;
+  border-radius: 12px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #1c1f1e;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+.pjw__finfo {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+.pjw__flabel {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+.pjw__fname {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.35px;
+  color: #fff;
+  line-height: 1.15;
+}
+.pjw__fdesc {
+  margin-top: 2px;
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.58);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pjw__fstack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 3px;
+}
+.pjw__chip {
+  font-size: 10.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.16);
+  border: 0.5px solid rgba(255, 255, 255, 0.16);
+  border-radius: 100px;
+  padding: 4px 9px;
+  white-space: nowrap;
+}
+.pjw__frow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto; /* meta + arrow sit at the foot of the panel */
+  padding-top: 10px;
+}
+.pjw__fmeta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+.pjw__fmeta-ic {
+  flex: 0 0 auto;
+  color: rgba(255, 255, 255, 0.55);
+  display: flex;
+}
+.pjw__fmeta-ic svg {
+  width: 19px;
+  height: 19px;
+  display: block;
+}
+.pjw__fmeta-txt {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.pjw__fmeta-a {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pjw__fmeta-b {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+}
+.pjw__fgo {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  border: 0.5px solid rgba(255, 255, 255, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.14s ease, transform 0.14s ease;
+}
+.pjw__fgo svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+.pjw__feature:hover .pjw__fgo {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateX(2px);
+}
+
+/* ---- footer: overlapping thumbnails + pill button ---- */
+.pjw__foot {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  /* rule above the footer. It sits on the card's padded content box rather than
+     being pulled full-bleed like the header's, so it stops short of the corners. */
+  border-top: 0.5px solid rgba(255, 255, 255, 0.22);
+  padding-top: 14px;
+}
+.pjw__thumbs {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.pjw__thumb {
+  width: 40px;
+  height: 34px;
+  flex: 0 0 auto;
+  padding: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  background-position: center;
+  background-size: cover;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  margin-right: -11px; /* the fanned-out stack from the reference */
+  transition: transform 0.14s ease, border-color 0.14s ease;
+}
+.pjw__thumb:last-of-type {
+  margin-right: 0;
+}
+.pjw__thumb:hover {
+  transform: translateY(-2px);
+  z-index: 2;
+}
+.pjw__thumb--on {
+  border-color: rgba(255, 255, 255, 0.75);
+  z-index: 3;
+}
+.pjw__plus {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  margin-left: 17px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s ease;
+}
+.pjw__plus:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+.pjw__viewall {
+  flex: 0 0 auto;
+  border: 0.5px solid rgba(255, 255, 255, 0.24);
+  border-radius: 100px;
+  padding: 9px 15px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s ease;
+}
+.pjw__viewall:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+
+/* ===================================================================== */
+/* == RESTORED: Experience header (lost when the old pjw rules went) ==== */
+/* ===================================================================== */
+/* These flattening rules used to be written as `.exp__header, .pjw__header`
+   pairs. Removing the retired .pjw__ innards took the .exp__ half with them,
+   which let the old skeuomorphic silver band show through again. */
+.desktop .exp__header {
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.22);
+  padding: 16px 22px 13px;
+}
+.desktop .exp__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+.desktop .exp__icon {
+  stroke: #fff;
+}
+
+@media (max-width: 720px) {
+  .ios .exp__header {
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    border-bottom: 0;
+    padding: 18px 20px 8px;
+    border-bottom-color: rgba(255, 255, 255, 0.22);
+  }
+  .ios .exp__title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .ios .exp__icon {
+    stroke: #fff;
+  }
+}
+
+/* Mobile: the projects widget gets a fixed height so the home screen keeps a
+   steady rhythm regardless of which project is featured (their descriptions and
+   stacks differ in length). The screenshot flexes to absorb the difference. */
+@media (max-width: 720px) {
+  .ios [data-pjw] {
+    height: 560px;
+    min-height: 0;
+  }
+  .ios [data-pjw] .pjw__fthumb {
+    min-height: 120px;
+    max-height: 240px;
+  }
+}
+
+/* The Experience card carries no divider on the phone, so this one matches. */
+@media (max-width: 720px) {
+  .ios [data-pjw] .pjw__top {
+    border-bottom: 0;
+    padding: 18px 20px 8px;
+  }
+}
+
+/* ===================================================================== */
+/* ===================== AMBIENT VIDEO CARD (desktop) ================== */
+/* ===================================================================== */
+/* Sits under the Spotify card in the right column and takes whatever height is
+   left, so the column has no dead strip. The source is 9:16 portrait; the card
+   is not, so `object-fit: cover` crops rather than distorting it. */
+.vidw {
+  position: relative;
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 26px;
+  /* shows through only if the video is still loading or fails outright */
+  background: rgba(120, 120, 128, 0.26);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  box-shadow: none;
+}
+.desktop .vidw {
+  flex: 1 1 auto;
+  min-height: 200px;
+}
+.vidw__v {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fill the card without ever stretching the frame */
+  display: block;
+  border-radius: inherit;
+}
+
+/* ===================================================================== */
+/* ========================= CONTACTS WINDOW =========================== */
+/* ===================================================================== */
+/* Dark chrome, matching the Spotify app window rather than the light Finder /
+   Notes ones: profile column on the left, a grid of detail cards on the right. */
+.contactwin {
+  position: relative;
+  width: 88%;
+  height: auto;
+  max-width: 900px;
+  max-height: 88%;
+  display: flex;
+  flex-direction: column;
+  background: #121212;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 0.5px rgba(0, 0, 0, 0.4);
+}
+.contactwin.contactwin--max {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 0;
+}
+.contactwin__bar {
+  flex: 0 0 auto;
+  background: #0b0b0b;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+.contactwin__bar .winmodal__title {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.cw {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  gap: 26px;
+  padding: 30px 30px 32px;
+  overflow-y: auto;
+  color: #fff;
+}
+
+/* ---- profile column ---- */
+.cw__side {
+  flex: 0 0 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+.cw__avatar {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(150deg, #4a4a52 0%, #26262b 100%);
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  margin-bottom: 14px;
+}
+.cw__avatar span {
+  font-size: 44px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.92);
+}
+.cw__name {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+.cw__role {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.3;
+}
+.cw__tagline {
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.4;
+}
+.cw__apps {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+.cw__app {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+  transition: transform 0.14s ease, filter 0.14s ease;
+}
+.cw__app:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.12);
+}
+.cw__app svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+.cw__app--doc {
+  background: #2b2b30;
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+}
+.cw__app--li {
+  background: #0a66c2;
+  font-size: 21px;
+  font-weight: 700;
+}
+.cw__app--gh {
+  background: #24292f;
+}
+
+/* ---- detail cards ---- */
+.cw__grid {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-content: start;
+}
+.cw__card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 15px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.055);
+  border: 0.5px solid rgba(255, 255, 255, 0.07);
+}
+.cw__card--wide {
+  grid-column: 1 / -1;
+}
+.cw__card--link {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.cw__cardmain {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cw__label {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+}
+.cw__value {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 1.3;
+  color: #fff;
+}
+.cw__link {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: #4a9dff;
+  text-decoration: none;
+  word-break: break-word;
+}
+.cw__link:hover {
+  text-decoration: underline;
+}
+
+/* copy button: the tick swaps in for ~1.5s after a successful copy */
+.cw__copy {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  padding: 0;
+  border-radius: 8px;
+  background: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.12s ease, background 0.12s ease;
+}
+.cw__copy:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.09);
+}
+.cw__copy svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.cw__copy svg + svg {
+  display: none;
+}
+.cw__copy--done {
+  color: #30d158;
+}
+.cw__copy--done svg {
+  display: none;
+}
+.cw__copy--done svg + svg {
+  display: block;
+}
+
+/* phones: profile above the cards, single column */
+@media (max-width: 720px) {
+  .cw {
+    flex-direction: column;
+    gap: 22px;
+    /* top pad clears the floating back disc, which the bar no longer holds */
+    padding: 62px 18px 30px;
+  }
+  .cw__side {
+    flex: 0 0 auto;
+  }
+  .cw__grid {
+    grid-template-columns: 1fr;
+  }
+  .cw__card--wide {
+    grid-column: auto;
+  }
+}
+
+/* ===================================================================== */
+/* ============================ LOCK SCREEN ============================ */
+/* ===================================================================== */
+/* Covers the whole app until the padlock is clicked. macOS puts the clock up
+   top with the user down below; iOS stacks date over a huge clock. */
+.lock {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  background: #0b0b0d;
+  display: flex;
+  color: #fff;
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.3, 0, 0.2, 1),
+    filter 0.55s ease;
+}
+.lock__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fill without ever stretching the frame */
+  object-position: center;
+  display: block;
+  /* the source is only 736x414, so it is being scaled up a long way — nudge the
+     browser toward its better scaler and keep any blur off the video itself */
+  image-rendering: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+/* keeps the time legible whatever frame the clip is on */
+.lock__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.42) 0%,
+    rgba(0, 0, 0, 0.16) 32%,
+    rgba(0, 0, 0, 0.22) 68%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+.lock__inner {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7vh 24px 6vh;
+  text-align: center;
+}
+
+/* ---- padlock + clock ---- */
+.lock__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.lock__btn {
+  width: 66px;
+  height: 66px;
+  border: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background 0.16s ease, transform 0.16s ease;
+}
+.lock__btn:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: scale(1.05);
+}
+.lock__btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 3px;
+}
+.lock__ic {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.lock__ic--open {
+  opacity: 0;
+  transform: scale(0.9);
+}
+/* the shackle springs open the moment it is clicked, before the screen leaves */
+.lock--open .lock__ic--shut {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.lock--open .lock__ic--open {
+  opacity: 1;
+  transform: scale(1);
+}
+.lock--open .lock__btn {
+  background: rgba(255, 255, 255, 0.3);
+}
+.lock__date {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+.lock__clock {
+  font-size: clamp(70px, 11vw, 132px);
+  font-weight: 250;
+  line-height: 1;
+  letter-spacing: -3px;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 4px 26px rgba(0, 0, 0, 0.42);
+}
+
+/* ---- user ---- */
+.lock__foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;            /* breathing room between the padlock and the line */
+  padding-bottom: 14vh; /* sits up from the bottom edge */
+}
+.lock__hint {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.72);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+/* ---- leaving: dissolve upward, the way macOS does ---- */
+.lock--gone {
+  opacity: 0;
+  transform: scale(1.06);
+  filter: blur(6px);
+  pointer-events: none;
+}
+.lock--hidden {
+  display: none;
+}
+
+/* ---- iPhone: date over a huge clock, home indicator at the bottom ---- */
+@media (max-width: 720px) {
+  .lock__inner {
+    padding: 8vh 20px 3vh;
+  }
+  .lock__foot {
+    gap: 16px;
+    padding-bottom: 9vh;
+  }
+  .lock__btn {
+    width: 60px;
+    height: 60px;
+    margin-top: 8px;
+  }
+  .lock__ic {
+    width: 31px;
+    height: 31px;
+  }
+  .lock__date {
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .lock__clock {
+    font-size: clamp(78px, 23vw, 104px);
+    letter-spacing: -2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lock,
+  .lock__ic,
+  .lock__btn {
+    transition: none;
+  }
+  .lock--gone {
+    filter: none;
+    transform: none;
+  }
+}
+
+/* ---- phone: pull the framing back so the clip isn't blown up and cropped ----
+   A 736x414 landscape source filling a 390x844 portrait screen has to throw away
+   ~74% of the frame's width, which is what reads as "stretched". Sitting it in a
+   band at its own aspect shows the whole shot, with a blurred still filling the
+   rest so the screen is never bare. */
+@media (max-width: 720px) {
+  /* full-bleed on the phone: the frame fills the screen edge to edge, cropped
+     by object-fit rather than letterboxed into a band */
+  .lock__video {
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    transform: none;
+    object-fit: cover;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+/* ---- speaker, top-left corner ---- */
+.lock__sound {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 3;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.16s ease, transform 0.16s ease;
+}
+.lock__sound:hover {
+  background: rgba(255, 255, 255, 0.26);
+  transform: scale(1.06);
+}
+.lock__sound:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 3px;
+}
+.lock__sic {
+  position: absolute;
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  display: block;
+}
+.lock__sic .lock__wave {
+  fill: none;
+}
+/* muted is the resting look; the class flips it once audio is actually running */
+.lock__sic--on {
+  opacity: 0;
+}
+.lock--sound .lock__sic--on {
+  opacity: 1;
+}
+.lock--sound .lock__sic--off {
+  opacity: 0;
+}
+
+
+/* ---- search inputs (Projects + About) ---- */
+.nw__search-in {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: #1d1d1f;
+}
+.nw__search-in::placeholder {
+  color: #9a9a9a;
+}
+/* the OS-drawn clear button clashes with the pill; ours is Escape */
+.nw__search-in::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.nw__search:focus-within {
+  border-color: rgba(0, 122, 255, 0.55);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.16);
+}
+
+/* empty states */
+.fw__empty {
+  grid-column: 1 / -1;
+  padding: 44px 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #8a8a8e;
+}
+.nw__empty {
+  padding: 24px 0;
+  font-size: 15px;
+  color: #8a8a8e;
+}
+
+/* ===================================================================== */
+/* ====== MOBILE APP CHROME — iOS Files style: floating glass back ====== */
+/* ====== button over the content, large title, no separate bar   ====== */
+/* ===================================================================== */
+@media (max-width: 720px) {
+  /* The back button used to live inside a white strip that acted as a second
+     header. Float it over the content instead and collapse the strip, so each
+     app shows one heading — its own — exactly like Files does. */
+  .ios-back {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 20;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    margin: 0;
+    border-radius: 50%;
+    /* black glass: the white chevron then reads clearly on the light Projects /
+       About backgrounds as well as the dark Spotify and game ones */
+    background: rgba(0, 0, 0, 0.62);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 0.5px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex: 0 0 auto;
+    transition: background 0.14s ease, transform 0.14s ease;
+  }
+  .ios-back:active {
+    transform: scale(0.94);
+    background: rgba(0, 0, 0, 0.78);
+  }
+  .ios-back svg {
+    width: 21px;
+    height: 21px;
+    margin: 0;
+    stroke-width: 2.6;
+  }
+  /* the word "Home" goes — the glyph carries it, as in the reference */
+  .ios-back span {
+    display: none;
+  }
+
+  /* collapse the strips that only existed to hold it (it is absolute now, so
+     they must stay visible — zero height rather than display:none) */
+  .winmodal__bar {
+    height: 0;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    overflow: visible;
+    background: transparent !important;
+  }
+  .winmodal__title {
+    display: none;
+  }
+  .fw__side-top,
+  .nw__side-top,
+  .set__side-top {
+    height: 0;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    overflow: visible;
+  }
+
+  /* the app's own title becomes the large iOS heading */
+  .finderwin .fw__title,
+  .noteswin .nw__title-main {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    line-height: 1.15;
+  }
+  /* These two put a horizontal tab strip at the very top, which the floating
+     button would sit on. Give the strip its own room instead of overlapping. */
+  .finderwin .fw__sidebar,
+  .noteswin .nw__sidebar {
+    padding-top: 60px;
+  }
+  .finderwin .fw__toolbar,
+  .noteswin .nw__toolbar {
+    height: auto;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+  /* Spotify and the games already carry their own heading, so they only need
+     room at the top for the button to sit clear of the content */
+  .spotwin .sp__scroll {
+    padding-top: 8px;
+  }
+  .spotwin .sp__hero {
+    padding-top: 62px;
+  }
+  .winmodal__window .winmodal__body {
+    padding-top: 62px;
+  }
+}
+
+/* ---- About on mobile: one heading, share paired with the back button ---- */
+@media (max-width: 720px) {
+  /* The toolbar's title duplicated the note's own <h1> right below it, and the
+     timestamp sat between them. Both go; the note supplies the heading. */
+  .noteswin .nw__toolbar {
+    height: 0;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    overflow: visible;
+  }
+  .noteswin .nw__title {
+    display: none;
+  }
+  .noteswin .nw__date {
+    display: none;
+  }
+  /* share mirrors the back button: same size, same inset, opposite corner */
+  .noteswin .nw__circ {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    left: auto;
+    z-index: 20;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.62);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 0.5px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+    color: #fff;
+    transition: background 0.14s ease, transform 0.14s ease;
+  }
+  .noteswin .nw__circ:active {
+    transform: scale(0.94);
+    background: rgba(0, 0, 0, 0.78);
+  }
+  .noteswin .nw__circ svg {
+    width: 19px;
+    height: 19px;
+    stroke: currentColor;
+    fill: none;
+  }
+  /* the note starts where the toolbar used to, so nothing hides under the buttons */
+  .noteswin .nw__content {
+    padding-top: 14px;
+  }
+}
+
+/* ---- Projects on mobile: share paired with back, heading given room ---- */
+@media (max-width: 720px) {
+  /* share mirrors the back button, same as the About window */
+  .finderwin .nw__circ {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    left: auto;
+    z-index: 20;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.62);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 0.5px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+    color: #fff;
+    transition: background 0.14s ease, transform 0.14s ease;
+  }
+  .finderwin .nw__circ:active {
+    transform: scale(0.94);
+    background: rgba(0, 0, 0, 0.78);
+  }
+  .finderwin .nw__circ svg {
+    width: 19px;
+    height: 19px;
+    stroke: currentColor;
+    fill: none;
+  }
+  /* breathing room between the tab strip and the "Recents" heading */
+  .finderwin .fw__toolbar {
+    padding-top: 18px;
+    padding-bottom: 4px;
+  }
+}
+
+/* ===================================================================== */
+/* ============== PROJECT CARD — actions on the card ==================== */
+/* ===================================================================== */
+/* View Details and Live Site used to sit behind a ⋯ menu. They are the two
+   things anyone actually wants, so they live on the card itself now. */
+.pj__body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+.pj__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;      /* pinned to the bottom, so rows line up across the grid */
+  padding-top: 16px;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.07);
+}
+.pj__act {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.14s ease, color 0.14s ease, border-color 0.14s ease;
+}
+/* borderless text action in black on the white card; the arrow says it is
+   clickable, and a light grey fill confirms it on hover */
+.pj__act--primary {
+  background: none;
+  color: #1d1d1f;
+  border: 0;
+}
+.pj__act--primary:hover {
+  background: #f2f2f4;
+}
+/* a card with no live site: View Details keeps its natural width and moves to
+   the right edge instead of stretching across the whole row */
+.pj__actions--solo {
+  justify-content: flex-end;
+}
+.pj__actions--solo .pj__act {
+  flex: 0 0 auto;
+  /* no edge to line up, so the arrow itself ends on the card's content edge
+     (the right end of the divider above); the left padding keeps the tap target */
+  padding: 0 0 0 14px;
+}
+.pj__actions--solo .pj__act:hover {
+  background: none;
+  opacity: 0.6;
+}
+.pj__act--ghost {
+  background: #fff;
+  color: #1d1d1f;
+  border: 0.5px solid rgba(0, 0, 0, 0.16);
+}
+.pj__act--ghost:hover {
+  background: #f2f2f4;
+  border-color: rgba(0, 0, 0, 0.28);
+}
+.pj__extic {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* the card is no longer a link, so lift only on a real hover of the surface */
+.pj:hover {
+  border-color: rgba(0, 0, 0, 0.14);
+}
+
+@media (max-width: 720px) {
+  .pj__act {
+    height: 38px;
+    font-size: 13.5px;
+  }
+}
+
+/* ===================================================================== */
+/* ====== MOBILE TAB BAR — floating glass pill, iOS Files style ======== */
+/* ===================================================================== */
+/* Projects and About kept their categories in a strip across the top. On a
+   phone that reads as a second header; iOS puts navigation in a floating pill
+   at the bottom instead, icon over label with the active one picked out. */
+@media (max-width: 720px) {
+  .finderwin .fw__sidebar,
+  .noteswin .nw__sidebar {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    z-index: 25;
+    width: auto;
+    max-width: calc(100% - 20px);
+    height: auto;
+    flex: 0 0 auto;
+    padding: 0;
+    margin: 0;
+    border-radius: 100px;
+    overflow: hidden;
+    /* liquid glass: heavy blur, a light rim, and an inner highlight along the
+       top edge — that top sheen is what reads as glass rather than flat grey */
+    background: rgba(30, 30, 32, 0.62);
+    backdrop-filter: blur(34px) saturate(190%);
+    -webkit-backdrop-filter: blur(34px) saturate(190%);
+    border: 0.5px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.46),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.28);
+  }
+
+  /* the row of tabs; scrolls sideways when there are more than the width fits */
+  .finderwin .fw__list,
+  .noteswin .nw__folders {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 2px;
+    padding: 6px;
+    margin: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .finderwin .fw__list::-webkit-scrollbar,
+  .noteswin .nw__folders::-webkit-scrollbar {
+    display: none;
+  }
+  /* the Finder's "Portfolio" group label has no place in a tab bar */
+  .finderwin .fw__section {
+    display: none;
+  }
+
+  /* the tab bar shows the filled twins, not the sidebar's outlines */
+  .finderwin .fw__item-ic,
+  .noteswin .nw__fic {
+    display: none;
+  }
+  .finderwin .fw__item-ic--fill,
+  .noteswin .nw__fic--fill {
+    display: flex;
+    /* .fw__item-ic pins its own grey for the desktop sidebar; in the tab bar the
+       glyph must take the tab's colour (white, or blue when active) */
+    color: inherit;
+  }
+
+  .finderwin .fw__item,
+  .noteswin .nw__folder {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    /* auto width so each tab hugs its own label; the capsule tracks offsetWidth,
+       so it ends up sized to the tab rather than to a fixed slot */
+    width: auto;
+    min-width: 66px;
+    padding: 9px 14px 8px;
+    border-radius: 100px;
+    background: none;
+    color: #fff;              /* inactive is white, not dimmed */
+    white-space: nowrap;
+    transition: background 0.16s ease, color 0.16s ease;
+  }
+  .finderwin .fw__item svg,
+  .noteswin .nw__folder svg {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 auto;
+    fill: currentColor;       /* filled glyphs, SF Symbols .fill style */
+    stroke: none;
+  }
+  /* the tab bar swaps in the short label */
+  .finderwin .fw__item-label:not(.fw__item-label--short),
+  .noteswin .nw__fname:not(.nw__fname--short) {
+    display: none;
+  }
+  .finderwin .fw__item-label--short,
+  .noteswin .nw__fname--short {
+    display: block;
+  }
+  .finderwin .fw__item-label,
+  .noteswin .nw__fname {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.1px;
+    max-width: 92px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* active: a lighter capsule behind it, blue glyph and label */
+  .finderwin .fw__item--active,
+  .noteswin .nw__folder--active {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.3);
+    color: #0a84ff;
+  }
+  .finderwin .fw__item--active svg,
+  .noteswin .nw__folder--active svg {
+    fill: #0a84ff;
+  }
+
+  /* nothing should end up hidden behind the pill */
+  .finderwin .fw__grid--projects,
+  .finderwin .fw__detail {
+    padding-bottom: 104px;
+  }
+  .noteswin .nw__content {
+    padding-bottom: 104px;
+    padding-top: 62px;
+  }
+  .finderwin .fw__footer {
+    display: none;
+  }
+  /* the strip is gone from the top, so the heading takes the back button's room */
+  .finderwin .fw__sidebar,
+  .noteswin .nw__sidebar {
+    padding-top: 0;
+  }
+  .finderwin .fw__toolbar {
+    padding-top: 62px;
+  }
+}
+
+/* filled icon twins are for the mobile tab bar only */
+.fw__item-ic--fill,
+.nw__fic--fill {
+  display: none;
+}
+.ic-fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* ===================================================================== */
+/* ========== iOS 26 LIGHT GLASS — bar, buttons, backdrop ============== */
+/* ===================================================================== */
+@media (max-width: 720px) {
+  /* ---- plain white page behind both apps ---- */
+  .finderwin,
+  .finderwin .fw__main,
+  .noteswin,
+  .noteswin .nw__main,
+  .noteswin .nw__content {
+    background: #fff;
+  }
+
+  /* ---- back + share: white glass discs with a dark glyph ---- */
+  .ios-back,
+  .finderwin .nw__circ,
+  .noteswin .nw__circ {
+    background: #fff;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 0.5px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.13);
+    color: #3a3a3c;
+  }
+  .ios-back:active,
+  .finderwin .nw__circ:active,
+  .noteswin .nw__circ:active {
+    background: rgba(240, 240, 244, 0.92);
+  }
+
+  /* ---- the pill itself ---- */
+  .finderwin .fw__sidebar,
+  .noteswin .nw__sidebar {
+    background: #fff;
+    /* opaque now, so the blur would cost compositing for nothing */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 0.5px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+  }
+
+  /* the scroller carries the sliding capsule, so it has to be a containing block */
+  .finderwin .fw__list,
+  .noteswin .nw__folders {
+    position: relative;
+  }
+  /* the capsule that glides between tabs — one per bar, moved by JS */
+  .tabind {
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    left: 0;
+    width: 0;
+    z-index: 0;
+    border-radius: 100px;
+    /* a white capsule would vanish on a white bar — tint it instead */
+    background: #f0f0f2;
+    box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.04);
+    opacity: 0;
+    pointer-events: none;
+    /* slight overshoot, the way the iOS capsule settles */
+    transition: transform 0.42s cubic-bezier(0.34, 1.32, 0.44, 1),
+      width 0.42s cubic-bezier(0.34, 1.32, 0.44, 1), opacity 0.2s ease;
+  }
+
+  /* tabs sit above the capsule; dark glyphs on the light glass */
+  .finderwin .fw__item,
+  .noteswin .nw__folder {
+    position: relative;
+    z-index: 1;
+    color: #1c1c1e;
+  }
+  /* the capsule provides the active background now */
+  .finderwin .fw__item--active,
+  .noteswin .nw__folder--active {
+    background: none;
+    box-shadow: none;
+    color: #0a84ff;
+  }
+  .finderwin .fw__item--active svg,
+  .noteswin .nw__folder--active svg {
+    fill: #0a84ff;
+  }
+  .finderwin .fw__item svg,
+  .noteswin .nw__folder svg {
+    fill: currentColor;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabind {
+    transition: opacity 0.2s ease;
+  }
+}
+
+/* About runs on the Notes amber, not the system blue — same accent its desktop
+   folder list already uses, so the app keeps one identity across both views. */
+@media (max-width: 720px) {
+  .noteswin .nw__folder--active,
+  .noteswin .nw__folder--active .nw__fname {
+    color: #f5b02e;
+  }
+  .noteswin .nw__folder--active svg {
+    fill: #f5b02e;
+  }
+}
+
+/* short tab labels are for the mobile bar only */
+.fw__item-label--short,
+.nw__fname--short {
+  display: none;
+}
+
+
+
+
+/* ===================================================================== */
+/* ===== iOS HOME: About card — the desktop Notes widget, 1:1 ========== */
+/* ===================================================================== */
+/* Same cream sheet and orange header band as .widget--notes on the Mac, in an
+   iOS widget's footprint. It is a <button> (tapping opens About Me), so the
+   browser's button defaults are reset back to the card it looks like. */
+@media (max-width: 720px) {
+  .ios__about {
+    -webkit-appearance: none;
+    appearance: none;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 26px; /* matches the Spotify tile beside it */
+    background: #fdfdfb;
+    border: 0.5px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    color: #2a2a2a;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.16s ease, box-shadow 0.16s ease;
+  }
+  .ios__about:active {
+    transform: scale(0.97);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+  }
+  /* the header band and body come straight from the desktop rules; only the
+     phone's slightly roomier padding is set here */
+  .ios__about .notes__header {
+    padding: 11px 15px;
+  }
+  .ios__about .notes__body {
+    padding: 14px 15px 13px;
+  }
+  .ios__about .notes__greeting {
+    font-size: 15px;
+  }
+  .ios__about .notes__text,
+  .ios__about .notes__date {
+    font-size: 13.5px;
+  }
+
+  /* Spotify sits in the same grid row, which stretches both to one height —
+     but the tile must not opt out of that stretch, or the pair drifts apart. */
+  .ios__row > .spw--tile {
+    align-self: stretch;
+  }
+}
+
+/* ===================================================================== */
+/* ===== MOBILE PARITY: Experience, the ambient clip, line icons ======= */
+/* ===================================================================== */
+@media (max-width: 720px) {
+  /* ---- Experience matches the Mac card: role left, dates right, and the
+     entries share the card's height so the rail runs edge to edge instead of
+     bunching at the top over a blank strip ---- */
+  .ios .exp__row {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2px 14px;
+  }
+  .ios .exp__date {
+    padding-top: 2px;
+  }
+  .ios .widget--exp {
+    min-height: 250px; /* the height the three entries distribute across */
+  }
+  .ios .exp__item {
+    flex: 1 0 auto; /* grow into spare height, never shrink under the text */
+  }
+  .ios .exp__item:last-child {
+    flex: 0 0 auto; /* sits flush with the bottom padding; the others absorb slack */
+  }
+
+  /* ---- the ambient clip: no intrinsic height here, since .vidw__v is absolute ---- */
+  .ios .vidw {
+    height: 200px;
+    margin-bottom: 16px;
+  }
+
+  /* ---- tab bars use the outlined set, matching the desktop sidebars ---- */
+  .finderwin .fw__item-ic,
+  .noteswin .nw__fic {
+    display: flex;
+    color: inherit; /* .fw__item-ic pins the sidebar's grey; the tab sets its own */
+  }
+  .finderwin .fw__item-ic--fill,
+  .noteswin .nw__fic--fill {
+    display: none;
+  }
+}
+
+/* ---- tab-bar glyphs are outlines now, so they need the sidebar's stroke
+   treatment rather than the fill the .fill twins used. The --active selectors
+   are repeated here because the rules they override carry that extra class. ---- */
+@media (max-width: 720px) {
+  .finderwin .fw__item svg,
+  .noteswin .nw__folder svg,
+  .finderwin .fw__item--active svg,
+  .noteswin .nw__folder--active svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  /* the solid dots inside a few line icons (robot eyes, list bullets) stay solid */
+  .finderwin .fw__item svg [fill="currentColor"],
+  .noteswin .nw__folder svg [fill="currentColor"] {
+    fill: currentColor;
+    stroke: none;
+  }
+
+  /* Experience type matches the Mac card exactly, which also buys back the
+     width the date needs to stay on the role's line */
+  .ios .exp__role {
+    font-size: 14.5px;
+  }
+}
+
+/* ---- Experience: the last differences from the Mac card were its own box.
+   .ios__widget added 16px of padding the desktop card does not have (which cost
+   the date its place on the role's line), the header ran two sizes larger, and
+   a content-sized card left the timeline no slack to distribute. ---- */
+@media (max-width: 720px) {
+  .ios .widget--exp {
+    padding: 0; /* the timeline supplies the inset, exactly as on the Mac */
+    min-height: 348px; /* the Mac card's height, so the entries space the same */
+  }
+  .ios .exp__header {
+    padding: 15px 20px;
+  }
+  .ios .exp__title {
+    font-size: 15px;
+  }
+  .ios .exp__timeline {
+    gap: 18px;
+    padding: 18px 20px 18px 44px;
+  }
+}
+
+/* The Notes sidebar glyphs are built by S(), which emits a bare <svg> with no
+   presentation attributes — so with no rule here they fell back to SVG's default
+   black fill and drew as solid shapes on the Mac. The Finder sidebar has carried
+   the equivalent rule all along; this is its missing twin. */
+.noteswin .nw__folder svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* solid dots drawn inside a few of the line icons keep their fill */
+.noteswin .nw__folder svg [fill="currentColor"] {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* ===================================================================== */
+/* ===== MOBILE-ONLY: full-frame clip, header rule, tighter timeline === */
+/* ===================================================================== */
+@media (max-width: 720px) {
+  /* The source is a 720x1280 portrait clip. At a fixed 200px the card cropped
+     most of the frame away, so give it the footage's own aspect ratio and the
+     whole shot is visible with nothing cut off. */
+  .ios .vidw {
+    height: auto;
+    aspect-ratio: 9 / 16;
+  }
+
+  /* the hairline under "Experience", same as the Mac card's header */
+  .ios .exp__header {
+    padding: 16px 22px 13px;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.22);
+  }
+  .ios .exp__title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  /* Entries sit at their natural height here rather than stretching to fill the
+     card, which is what put ~40px of dead space between each company. */
+  .ios .widget--exp {
+    min-height: 0;
+  }
+  .ios .exp__item,
+  .ios .exp__item:last-child {
+    flex: 0 0 auto;
+  }
+  .ios .exp__timeline {
+    gap: 14px;
+  }
+  /* the connector runs from this dot to the next, so it tracks the gap */
+  .ios .exp__item:not(:last-child)::before {
+    bottom: -23px;
+  }
+}
+
+/* ===================================================================== */
+/* ============ iOS APP LIBRARY SEARCH OVERLAY (mobile) =============== */
+/* ===================================================================== */
+/* Spotlight over the home screen: the wallpaper blurs behind a translucent
+   sheet, the field sits under the status bar with a Cancel beside it, and the
+   results are plain iOS rows. Phones only — the Mac has its own menu bar. */
+.iss {
+  position: absolute;
+  inset: 0;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+}
+.iss__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(26px) saturate(140%);
+  -webkit-backdrop-filter: blur(26px) saturate(140%);
+  opacity: 0;
+  transition: opacity 0.24s ease;
+}
+.iss--open .iss__scrim {
+  opacity: 1;
+}
+.iss__panel {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 46px 14px 0; /* clears the status bar */
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.24s ease, transform 0.28s cubic-bezier(0.32, 1.2, 0.42, 1);
+}
+.iss--open .iss__panel {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- field + Cancel ---- */
+.iss__bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.iss__field {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 0.5px solid rgba(255, 255, 255, 0.16);
+}
+.iss__field > svg {
+  flex: 0 0 auto;
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.66);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.iss__in {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  background: none;
+  outline: none;
+  color: #fff;
+  font: inherit;
+  font-size: 17px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.iss__in::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+/* the platform's own clear affordance would sit on top of ours */
+.iss__in::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.iss__clear {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  display: none;
+  color: rgba(255, 255, 255, 0.55);
+}
+.iss__in:not(:placeholder-shown) ~ .iss__clear {
+  display: block;
+}
+.iss__clear svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+.iss__cancel {
+  flex: 0 0 auto;
+  border: 0;
+  background: none;
+  padding: 0 2px;
+  cursor: pointer;
+  color: #fff;
+  font: inherit;
+  font-size: 17px;
+  -webkit-tap-highlight-color: transparent;
+}
+.iss__cancel:active {
+  opacity: 0.55;
+}
+
+/* ---- results ---- */
+.iss__list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 16px;
+  padding-bottom: 30px;
+}
+.isss {
+  padding: 14px 6px 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+.issr {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px;
+  border: 0;
+  border-radius: 13px;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  color: #fff;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.issr:active {
+  background: rgba(255, 255, 255, 0.14);
+}
+.issr__ic {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.16);
+}
+.issr__ic svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.issr__txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.issr__t {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.issr__s {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.issr__go {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.42);
+}
+.issr__go svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.issnone {
+  padding: 60px 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 21px;
+  font-weight: 600;
+}
+.issnone span {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iss__scrim,
+  .iss__panel {
+    transition: none;
+  }
+}
+
+/* ---- Desktop About Me: drop the toolbar heading. The note below already
+   carries its own <h1> with the same name, so this was the title twice over.
+   It also held the `margin-right: auto` that pushed share and search right,
+   hence the toolbar takes over that job. Phones already hide it. ---- */
+@media (min-width: 721px) {
+  .noteswin .nw__title {
+    display: none;
+  }
+  .noteswin .nw__toolbar {
+    justify-content: flex-end;
+  }
+}
+
+/* ===================================================================== */
+/* ============ LOCK SCREEN — speaker tooltip (Mute / Unmute) ========== */
+/* ===================================================================== */
+/* A light glass pill to the right of the speaker, since the button hugs the top
+   left corner and anything above or to the left would clip. It names the action
+   a click will take and stays on screen as the prompt to turn sound on. It is
+   a sibling rather than a child of the button so the button's hover scale does
+   not blur its text. */
+.lock__tip {
+  position: absolute;
+  top: 39px; /* the button's vertical centre: 20px inset + half of 38px */
+  left: 68px; /* 20px inset + 38px button + 10px gap */
+  z-index: 3;
+  padding: 6px 11px;
+  border-radius: 8px;
+  /* light glass with dark type, bright enough to catch the eye over the video;
+     near-opaque so the arrow (which cannot share the pill's blur) matches it */
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+  color: #1c1c1e;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer; /* clicking the hint works too — it forwards to the speaker */
+  transform: translate(0, -50%);
+  /* always on: it is the invitation to turn the sound on, so it cannot wait
+     for a hover. It settles in just after the lock screen appears. */
+  animation: lockTipIn 0.5s cubic-bezier(0.2, 0.9, 0.3, 1) 0.9s both;
+  transition: background 0.14s ease;
+}
+.lock__tip:hover {
+  background: #fff;
+}
+@keyframes lockTipIn {
+  from {
+    opacity: 0;
+    transform: translate(-6px, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+/* small arrow pointing back at the speaker. A triangle that sits wholly
+   outside the pill: a rotated square overlapping a translucent pill doubles the
+   colour where they meet and shows as a diamond. */
+.lock__tip::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -5px;
+  width: 5px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  transform: translateY(-50%);
+}
+/* the arrow takes the hover tint along with the pill */
+.lock__tip:hover::before {
+  background: #fff;
+}
+/* phones: the hint matters most on touch, so it stays — just a touch smaller */
+@media (max-width: 720px) {
+  .lock__tip {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lock__tip {
+    animation: none;
+  }
+}
+
+/* ---- Phone: "View all projects" becomes a plain text action, flush right ----
+   No pill: the label sits on the card itself and its last letter lines up with
+   the right end of the divider above, the card's content edge. The left and
+   vertical padding stay so the tap target keeps its size. */
+@media (max-width: 720px) {
+  .ios .pjw__viewall,
+  .ios .pjw__viewall:hover {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    padding: 9px 0 9px 12px;
+    margin-left: auto;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 0.12s ease;
+  }
+  .ios .pjw__viewall:active {
+    opacity: 0.55;
+  }
 }
